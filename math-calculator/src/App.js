@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import Header from './Taher_components/Header';
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
+          <Header/>
         </p>
         
         <a
