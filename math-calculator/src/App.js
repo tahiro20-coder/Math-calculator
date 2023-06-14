@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Button from 'react-bootstrap/Button'
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (
@@ -11,7 +10,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <Button>this is button</Button>
+        
         <a
           className="App-link"
           href="https://reactjs.org"
