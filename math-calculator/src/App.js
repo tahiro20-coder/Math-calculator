@@ -1,25 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
-
+import React, { useEffect, useState } from 'react';
+import TempCalcPage from './sellami_components/TempCalcPage';
+import axios from 'axios'
+import APIService from './sellami_components/api/APIService'; 
 
 function App() {
+  const [getMessage, setGetMessage] = useState({})
+  const [data, setdata] = useState("Banananana")
+
+  useEffect(()=>{
+    axios.get('http://localhost:5000/flask/hello').then(response => {
+      console.log("SUCCESS", response)
+      setGetMessage(response)
+    }).catch(error => {
+      console.log(error)
+    })
+
+  }, [])
+  const add = () =>{
+    console.log(JSON.stringify(data))
+    APIService.add({data})
+    .then((response) => console.log(response))
+    .catch(error => console.log('error',error))
+  }
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        {getMessage.status === 200 ? 
+          <h3>{getMessage.data.message}</h3>
+          :
+          <h3>LOADING</h3>}
+      </div>
+      <button onClick={add}> jaksoilna</button>
+      <TempCalcPage />
     </div>
   );
 }
