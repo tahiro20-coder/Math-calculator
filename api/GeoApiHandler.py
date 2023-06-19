@@ -1,5 +1,6 @@
 from flask_restful import Api, Resource, reqparse
 from flask import Flask, send_from_directory,current_app,jsonify,request
+import numpy as np
 class scp(Resource):
     # def get(self):
     #     return {
@@ -28,20 +29,7 @@ class mat(Resource):
 
     def post(self):
         print(self)
-        parser = reqparse.RequestParser()
-        # parser.add_argument('matrix', type=str)
-        print(request.form.getlist('matrix'))
-        print(request.base_url)
-        print(request.json["matrix"], file=sys.stderr)
-        parser.add_argument('matrix',type=list)
-        print("jakjak")
-        args = parser.parse_args()
-        print("jakjak")
-        matrix = args['matrix']
-        # array = request.form.getlist('matrix')
-        # print("jakjak",array)
-        final_ret = {"status": "Success", "message": matrix}
-        # print("jakjak")
-        print(matrix)
+        matrix = request.json["matrix"]
+        print(np.array(matrix))
 
-        return final_ret
+        return {'final_ret':"nannnni"}

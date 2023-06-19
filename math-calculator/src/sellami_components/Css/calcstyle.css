@@ -1,11 +1,16 @@
 @font-face {
     font-family: roboto_mono;
-    src: url(../fonts/RobotoMono-Regular.ttf);
+    src: url(../../fonts/RobotoMono-Regular.ttf);
 }
 
 @font-face {
     font-family: inter;
-    src: url(../fonts/Inter-Regular.ttf);
+    src: url(../../fonts/Inter-Regular.ttf);
+}
+
+@font-face {
+    font-family: inter-semibold;
+    src: url(../../fonts/Inter-SemiBold.ttf);
 }
 
 .Header {
@@ -31,10 +36,12 @@
     border-radius: 5px !important;
     height: 50px !important;
     width: 30vw;
+    min-width: 200px;
 }
 
 .dropdown_menu {
     width: 30vw;
+    min-width: 200px;
 }
 
 .Number_input,
@@ -52,14 +59,21 @@
     text-align: center !important;
 }
 
+.MinputCont {
+    /* max-width: 55vw; */
+}
+
 .Controlbtn {
+    width: 25% !important;
     border-radius: 100px !important;
     background-color: transparent !important;
     border: none !important;
+    padding: 5px 2px !important;
 }
 
 .NBInputC {
-    width: 8vw;
+    min-width: 100px;
+    width: 10vw;
     border: 2px solid black;
     border-radius: 50px;
     padding: 2px;

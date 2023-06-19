@@ -25,31 +25,15 @@ export default class APIService {
             .catch(error => console.log(error))
     }
     static mat(matrix) {
-        console.log("zz", matrix)
-        let data = new FormData();
-        let array = [
-            [
-                [1, 4],
-                [2, 4]
-            ],
-            [
-                [3, 1],
-                [2, 4]
-            ],
-            [
-                [7, 4],
-                [1, 1]
-            ]
-        ];
-        data.append("matrix", JSON.stringify(array));
+        console.log("zz", JSON.stringify(matrix))
         return fetch(`http://localhost:5000/mat`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                matrix: data
+                body: JSON.stringify(matrix)
             })
-            .then(response => response)
+            .then(response => response.json())
             .catch(error => console.log(error))
     }
 
