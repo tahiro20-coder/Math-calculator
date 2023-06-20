@@ -1,0 +1,60 @@
+* {
+    font-family: 'Inter', sans-serif;
+    /* padding: 0;
+    margin: 0; */
+}
+
+.navbar {
+    padding: 0;
+    color: #666666;
+}
+
+.active {
+    color: #116A7B;
+    font-weight: 600;
+}
+
+.link_page {
+    text-decoration: none;
+}
+
+.nav-link {
+    color: #666666;
+    font-size: 1.1em;
+}
+
+.shape {
+    width: 100px;
+    height: 100%;
+}
+
+.shape_rec {
+    position: relative;
+    width: 100px;
+    height: 134px;
+}
+
+.first {
+    position: absolute;
+    top: 10;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    background: #116A7B;
+}
+
+.second {
+    clip-path: polygon(100% 0, 30% 0, 100% 70%);
+    background: #178A9F;
+}
+
+.third {
+    position: absolute;
+    top: 0px;
+    clip-path: polygon(100% 0, 60% 0, 100% 40%);
+    background: #22B4D0;
+}
+
+@media (max-width: 770px) {
+    .shape {
+        display: none !important;
+    }
+}

@@ -1,0 +1,119 @@
+    .cont {
+        display: block;
+        width: 50vw;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-top: 35px;
+        margin-bottom: 15px;
+    }
+    
+    .titleCont {
+        display: flex;
+        margin-top: -15px;
+        justify-content: center;
+    }
+    
+    .title {
+        /* position: absolute;
+    top: -5px; */
+        background-color: white;
+        width: fit-content;
+        justify-self: center;
+    }
+    
+    .TitleContainer {
+        margin-top: 250px;
+    }
+    
+    .leftTitle {
+        position: absolute;
+        /* background-color: blue; */
+        left: 0;
+        margin-top: -200px;
+    }
+    
+    .mainTitle {
+        margin-bottom: 15px;
+        font-family: Inter;
+        font-size: 30px;
+    }
+    
+    .tile1,
+    .tile2,
+    .tile3 {
+        /* position: absolute; */
+        /* width: 400px;
+        height: 32px; */
+        width: 29.25vw;
+        /* width: 400px; */
+        height: 32px;
+        clip-path: polygon(0 0, 100% 0, 91% 100%, 0% 100%);
+    }
+    
+    .tile1 {
+        background-color: #1C98AF;
+        margin-bottom: -16px;
+        margin-left: -32px;
+    }
+    
+    .tile2 {
+        background-color: #116A7B;
+        margin-bottom: -16px;
+        margin-left: -16px;
+    }
+    
+    .tile3 {
+        background-color: #0B3841;
+    }
+    
+    .submit,
+    .cancel {
+        width: 15vw;
+        min-width: 140px;
+        height: 40px;
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        font-family: inter-semibold;
+        font-size: 85%;
+    }
+    
+    .submit {
+        clip-path: polygon(0 0, 100% 0, 91% 100%, 0% 100%);
+        background-color: #116A7B;
+    }
+    
+    .cancel {
+        clip-path: polygon(9% 0, 100% 0, 100% 100%, 0% 100%);
+        background-color: #BB3E03;
+    }
+    
+    .submit button {
+        position: absolute;
+        top: 1px;
+        /* equal to border thickness */
+        left: 1px;
+        width: 98.5%;
+        height: 38px;
+        background-color: #C2DEDC;
+        color: #116A7B;
+        border: none !important;
+        /* container height - (border thickness * 2) */
+        -webkit-clip-path: polygon(0 0, 100% 0, 91% 100%, 0% 100%);
+        clip-path: polygon(0 0, 100% 0, 91% 100%, 0% 100%);
+    }
+    
+    .cancel button {
+        position: absolute;
+        top: 1px;
+        /* equal to border thickness */
+        right: 1px;
+        width: 98.5%;
+        height: 38px;
+        background-color: #DDCA90;
+        color: #BB3E03;
+        border: none !important;
+        /* container height - (border thickness * 2) */
+        -webkit-clip-path: polygon(9% 0, 100% 0, 100% 100%, 0% 100%);
+        clip-path: polygon(9% 0, 100% 0, 100% 100%, 0% 100%);
+    }

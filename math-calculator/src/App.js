@@ -1,27 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import '../src/Styles/App.css';
+import Header from './Taher_Components/Header';
+import Footer from './Taher_Components/Footer';
+import PageContent from './Taher_Components/PageContent';
+import React from 'react'
+
 
 
 function App() {
+
+  // useEffect(()=>{
+  //   axios.get('http://localhost:5000/flask/hello').then(response => {
+  //     console.log("SUCCESS", response)
+  //     setGetMessage(response)
+  //   }).catch(error => {
+  //     console.log(error)
+  //   })
+
+  // }, [])
+  // const add = () =>{
+  //   console.log(JSON.stringify(data))
+  //   APIService.add({data})
+  //   .then((response) => console.log(response))
+  //   .catch(error => console.log('error',error))
+  // }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          
-        </p>
-        
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Header/>
+    <PageContent />
+    <Footer/>
+    </>
   );
 }
 
