@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import { Dash,Plus } from "react-bootstrap-icons";
-function NumberInput ({HandleChangeValue}){
+function NumberInput ({number,HandleChangeValue}){
     const min = 1
     const max = 10
-    const [number , setnumber] = useState(2)
+    // const [number , setnumber] = useState(2)
     const ModifyValue = (newValue) =>{
         if((newValue>= min) && (newValue <= max)){
-            setnumber(newValue)
+            // setnumber(newValue)
             HandleChangeValue(newValue)
         }
     }

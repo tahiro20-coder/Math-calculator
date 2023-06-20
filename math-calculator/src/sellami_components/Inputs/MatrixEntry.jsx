@@ -30,7 +30,7 @@ function MatrixEntry ({sizeX , sizeY, HandleMatrixChange}){
                           event.target.value = event.target.value[0] + event.target.value.substring(1).replace('+','').replace('-','')
                           let [indexY,indexX] = event.target.name.split(",")
                           // matrix[Number(indexX)][Number(indexY)] = Number(event.target.value)
-                          console.log("done")
+                          // console.log("done")
                           HandleMatrixChange(indexX,indexY,Number(event.target.value));
                         }
                           

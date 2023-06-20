@@ -33,3 +33,18 @@ class mat(Resource):
         print(np.array(matrix))
 
         return {'final_ret':"nannnni"}
+
+class addMatricies(Resource):
+    def get(self):
+        return {
+        'message': "addMatricies Get"
+        }
+
+    def post(self):
+        print(self)
+        matrix1 = np.array(request.json["matrix1"])
+        matrix2 = np.array(request.json["matrix2"])
+        
+        result = matrix1 + matrix2
+
+        return {'output':result.tolist()}

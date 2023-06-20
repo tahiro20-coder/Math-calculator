@@ -24,14 +24,13 @@ export default class APIService {
             .then(response => response)
             .catch(error => console.log(error))
     }
-    static mat(matrix) {
-        console.log("zz", JSON.stringify(matrix))
-        return fetch(`http://localhost:5000/mat`, {
+    static addMatricies(content) {
+        return fetch(`http://localhost:5000/addMatricies`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(matrix)
+                body: JSON.stringify(content)
             })
             .then(response => response.json())
             .catch(error => console.log(error))

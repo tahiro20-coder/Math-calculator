@@ -19,7 +19,7 @@ const TempCalcPage = () => {
       <DropDownMenu />
 
       <AddMatrices />
-      <div className='h-100'>s</div>
+      <div className='h-100'></div>
       </div>
   )
 }
