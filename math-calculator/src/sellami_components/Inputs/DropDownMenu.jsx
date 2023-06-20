@@ -1,5 +1,6 @@
 import React from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
+import {Link} from 'react-router-dom'
 function DropDownMenu (){
   return (
     <div>
@@ -9,7 +10,10 @@ function DropDownMenu (){
         </Dropdown.Toggle>
 
         <Dropdown.Menu className='dropdown_menu'>
-            <Dropdown.Item href="#/action-1">Add Matricices</Dropdown.Item>
+        {/* href="#/AddMatrices" */}
+            <Dropdown.Item >
+              <Link to='/Calculator/AddMatrices' className='d-flex w-100'>Add Matricices</Link>
+              </Dropdown.Item>
             <Dropdown.Item href="#/action-2">Subtract</Dropdown.Item>
             <Dropdown.Item href="#/action-3">multiplication</Dropdown.Item>
         </Dropdown.Menu>

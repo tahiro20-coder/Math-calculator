@@ -1,9 +1,8 @@
 import '../src/Styles/App.css';
-import Header from './Taher_components/Header';
-import Footer from './Taher_components/Footer';
-import PageContent from './Taher_components/PageContent';
-import React from 'react';
-
+import Header from './Taher_Components/Header';
+import Footer from './Taher_Components/Footer';
+import PageContent from './Taher_Components/PageContent';
+import React from 'react'
 
 
 
