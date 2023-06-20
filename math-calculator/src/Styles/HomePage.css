@@ -1,0 +1,172 @@
+
+
+*{
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+
+.intro-container{
+    
+    display: flex;
+    align-items: center;
+}
+
+.intro-text-container{
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.intro-title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 3.75rem;
+    font-weight: 300;
+    color: #116A7B;
+}
+
+.intro-content{
+    font-weight: 600;
+    font-size: 1.25rem;
+    width: 90%;
+    color: #666666;
+}
+
+.intro-btn-container{
+    width: 80%;
+   
+    padding: 1em;
+    
+}
+.btn-text>p{
+    margin-bottom: 0;
+}
+
+.btn-text>span:hover{
+    color: #116A7B;
+}
+
+.btn-text{
+    color: #000000;
+    font-weight: 600;
+    font-size: 1.25rem;
+
+}
+
+svg{
+   width: 50px;
+   height: 50px;
+   margin-left: 1em;
+}
+
+.btn-link{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.con-main{
+    background-color: #C2DEDC;
+    padding: 3em;
+    height: 50%;
+    
+}
+.main-container{
+    
+    
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-content{
+    width: 50%;
+    font-weight: 200;
+    font-size: 1.7rem;
+}
+
+.main-courses-container{
+    height: 100%;
+    width: 50%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    
+}
+
+.course-container{
+    
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.course-container>svg{
+    width: 20%;
+    color: #CF9121;
+}
+
+.course{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1em;
+    font-weight: 350;
+    font-size: 1.25rem;
+    border: 1px solid black;
+    width: 80%;
+    border-radius: 10px;
+    
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 960px){
+    .intro-img{
+        display: none;
+    }
+
+    .intro-text-container{
+        align-items: center;
+        justify-content: center;
+        
+    }
+
+    .intro-btn-container{
+        width: 100%;
+       
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    
+    .main-container{
+        flex-direction: column;
+        
+        
+    }
+    .con-main{
+        height: 100%;
+    }
+    .main-content{
+        width: 90%;
+    }
+    .main-courses-container{
+        width: 80%;
+    }
+}
