@@ -1,0 +1,31 @@
+.dropdown_btn {
+    color: black !important;
+    background-color: transparent !important;
+    border: 2px solid black !important;
+    border-radius: 5px !important;
+    height: 50px !important;
+    width: 30vw;
+    min-width: 200px;
+}
+
+.dropdown_menu {
+    width: 30vw;
+    min-width: 200px;
+}
+
+.active {
+    background-color: #1C98AF !important;
+}
+
+.dropdown-item:active {
+    background-color: #21b5cf !important;
+    color: white !important;
+}
+
+.active a {
+    color: white !important;
+}
+
+.dropdown-item a {
+    color: black;
+}

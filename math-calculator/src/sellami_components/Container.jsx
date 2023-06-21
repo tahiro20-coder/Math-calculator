@@ -6,7 +6,7 @@ const Container = ({title,content}) => {
           <div className='titleCont'>
               <div className="title">&nbsp;{title}&nbsp;</div>
           </div>
-          <div className='d-flex justify-content-center m-3'>
+          <div className='d-flex flex-wrap justify-content-center m-3'>
             {content}
             </div>
       </div>

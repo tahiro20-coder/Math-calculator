@@ -12,6 +12,10 @@ body {
     height: 66%;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 
 /* * {
     text-align: center;

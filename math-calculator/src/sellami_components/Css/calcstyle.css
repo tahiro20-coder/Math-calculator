@@ -14,21 +14,6 @@
     padding: 2% 0;
 }
 
-.dropdown_btn {
-    color: black !important;
-    background-color: transparent !important;
-    border: 2px solid black !important;
-    border-radius: 5px !important;
-    height: 50px !important;
-    width: 30vw;
-    min-width: 200px;
-}
-
-.dropdown_menu {
-    width: 30vw;
-    min-width: 200px;
-}
-
 .Number_input,
 .Number_input:hover,
 .Number_input:focus-visible {
