@@ -8,6 +8,12 @@ import 'katex/dist/katex.min.css';
 import { BlockMath } from 'react-katex'; 
 import renderLatexMatrix from "../LatexRender"
 
+
+const Description = `
+  the Calculator will add two matrices item by item where the result and 
+  the input matricies will be the same size
+`
+
 const AddMatrices = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -40,7 +46,7 @@ const AddMatrices = () => {
   }
   const handleSubmit = () =>{
       APIService.addMatricies({matrix1,matrix2})
-      .then((response) => {setresultMatrix(response["output"]);setoutput(" ")})
+      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -79,6 +85,9 @@ const AddMatrices = () => {
   }, [sizeX,sizeY]);
   return (
     <div>
+        <Title title={"Description"}/>
+        <Container title={"Function Description"} content={ Description}/>
+        
         <Title title={"Inputs"}/>
 
         <Container title={"The Size of the Matrices"} content={
@@ -111,9 +120,7 @@ const AddMatrices = () => {
 
         <Container title={"Results"} content={
             <>
-                <BlockMath math={"A = " + renderLatexMatrix(matrix1) +
-                 "+ B = " +renderLatexMatrix(matrix2) +" = "+ 
-                 renderLatexMatrix(resultMatrix) }/>
+                <BlockMath math={output}/>
             </>
         }/>
         </>

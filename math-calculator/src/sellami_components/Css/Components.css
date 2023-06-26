@@ -7,6 +7,21 @@
         margin-bottom: 15px;
     }
     
+    .textit {
+        overflow-wrap: break-word;
+    }
+    
+    .base {
+        display: unset !important;
+        white-space: unset !important;
+        /* min-width: none !important; */
+        width: unset !important;
+    }
+    
+    .katex {
+        white-space: unset !important;
+    }
+    
     .titleCont {
         display: flex;
         margin-top: -15px;

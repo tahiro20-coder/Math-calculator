@@ -2,7 +2,8 @@ from flask import Flask, send_from_directory,current_app,jsonify,request
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS #comment this on deployment
 from api.HelloApiHandler import HelloApiHandler
-from api.GeoApiHandler import scp,mat,addMatricies
+from api.GeoApiHandler import scp,mat
+from api.StandardApiHandler import addMatricies
 from scripts.scp import functo
 import sys
 

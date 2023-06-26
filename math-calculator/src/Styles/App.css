@@ -17,6 +17,14 @@ a {
 }
 
 
+/* .katex-html {
+    display: flex !important;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-wrap: break-word;
+} */
+
+
 /* * {
     text-align: center;
 } */
