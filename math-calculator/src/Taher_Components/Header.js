@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../Styles/Header.css';
 
+
 import {Link , useMatch, useResolvedPath} from 'react-router-dom'
 
 
@@ -33,10 +34,10 @@ function Header(){
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <CustomLink className = "link_page " to='/HomePage'>Home</CustomLink>
-              <CustomLink className = "link_page " to='/CalcPage' >Math Calculator</CustomLink>
-              <CustomLink className = "link_page " to='/AboutPage'>About</CustomLink>
-              <CustomLink className = "link_page " to='/ContactPage'>Contact us</CustomLink>
+              <CustomLink className = "link_page " to='/Home'>Home</CustomLink>
+              <CustomLink className = "link_page " to='/Calculator' >Math Calculator</CustomLink>
+              <CustomLink className = "link_page " to='/About'>About</CustomLink>
+              <CustomLink className = "link_page " to='/Contact'>Contact us</CustomLink>
             </Nav>
           </Navbar.Collapse>
         </Container>

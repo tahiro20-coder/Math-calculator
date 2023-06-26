@@ -12,13 +12,13 @@ function Footer(){
             <div className="left">            
                 <ul className="footer_list">
                     <li className="footer_item">
-                        <Link to='/HomePage'className="footer_link">Home</Link>
+                        <Link to='/Home'className="footer_link">Home</Link>
                     </li>
                     <li className="footer_item">
-                        <Link to='/AboutPage'className="footer_link">About</Link>
+                        <Link to='/About'className="footer_link">About</Link>
                     </li>
                     <li className="footer_item">
-                        <Link to='/ContactPage'className="footer_link">Contact us</Link>
+                        <Link to='/Contact'className="footer_link">Contact us</Link>
                     </li>
                 </ul>
                 <div className="copy-rights-container">
