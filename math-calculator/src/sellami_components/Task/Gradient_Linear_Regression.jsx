@@ -13,13 +13,22 @@ const Gradient_Linear_Regression = () => {
   const line = useRef(null);
   const runBtn = useRef(null);
   const [ running ,setrunning] = useState(false);
-
+  const [reset,setreset] = useState(false);
 
   useEffect(() => {
     
     if(running){
       runBtn.current.innerHTML = "Stop";
     }else{
+      if(reset){
+        setdata([]); // remove the points data //
+  
+      // reset the function //
+      settheta_0(0);
+      settheta_1(1);
+      setreset(false)
+      console.log("iam in")
+      }
       runBtn.current.innerHTML = "Run";
     }
     if (graph.current) {
@@ -145,6 +154,8 @@ const Gradient_Linear_Regression = () => {
 
     result.innerHTML =
               "H(x)= " + 0 + " + " + 1+ " * x";
+    
+   setreset(true)
     if(running){
       HandleRunning()
     }
@@ -184,7 +195,11 @@ const Gradient_Linear_Regression = () => {
     </h2> */}
     
     <div className="run">
-        <span className="run-btn" ref={runBtn} onClick={HandleRunning} >Run</span>
+        <span className="run-btn" ref={runBtn} onClick={()=>{
+          if(data.length >= 2){
+            HandleRunning()
+          }
+        }} >Run</span>
     </div>
 
     <div className="control">
