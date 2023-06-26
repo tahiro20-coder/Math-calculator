@@ -13,20 +13,19 @@ const Gradient_Linear_Regression = () => {
   const line = useRef(null);
   const runBtn = useRef(null);
   const [ running ,setrunning] = useState(false);
-  const [reset,setreset] = useState(false);
+  const [reset,setreset] = useState(true);
 
   useEffect(() => {
-    
+
     if(running){
       runBtn.current.innerHTML = "Stop";
     }else{
       if(reset){
-        setdata([]); // remove the points data //
-  
       // reset the function //
       settheta_0(0);
       settheta_1(1);
       setreset(false)
+      drawLine();
       console.log("iam in")
       }
       runBtn.current.innerHTML = "Run";
@@ -35,7 +34,7 @@ const Gradient_Linear_Regression = () => {
       // console.log(graph)
       setpos(graph.current.getBoundingClientRect());
     }
-    drawLine();
+    // drawLine();
    
     const timer1 = setInterval(() => {
 
@@ -61,12 +60,9 @@ const Gradient_Linear_Regression = () => {
 
 
     return () => {
-      settheta_0(theta_0);
-      settheta_1(theta_1);
-      setdata(data);
       clearInterval(timer1); 
       clearInterval(timer2); }
-  }, [running]);
+  }, [running,data]);
   
   const HandleGraphClick = (e)=>{
     var bounds = e.target.getBoundingClientRect();
@@ -90,7 +86,8 @@ const Gradient_Linear_Regression = () => {
         window.getComputedStyle(graph.current).getPropertyValue("height").split("px")[0] - y
     );
     // console.log(x,y)
-    data.push({ x, y });
+    // data.push({ x, y });
+    setdata([...data,{x,y}])
   }
   const gradientDecent = () =>{
     let costSum_0 = 0;
@@ -98,7 +95,7 @@ const Gradient_Linear_Regression = () => {
 
     let n = data.length;
     let learningRate = 0.000001;
-
+    console.log(n)
     // calc the cost //
     for (let i = 0; i < n; i++) {
         let x = data[i].x;
@@ -160,7 +157,7 @@ const Gradient_Linear_Regression = () => {
       HandleRunning()
     }
     
-    // drawLine();
+    drawLine();
 
     
   }
