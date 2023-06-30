@@ -31,3 +31,8 @@
 .dropdown-item a {
     color: black;
 }
+
+.dropdown-menu {
+    max-height: 280px;
+    overflow-y: auto;
+}

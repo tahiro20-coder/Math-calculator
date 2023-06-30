@@ -9,11 +9,11 @@ import 'katex/dist/katex.min.css';
 
 
 const Description = `
-  the Calculator will add two matrices item by item where the result and 
+  the Calculator will multiply two matrices side by side where the result and 
   the input matricies will be the same size
 `
 
-const AddMatrices = () => {
+const MulMatrcies = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
@@ -44,7 +44,7 @@ const AddMatrices = () => {
     setMatrix2(temp)
   }
   const handleSubmit = () =>{
-    StandardFAPIService.addMatricies({matrix1,matrix2})
+    StandardFAPIService.MulMatrcies({matrix1,matrix2})
       .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
@@ -126,4 +126,4 @@ const AddMatrices = () => {
   )
 }
 
-export default AddMatrices
+export default MulMatrcies

@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import NumberInput from '../Inputs/NumberInput';
 import MatrixEntry from '../Inputs/MatrixEntry';
+import InputParameter from '../Inputs/InputParameter';
 import Container from '../Container';
 import Title from '../Title';
 import StandardFAPIService from '../api/StandardFAPIService';
@@ -9,15 +10,15 @@ import 'katex/dist/katex.min.css';
 
 
 const Description = `
-  the Calculator will add two matrices item by item where the result and 
-  the input matricies will be the same size
+  the Calculator will multiply a matrix with a scalar item by item where the result and 
+  the input matrix will be the same size
 `
 
-const AddMatrices = () => {
+const MulScalarMatrix = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [matrix2,setMatrix2] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
+  const [scalar,setScalar]  = useState(2)
   const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
@@ -32,55 +33,38 @@ const AddMatrices = () => {
     temp[Number(indexX)][Number(indexY)] = Number(Value)
     setMatrix1(temp)
   }
-  const HandleMatrix2Change = (indexX,indexY,Value) =>{
-    let temp = Array(sizeX).fill(0).map(row => new Array(sizeY).fill(0))
-    for (let i = 0; i < Math.min(matrix2.length,sizeX) ; i++) {
-      for (let j = 0; j <  Math.min(matrix2[0].length,sizeY) ; j++) {
-        temp[i][j] = matrix2[i][j]
-      }
-    }
-    // console.log(temp)
-    temp[Number(indexX)][Number(indexY)] = Number(Value)
-    setMatrix2(temp)
-  }
+
   const handleSubmit = () =>{
-    StandardFAPIService.addMatricies({matrix1,matrix2})
+    StandardFAPIService.MulScalarMatrix({matrix1,scalar})
       .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
     document.getElementsByName("0,0")[1].value = 0
-    document.getElementsByName("0,0")[0].value = 0
     if((sizeX >= 2) && (sizeY >= 2)){
       document.getElementsByName("1,1")[0].value = 0
-      document.getElementsByName("1,1")[1].value = 0
     }
     if(sizeY >= 2){
       document.getElementsByName("1,0")[0].value = 0
-      document.getElementsByName("1,0")[1].value = 0
     }
     if(sizeX >= 2){
       document.getElementsByName("0,1")[0].value = 0
-      document.getElementsByName("0,1")[1].value = 0
     }
 
     setSizeX(2)
     setSizeY(2)
+    setScalar(2)
     setMatrix1(Array(2).fill(0).map(row => new Array(2).fill(0)))
-    setMatrix2(Array(2).fill(0).map(row => new Array(2).fill(0)))
     setoutput("")
   }
   useEffect (() => {
     let temp1 = Array(sizeX).fill(0).map(row => new Array(sizeY).fill(0))
-    let temp2 = Array(sizeX).fill(0).map(row => new Array(sizeY).fill(0))
     for (let i = 0; i < Math.min(matrix1.length,sizeX) ; i++) {
       for (let j = 0; j <  Math.min(matrix1[0].length,sizeY) ; j++) {
         temp1[i][j] = matrix1[i][j]
-        temp2[i][j] = matrix2[i][j]
       }
     }
     setMatrix1(temp1)
-    setMatrix2(temp2)
   }, [sizeX,sizeY]);
   return (
     <div>
@@ -89,7 +73,7 @@ const AddMatrices = () => {
         
         <Title title={"Inputs"}/>
 
-        <Container title={"The Size of the Matrices"} content={
+        <Container title={"The Size of the Matrix"} content={
             <>
                 <NumberInput number = {sizeX} HandleChangeValue = {setSizeX}/>
                 <div className='p-2'>X</div>
@@ -97,13 +81,14 @@ const AddMatrices = () => {
             </>
         }/>
 
-        <Container title={"Matrix One"} content={
+        <Container title={"The Matrix"} content={
         < MatrixEntry  sizeX = {sizeX} sizeY = {sizeY} HandleMatrixChange = {HandleMatrix1Change} />
         }/>
 
-        <Container title={"Matrix Two"} content={
-        < MatrixEntry  sizeX = {sizeX} sizeY = {sizeY} HandleMatrixChange = {HandleMatrix2Change} />
+        <Container title={"The Scalar"} content={
+        < InputParameter  value = {scalar} handleChange = {setScalar} />
         }/>
+        
         <div className='d-flex justify-content-center'>
           <div className='submit'>
             <button  onClick={handleSubmit}>Calculate</button>
@@ -126,4 +111,4 @@ const AddMatrices = () => {
   )
 }
 
-export default AddMatrices
+export default MulScalarMatrix

@@ -123,3 +123,98 @@ class addMatricies(Resource):
         result = matrix1 + matrix2
         LatexText += "\\\\" + emph(" The Result of Adding Both of them is : ")+Container(bmatrix(matrix1)+" + "+bmatrix(matrix2)+" = "+bmatrix(result) )
         return {'output':LatexText,"result":result.tolist()}
+
+class SubMatrcies(Resource):
+    def get(self):
+        return {
+        'message': "SubMatrcies Get"
+        }
+
+    def post(self):
+        print(self)
+        LatexText = ""
+        matrix1 = np.array(request.json["matrix1"])
+        matrix2 = np.array(request.json["matrix2"])
+        
+        LatexText +=emph("The Input Matrcices Are : ")+Container("A = "+bmatrix(matrix1) +" , B = "+bmatrix(matrix2))
+
+        result = matrix1 - matrix2
+        LatexText += "\\\\" + emph(" The Result of Subtracting Both of them is : ")+Container(bmatrix(matrix1)+" - "+bmatrix(matrix2)+" = "+bmatrix(result) )
+        return {'output':LatexText,"result":result.tolist()}
+
+class MulMatrcies(Resource):
+    def get(self):
+        return {
+        'message': "MulMatrcies Get"
+        }
+
+    def post(self):
+        print(self)
+        LatexText = ""
+        matrix1 = np.array(request.json["matrix1"])
+        matrix2 = np.array(request.json["matrix2"])
+        
+        LatexText +=emph("The Input Matrcices Are : ")+Container("A = "+bmatrix(matrix1) +" , B = "+bmatrix(matrix2))
+
+        result = matrix1 * matrix2
+        LatexText += "\\\\" + emph(" The Result of Multiplying Both of them side by side is : ")+Container(bmatrix(matrix1)+" * "+bmatrix(matrix2)+" = "+bmatrix(result) )
+        return {'output':LatexText,"result":result.tolist()}
+
+
+class MulScalarMatrix(Resource):
+    def get(self):
+        return {
+        'message': "MulScalarMatrix Get"
+        }
+
+    def post(self):
+        print(self)
+        LatexText = ""
+        matrix1 = np.array(request.json["matrix1"])
+        scalar = np.array(request.json["scalar"])
+
+        LatexText =emph("The Input Matrcices Are : ")+Container("A = "+bmatrix(matrix1) +" , α = "+str(scalar))
+        result = matrix1*scalar
+        LatexText += "\\\\" + emph(" The Result of Multiplying "+str(scalar)+ " with A : ")+Container("A*α = "+bmatrix(matrix1)+"*"+str(scalar))+ Container("="+bmatrix(result) )
+        
+        return {'output':LatexText,"result":result.tolist()}
+
+class DivScalarMatrix(Resource):
+    def get(self):
+        return {
+        'message': "DivScalarMatrix Get"
+        }
+
+    def post(self):
+        print(self)
+        LatexText = ""
+        matrix1 = np.array(request.json["matrix1"])
+        scalar = np.array(request.json["scalar"])
+
+        LatexText =emph("The Input Matrcices Are : ")+Container("A = "+bmatrix(matrix1) +" , α = "+str(scalar))
+        result = matrix1/scalar
+        LatexText += "\\\\" + emph(" The Result of Dividing "+str(scalar)+ " with A : ")+Container("A/α = "+bmatrix(matrix1)+"/"+str(scalar)) + Container("="+bmatrix(result) )
+        
+        return {'output':LatexText,"result":result.tolist()}
+
+class Dot_Product(Resource):
+    def get(self):
+        return {
+        'message': "Dot_Product Get"
+        }
+
+    def post(self):
+        print(self)
+        A = np.array(request.json["matrix1"])
+        B = np.array(request.json["matrix2"])
+        print(A)
+        print(B)
+        LatexText = emph(" Your Input is ") +", A = "+ bmatrix(A) +", B = "+bmatrix(B)+"\\\\ \ \\\\"
+        if(A.shape[0]!=B.shape[0]):
+            LatexText += Container(emph(" You Cant apply dot product on this inputs since there shapes are not compatible with each other"))
+            return {'output':LatexText,"result":[]}
+        result = A.T@B
+        LatexText += Container("A^T.B = "+bmatrix(A.T)+"."+bmatrix(B)+" = "+bmatrix(result))
+        
+        return {'output':LatexText,"result":result.tolist()}
+    

@@ -8,11 +8,30 @@ function DropDownMenu ({selected}){
   // console.log(selected)
   const TitleList = {
     "AddMatrices" : "Add two matrices",
-    "Gradient_Linear_Regression" : "Linear Regression ( Gradient Descent ) "
+    "DivScalarMatrix" : "Divide by Scalar",
+    "Dot_Product" : "Dot Product",
+    "one_norm" : "Matrix 1rst Norm",
+    "Euclidean_Norm" : "Matrix Euclidean Norm",
+    "Inifinity_norm" : "Matrix Infinity Norm",
+    "Manhattan_Norm" : "Vector Manhattan Norm",
+    "Euclidean_VNorm" : "Vector Euclidean Norm",
+    "Inifinity_VNorm" : "Vector Inifinity Norm",
+    "Lp_Norm" : "Vector Lp Norm",
+    "Manhattan_Distance" : "Matrix Manhattan Distance",
+    "Euclidean_Distance" : "Matrix Euclidean Distance",
+    "Infinity_Distance" : "Matrix Infinity Distance",
+    "Manhattan_VDistance" : "Vector Manhattan Distance",
+    "Euclidean_VDistance" : "Vector Euclidean Distance",
+    "Infinity_VDistance" : "Vector Infinity VDistance",
+    "Gradient_Linear_Regression" : "Univariante Linear Regression using Gradient Descent ",
+    "MulMatrcies" : "Side by Side Matricies Multiplication ",
+    "MulScalarMatrix" : "Scalar Multiplication",
+    "SubMatrcies" : "Subtract two matrcies",
+
   }
   return (
     <div>
-        <Dropdown className='w-100'>
+        <Dropdown className='w-100 '>
         <Dropdown.Toggle className=' dropdown_btn' variant="success" id="dropdown-basic">
             {
               selected == null ? "Dropdown Button" : TitleList[selected]
