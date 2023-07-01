@@ -16,10 +16,28 @@ import Infinity_Distance from '../sellami_components/Task/Infinity_Distance';
 import Manhattan_VDistance from '../sellami_components/Task/Manhattan_VDistance';
 import Euclidean_VDistance from '../sellami_components/Task/Euclidean_VDistance';
 import Infinity_VDistance from '../sellami_components/Task/Infinity_VDistance';
+import Transpose from '../sellami_components/Task/Transpose';
+import Inverse_matrix from '../sellami_components/Task/Inverse_matrix';
+import Trace from '../sellami_components/Task/Trace';
+import Determinant from '../sellami_components/Task/Determinant';
+import Eigen_Decomposition from '../sellami_components/Task/Eigen_Decomposition';
+import LU from '../sellami_components/Task/LU';
+import Cholosky_Decomposition from '../sellami_components/Task/Cholosky_Decomposition';
+import QR_Decomposition from '../sellami_components/Task/QR_Decomposition';
+import SVD from '../sellami_components/Task/SVD';
 import Gradient_Linear_Regression from '../sellami_components/Task/Gradient_Linear_Regression';
 import MulMatrcies from '../sellami_components/Task/MulMatrcies';
 import MulScalarMatrix from '../sellami_components/Task/MulScalarMatrix';
 import SubMatrcies from '../sellami_components/Task/SubMatrcies';
+import Gaussian_Elm from '../sellami_components/Task/Gaussian_Elm';
+import Basis from '../sellami_components/Task/Basis';
+import Gram_Shmidt from '../sellami_components/Task/Gram_Shmidt';
+import Kernel from '../sellami_components/Task/Kernel';
+import Rank from '../sellami_components/Task/Rank';
+import Particular_Solution from '../sellami_components/Task/Particular_Solution';
+import General_solution from '../sellami_components/Task/General_solution';
+import LU_Solv from '../sellami_components/Task/LU_Solv';
+import Eigenvalues_and_Eigenvectors from '../sellami_components/Task/Eigenvalues_and_Eigenvectors';
 import '../sellami_components/Css/calcstyle.css';
 import '../sellami_components/Css/Components.css';
 import {useParams} from 'react-router-dom';
@@ -44,6 +62,24 @@ function CalcPage(){
         "Manhattan_VDistance" : <Manhattan_VDistance/>,
         "Euclidean_VDistance": <Euclidean_VDistance/>,
         "Infinity_VDistance" : <Infinity_VDistance/>,
+        "Transpose" : <Transpose/>,
+        "Inverse_matrix" : <Inverse_matrix/>,
+        "Trace" : <Trace/>,
+        "Determinant" : <Determinant/>,
+        "Gaussian_Elm" : <Gaussian_Elm/>,
+        "Basis" : <Basis/>,
+        "Kernel" : <Kernel/>,
+        "Rank" : <Rank/>,
+        "Gram_Shmidt" : <Gram_Shmidt/>,
+        "Particular_Solution" : <Particular_Solution/>,
+        "General_solution" : <General_solution/>,
+        "LU_Solv" : <LU_Solv/>,
+        "Eigenvalues_and_Eigenvectors" : <Eigenvalues_and_Eigenvectors/>,
+        "Eigen_Decomposition" : <Eigen_Decomposition/>,
+        "LU" : <LU/>,
+        "SVD" : <SVD/>,
+        "Cholosky_Decomposition" : <Cholosky_Decomposition/>,
+        "QR_Decomposition" : <QR_Decomposition/>,
         "Gradient_Linear_Regression": <Gradient_Linear_Regression />,
         "MulMatrcies" : <MulMatrcies/>,
         "MulScalarMatrix" :  <MulScalarMatrix/>,
