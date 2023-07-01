@@ -38,6 +38,11 @@ import Particular_Solution from '../sellami_components/Task/Particular_Solution'
 import General_solution from '../sellami_components/Task/General_solution';
 import LU_Solv from '../sellami_components/Task/LU_Solv';
 import Eigenvalues_and_Eigenvectors from '../sellami_components/Task/Eigenvalues_and_Eigenvectors';
+import Diagonizable from '../sellami_components/Task/diagonizable';
+import Convexity from '../sellami_components/Task/Convexity';
+import Invertibility from '../sellami_components/Task/Invertibility';
+import Orthogonality from '../sellami_components/Task/Orthogonality';
+import Independency from '../sellami_components/Task/Independency';
 import '../sellami_components/Css/calcstyle.css';
 import '../sellami_components/Css/Components.css';
 import {useParams} from 'react-router-dom';
@@ -74,6 +79,11 @@ function CalcPage(){
         "Particular_Solution" : <Particular_Solution/>,
         "General_solution" : <General_solution/>,
         "LU_Solv" : <LU_Solv/>,
+        "Diagonizable" : <Diagonizable/>,
+        "Convexity" : <Convexity/>,
+        "Invertibility" : <Invertibility/>,
+        "Orthogonality" : <Orthogonality/>,
+        "Independency" : <Independency/>,
         "Eigenvalues_and_Eigenvectors" : <Eigenvalues_and_Eigenvectors/>,
         "Eigen_Decomposition" : <Eigen_Decomposition/>,
         "LU" : <LU/>,

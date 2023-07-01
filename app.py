@@ -9,6 +9,7 @@ from api.Distance import Manhattan_Distance,Euclidean_Distance,Infinity_Distance
 from api.MatrixFund import Transpose,Inverse_matrix,Trace,Determinant
 from api.Matrix_Decomposition import Eigen_Decomposition,LU,Cholosky_Decomposition,QR_Decomposition,SVD
 from api.Echelon import Gaussian_Elmination,Basis,Gram_Shmidt,Kernel,Rank,Particular_Solution_C,General_solution,LU_Solv_C,Eigenvalues_and_Eigenvectors_C
+from api.Testing_Methods import Diagonizable,Convexity,Invertibility,Orthogonality,Independency
 from scripts.scp import functo
 import sys
 
@@ -82,6 +83,13 @@ api.add_resource(Particular_Solution_C, '/Particular_Solution')
 api.add_resource(General_solution, '/General_solution')
 api.add_resource(LU_Solv_C, '/LU_Solv')
 api.add_resource(Eigenvalues_and_Eigenvectors_C, '/Eigenvalues_and_Eigenvectors')
+
+api.add_resource(Diagonizable, '/Diagonizable')
+api.add_resource(Convexity, '/Convexity')
+api.add_resource(Invertibility, '/Invertibility')
+api.add_resource(Orthogonality, '/Orthogonality')
+api.add_resource(Independency, '/Independency')
+
 
 api.add_resource(mat, '/mat')
 api.add_resource(scp, '/add')
