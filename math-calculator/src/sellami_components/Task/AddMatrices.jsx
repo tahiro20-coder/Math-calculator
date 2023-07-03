@@ -3,10 +3,9 @@ import NumberInput from '../Inputs/NumberInput';
 import MatrixEntry from '../Inputs/MatrixEntry';
 import Container from '../Container';
 import Title from '../Title';
-import APIService from '../api/APIService';
+import StandardFAPIService from '../api/StandardFAPIService';
 import 'katex/dist/katex.min.css';
-import { BlockMath } from 'react-katex'; 
-import renderLatexMatrix from "../LatexRender"
+
 
 
 const Description = `
@@ -45,7 +44,7 @@ const AddMatrices = () => {
     setMatrix2(temp)
   }
   const handleSubmit = () =>{
-      APIService.addMatricies({matrix1,matrix2})
+    StandardFAPIService.addMatricies({matrix1,matrix2})
       .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
@@ -118,10 +117,8 @@ const AddMatrices = () => {
         <>
         <Title title={"Output"}/>
 
-        <Container title={"Results"} content={
-            <>
-                <BlockMath math={output}/>
-            </>
+        <Container title={"Results"} mathcontent={
+            output
         }/>
         </>
         }

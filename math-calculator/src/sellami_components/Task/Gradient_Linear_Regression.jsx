@@ -1,6 +1,6 @@
 import React,{useEffect, useRef, useState} from 'react'
 import "../Css/Gradient_Linear_Regression.css"
-import { BlockMath } from 'react-katex'; 
+
 import Container from '../Container';
 import Title from '../Title';
 
@@ -13,20 +13,19 @@ const Gradient_Linear_Regression = () => {
   const line = useRef(null);
   const runBtn = useRef(null);
   const [ running ,setrunning] = useState(false);
-  const [reset,setreset] = useState(false);
+  const [reset,setreset] = useState(true);
 
   useEffect(() => {
-    
+
     if(running){
       runBtn.current.innerHTML = "Stop";
     }else{
       if(reset){
-        setdata([]); // remove the points data //
-  
       // reset the function //
       settheta_0(0);
       settheta_1(1);
       setreset(false)
+      drawLine();
       console.log("iam in")
       }
       runBtn.current.innerHTML = "Run";
@@ -35,7 +34,7 @@ const Gradient_Linear_Regression = () => {
       // console.log(graph)
       setpos(graph.current.getBoundingClientRect());
     }
-    drawLine();
+    // drawLine();
    
     const timer1 = setInterval(() => {
 
@@ -61,12 +60,9 @@ const Gradient_Linear_Regression = () => {
 
 
     return () => {
-      settheta_0(theta_0);
-      settheta_1(theta_1);
-      setdata(data);
       clearInterval(timer1); 
       clearInterval(timer2); }
-  }, [running]);
+  }, [running,data]);
   
   const HandleGraphClick = (e)=>{
     var bounds = e.target.getBoundingClientRect();
@@ -90,7 +86,8 @@ const Gradient_Linear_Regression = () => {
         window.getComputedStyle(graph.current).getPropertyValue("height").split("px")[0] - y
     );
     // console.log(x,y)
-    data.push({ x, y });
+    // data.push({ x, y });
+    setdata([...data,{x,y}])
   }
   const gradientDecent = () =>{
     let costSum_0 = 0;
@@ -98,7 +95,7 @@ const Gradient_Linear_Regression = () => {
 
     let n = data.length;
     let learningRate = 0.000001;
-
+    let errorsum = 0
     // calc the cost //
     for (let i = 0; i < n; i++) {
         let x = data[i].x;
@@ -111,12 +108,15 @@ const Gradient_Linear_Regression = () => {
         // costSum_1 += (learningRate / n) * error * x;
         costSum_0 += error * 1000000
         costSum_1 += x*error 
+        errorsum += (guess-y)**2
     }
     //  //
     // console.log("chane",learningRate * ((-2/n)*costSum_0),learningRate * ((-2/n)*costSum_1))
     // console.log(theta_0,theta_1)
+    errorsum /= n
     theta_0 -= learningRate * ((1/n)*costSum_0);
     theta_1 -= learningRate * ((1/n)*costSum_1);
+
   }
   const drawLine = () => {
     let x1 = 0;
@@ -160,7 +160,7 @@ const Gradient_Linear_Regression = () => {
       HandleRunning()
     }
     
-    // drawLine();
+    drawLine();
 
     
   }
@@ -175,6 +175,27 @@ const Gradient_Linear_Regression = () => {
 
   const result = document.querySelector(".fx");
 
+    // const [employeeData, setEmployeeData] = useState(data)
+  
+    const onChangeInput = (e, number) => {
+      const { name, value } = e.target
+  
+      const editdata = data.map((item,index) =>
+      index === number ? { ...item, [name]: value } : item
+      )
+
+      let graphPoints = document.querySelectorAll(".gradient-decent .graph .point");
+      if(name == "x"){
+        graphPoints[number].style.left = value + "px";
+    
+      }else{
+        graphPoints[number].style.top = graph.current.getBoundingClientRect().height-3 - value + "px";
+      }
+      
+      setdata(editdata)
+    }
+  
+
   const Description = `
   \\textit{This is an interactive function where you can add points by clicking and view the 
   changing of the slope line using gradient descent,where this function is calculating the slope by the 
@@ -185,7 +206,7 @@ const Gradient_Linear_Regression = () => {
   return (
     <>
     <Title title={"Description"}/>
-    <Container title={"Function Description"} content={<BlockMath math={Description}/> }/>
+    <Container title={"Function Description"} mathcontent={Description }/>
     <Title title={"Interactive Input"}/>
     <section className="gradient-decent">
     {/* <h2>
@@ -213,6 +234,83 @@ const Gradient_Linear_Regression = () => {
 
     <p className="fx">H(x)= 0 + 1 * x</p>
     </section>
+    
+    <Title title={"Points Table"}/>
+
+    <table className='InputTable'>
+        <thead>
+          <tr>
+            <th>number</th>
+            <th>x</th>
+            <th>y</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map(({ x, y },number) => (
+            <tr key={number}>
+              <td>
+                {/* <input
+                  name="number"
+                  value={number}
+                  type="number"
+                  onChange={(e) => onChangeInput(e, number)}
+                  placeholder="Type Number"
+                /> */}
+                {number +1 }
+              </td>
+              <td>
+                <input
+                  name="x"
+                  value={x}
+                  type="number"
+                  min={0}
+                  max={graph.current.getBoundingClientRect().width}
+                  onKeyPress={(event) => {
+                    // console.log(event.target.value)
+                    if ((!/[0-9]/.test(event.key))) {
+                    event.preventDefault();
+                    }
+                  }}
+                  onChange={(e) => {
+                    if((e.target.value>=0)&&(e.target.value<=graph.current.getBoundingClientRect().width-3)){ 
+                      onChangeInput(e, number)
+                    }else{
+                      e.preventDefault();
+                    }
+                  }
+                  }
+                  placeholder="Type Number"
+                />
+              </td>
+              <td>
+                <input
+                  name="y"
+                  type="number"
+                  value={y}
+                  min={0}
+                  max={graph.current.getBoundingClientRect().height-3}
+                  onKeyPress={(event) => {
+                    // console.log(event.target.value)
+                    if ((!/[0-9]/.test(event.key))) {
+                    event.preventDefault();
+                    }
+                  }}
+                  onChange={(e) => {
+                    if((e.target.value>=0)&&(e.target.value<=graph.current.getBoundingClientRect().height-3)){ 
+                      onChangeInput(e, number)
+                    }else{
+                      e.preventDefault();
+                    }
+                  }
+                  }
+                  placeholder="Type Number"
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
     </>
   )
 }
