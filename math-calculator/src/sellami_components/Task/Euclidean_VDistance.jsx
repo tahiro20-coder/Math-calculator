@@ -71,7 +71,7 @@ const Euclidean_VDistance = () => {
     }
     setMatrix1(temp1)
     setMatrix2(temp2)
-  }, [1,sizeY]);
+  }, [sizeY]);
   return (
     <div>
         <Title title={"Description"}/>

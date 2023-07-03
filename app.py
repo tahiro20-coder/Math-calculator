@@ -6,7 +6,7 @@ from api.GeoApiHandler import scp,mat
 from api.StandardApiHandler import addMatricies,SubMatrcies,MulMatrcies,Dot_Product,MulScalarMatrix,DivScalarMatrix
 from api.Norms import Euclidean_Norm,Inifinity_norm,one_norm,Manhattan_Norm,Euclidean_VNorm,Inifinity_VNorm,Lp_Norm
 from api.Distance import Manhattan_Distance,Euclidean_Distance,Infinity_Distance,Manhattan_VDistance,Euclidean_VDistance,Infinity_VDistance
-from api.MatrixFund import Transpose,Inverse_matrix,Trace,Determinant
+from api.MatrixFund import Transpose,Inverse_matrix,Trace,Determinant,Angle,Projection_C,Affine_Projection
 from api.Matrix_Decomposition import Eigen_Decomposition,LU,Cholosky_Decomposition,QR_Decomposition,SVD
 from api.Echelon import Gaussian_Elmination,Basis,Gram_Shmidt,Kernel,Rank,Particular_Solution_C,General_solution,LU_Solv_C,Eigenvalues_and_Eigenvectors_C
 from api.Testing_Methods import Diagonizable,Convexity,Invertibility,Orthogonality,Independency
@@ -89,6 +89,10 @@ api.add_resource(Convexity, '/Convexity')
 api.add_resource(Invertibility, '/Invertibility')
 api.add_resource(Orthogonality, '/Orthogonality')
 api.add_resource(Independency, '/Independency')
+
+api.add_resource(Angle, '/Angle')
+api.add_resource(Projection_C, '/Projection_C')
+api.add_resource(Affine_Projection, '/Affine_Projection')
 
 
 api.add_resource(mat, '/mat')

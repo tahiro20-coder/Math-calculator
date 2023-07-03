@@ -10,8 +10,25 @@ import Testing_Methods from '../api/Testing_Methods';
 
 const Description = `
 
+\\textit{Convexity is a term that pertains to both sets and functions.\\\\
 
-NOTT SET
+For functions, there are different degrees of convexity, and how
+convex a function is, tells us a lot about its minima: do they
+exist, are they unique, how quickly can we find them using
+optimization algorithms.\\\\
+
+we use the Theorem:\\\\}
+
+
+\\textit{*   f is **convex** if and only if} ∇^{2}f(x)\\textit{ is **positive semi definite** for all} x ∈ dom f\\\\
+
+\\textit{*   If} ∇^{2}f(x)\\textit{ is **positive definite** for all} x ∈ dom f\\textit{ then }f \\textit{is **strictly convex**.}\\\\
+
+
+
+\\textit{To tell wheither the function is convex or not by calculating the eignvalues of }∇^{2}f(x)\\\\
+
+\\textit{resource: K.Boanan cours}
 
 
 `

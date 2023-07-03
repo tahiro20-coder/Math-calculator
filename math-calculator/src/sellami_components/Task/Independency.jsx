@@ -10,7 +10,23 @@ import Testing_Methods from '../api/Testing_Methods';
 
 const Description = `
 
-NOT SET
+
+\\textit{In the theory of vector spaces, a set of vectors is said to be linearly
+independent if there exists no nontrivial linear combination of the vectors 
+that equals the zero vector. If such a linear combination exists, then the 
+vectors are said to be linearly dependent.}\\\\
+
+\\textit{A sequence of vectors }{\displaystyle \\mathbf {v} _{1},\\mathbf {v} _{2},\\dots ,\\mathbf {v} _{k}}
+\\textit{from a vector space V is said to be linearly dependent, if there exist scalars }
+{\\displaystyle a_{1},a_{2},\\dots ,a_{k},} \\textit{not all zero, such that:}\\\\
+{\\displaystyle a_{1}\\mathbf {v} _{1}+a_{2}\\mathbf {v} _{2}+\\cdots +a_{k}\\mathbf {v} _{k}=\\mathbf {0} ,}
+
+
+\\textit{and to check the independency of the vectors subspace we will apply the Gaussian 
+elimination on the space to check if there exist a kernel span.}
+
+
+\\textit{\\\\for more : \\\\ https://en.wikipedia.org/wiki/Linear\\_independence}
 
 `
 

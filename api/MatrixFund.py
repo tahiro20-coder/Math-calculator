@@ -337,3 +337,316 @@ class Trace(Resource):
 
             LatexText += "="+str(trace)
             return {'output':LatexText,"result":trace.tolist()}   
+
+
+class Products:
+  def __init__(self,A=None):
+    self.A = A
+  def Standard_inner_product(self,x,y):
+
+    return x.T @ y
+  def inner_product(self,x,y):
+    if(A is None):
+      self.A = np.eye(x.shape[0])
+    return (x.T @ self.A @ y)
+
+class Angle(Resource):
+    def get(self):
+        return {
+        'message': "Angle Get"
+        }
+
+    def post(self):
+        print(self)
+        
+        LatexText = ""
+        A = np.array(request.json["matrix1"])
+        x = np.array(request.json["matrix2"])[0]
+        y = np.array(request.json["matrix3"])[0]
+        product_type = np.array(request.json["choice"])
+   
+        if(product_type==0):
+            # the inner product = dot product
+            LatexText += emph('computing the angle between:')+'\\\\'
+            LatexText += Container(emph('x=')+bmatrix(x)+emph(' , y= ')+bmatrix(y))
+            LatexText += emph('using <x,y> :=')+f"x^{'T'}y"+'\\\\'
+            pr = Products()
+            product_x_y = pr.Standard_inner_product(x,y)[0,0]
+            norm_x = pr.Standard_inner_product(x,x)[0,0]
+            norm_y = pr.Standard_inner_product(y,y)[0,0]
+            cos_angle = np.arccos(product_x_y/np.sqrt(norm_x*norm_y))
+            angle = (cos_angle*180/np.pi)
+
+            a,b = f"\sqrt{norm_x}",f"\sqrt{norm_y}"
+            f = "\dfrac{"+str(product_x_y)+"}{"+a+b+"} = "+str(cos_angle)+"rad = "+f"{str(angle)}^{'o'}"+'\\\\'
+            LatexText += emph('cos ω =')+ f
+
+            return {'output':LatexText,"result":angle.tolist()}   
+        if(product_type==1):
+            # the inner product defined as <x,y> = x.T@A@y
+            LatexText += emph('computing the angle between:')+'\\\\'
+            LatexText += Container(emph('x=')+bmatrix(x)+emph(' , y= ')+bmatrix(y) +emph(' ,B = ')+bmatrix(A))
+            LatexText += emph('using <x,y> :=')+f"x^{'T'}By"+'\\\\'
+
+            pr = Products(A)
+            product_x_y = pr.inner_product(x,y)[0,0]
+            norm_x = pr.inner_product(x,x)[0,0]
+            norm_y = pr.inner_product(y,y)[0,0]
+            cos_angle = np.arccos(product_x_y/np.sqrt(norm_x*norm_y))
+            angle = (cos_angle*180/np.pi)
+
+            a,b = f"\sqrt{norm_x}",f"\sqrt{norm_y}"
+            f = "\dfrac{"+str(product_x_y)+"}{"+a+b+"} = "+str(cos_angle)+"rad = "+f"{str(angle)}^{'o'}"+'\\\\'
+            LatexText += emph('cos ω =')+ f
+
+            return {'output':LatexText,"result":angle.tolist()}   
+
+
+
+class Projection:
+  def __init__(self,inner_product = None):
+    pr = Products()
+    if(inner_product is None):
+      self.inner_product = pr.Standard_inner_product
+      self.dot_space = True
+    else:
+      self.inner_product = inner_product
+      self.dot_space = False
+  def Gaussian_Elm(self,A,col=0,isReduit=False,tol = 1e-5):
+    LatexText = ""
+    A[abs(A) < tol] = 0.0
+    n,m = A.shape
+    A = A.astype(float)
+    #existing Conditions
+    if col >= min(n,m):
+        return A,LatexText
+    if(col!=0):
+      LatexText+=Container(emph("Then we Evaluate the next column which is the column number ")+str(col+1))
+    else:
+      LatexText += Container(emph("we will be applying the transformations column by column so we will start by the first column"))
+    # swaping pointer(index)
+    LatexText += Container(emph("The current matrix is ")+bmatrix(A))
+    swap_idx = col
+    # select pivot value
+    pivot = A[col][col]
+    # finding  the next Number not equat to zero in same columns in remaining rows
+    while pivot == 0 and col + swap_idx < A.shape[0]:
+        if(swap_idx == col):
+          LatexText += Container(emph("The pivot is 0 so we should swap rows until we find the non pivot row one "))
+        else:
+          LatexText += Container(emph("but This swap doesnt prevent the zero pivot so we should continue swaping"))
+        # swaping rows col , col+swap_index
+        A[[col, col + swap_idx]] = A[[col + swap_idx, col]]
+        # incrememnt row swaping pointer
+        swap_idx += 1
+        #new pivot value
+        pivot = A[col][col]
+        LatexText += Container(emph("After swaping with the ")+str(col + swap_idx+1)+emph(" row we get the following matrix ")+bmatrix(A))
+    # if pivot still zero thats mean all remaining rows are  zeros  so abort the function
+    if pivot == 0:# return the current  A
+        LatexText += Container(emph("All the rows has 0 pivot so we cant continue calculation,Therefor we will be end with the following matrix ")+bmatrix(A))
+        return A,LatexText
+
+    if(A[col][col] != 1):
+      # divide the current row at Pivot to get 1 in the diagonal
+      A[col] = A[col]/A[col][col]
+      LatexText += Container(emph("then we will divide the current row of the pivot by the pivot itself to get 1 in the diagonal , that will result the following matrix : ")+bmatrix(A))
+    #rows under the diagonal
+    for row in range(col+1 ,n):
+        rate = A[row][col]/A[col][col]
+        A[row] -= rate * A[col]
+    LatexText += Container(emph("then next step is to transform the under diagonal rows where we get the following matrix : ")+bmatrix(A))
+    #above the diagonal
+    if isReduit ==True:
+        for row in range(0 ,col):
+            rate = A[row][col]/A[col][col]
+            A[row] -= rate * A[col]
+        LatexText += Container(emph("And also because we want the reduced form we will calculate the upper diagonal rows where we finally get the matrix : ")+bmatrix(A))
+    #the call the function for the next col
+    g,ls = self.Gaussian_Elm(A,col+1,isReduit=isReduit)
+    LatexText += ls
+    return g,LatexText
+  def Apply_Gaussian_Elm(self,A,isReduit=False):
+    LatexText = emph(" Your Input is ") +", A = "+ bmatrix(A) +"\\\\ \ \\\\"
+    g,ls = self.Gaussian_Elm(A,0,isReduit)
+    LatexText += ls
+    LatexText += Container(emph("At the end the Echelon form of the input matrix ")+bmatrix(A)+emph(" is ")+bmatrix(g))
+    return g,LatexText
+  def distance(self,p,x):
+    z = x - p
+    return np.sqrt(np.round((self.inner_product(z, z))))
+  def Gram_Shmidt(self,B):
+    LatexText = Container(emph("The new Basis Space after applying the gram shmidt method will be : "))
+    C = [B[:,0].copy()]
+    LatexText += Container("u_1 = b_1 = "+bvector(B[:,0].copy()))
+    for i in range(1,B.shape[1]):
+      C.append(B[:,i].copy())
+      for j in range(i):
+        c = np.array(C[j])
+        C[i] = C[i] - ( self.inner_product(B[:,i] , c)  /  self.inner_product(c , c )) * c
+      LatexText += Container("u_{"+str(i+1)+"} = b_{"+str(i+1)+"} - \\sum_{j=1}^{"+str(i)+"} proj_{u_j}(b_{"+str(i+1)+"}) = "+bvector(C[i]))
+    return np.array(C).T,LatexText
+  def Basis(self,U_Span):
+    LatexText = Container(emph("The first step is to find the Basis of the input space where we will apply the Gaussian elimination on the space"))
+    U_reduced,ls = self.Apply_Gaussian_Elm(U_Span)
+    ls = ls.replace(" Your Input is " ,"we will start by the Space matrix ")
+    LatexText += ls
+    Basis = []
+    for i in range(0,U_reduced.shape[1]):
+      if(U_reduced[i,i] == 1): # this is a basis
+        Basis.append(U_Span[:,i])
+    LatexText += Container(emph("After extracting the pivot columns which are the basis we find that the basis of the space are : "))
+    LatexText += Container("Basis = Span \\left ("+bmatrix(np.array(Basis).T)+"\\right )")
+    return np.array(Basis).T,LatexText
+  def Dot_Projection(self,Basis,x):
+    LatexText = Container(emph("Where the standard dot projection is applyied with the formula : "))
+    lambda_B = np.linalg.inv(Basis.T @ Basis) @ Basis.T @ x
+    LatexText += Container("\lambda = (B^T.B)^{-1}.B^T.x = \\left ( "+bmatrix(Basis.T)+"."+bmatrix(Basis)+"\\right )^{-1} ."+bmatrix(Basis.T)+"."+bvector(x)+" = "+bmatrix(lambda_B))
+    LatexText += Container(emph("From there the projection will be "))
+    LatexText += Container("B.\\lambda = " +bmatrix(Basis @ lambda_B))
+    return Basis @ lambda_B,LatexText
+  def is_Orthogonal_Space(self,SubSpace):
+    LatexText = Container(emph("The next step is to test if the Basis of the space are orthogonal or not"))
+    tester = True
+    for i in range(SubSpace.shape[1]):
+      for j in range(i+1,SubSpace.shape[1]):
+        if(self.inner_product(SubSpace[:,i], SubSpace[:,j]) != 0):
+          LatexText += Container(emph("after evaluating we find that the vector ")+bvector(SubSpace[:,i])+emph(" is not orthogonal with the vector ")+bvector(SubSpace[:,j]))
+          LatexText += Container(emph("where the inner product between them is ")+str(self.inner_product(SubSpace[:,i], SubSpace[:,j])))
+          LatexText += Container(emph("Therefor, the Space is not othogonal "))
+          tester = False
+          break
+      if(tester is False):
+        break
+    if(tester):
+      LatexText += Container(emph("After evaluation we find that all the basis are orthogonal ,Then the space is an Orthogonal space"))
+    return tester,LatexText
+  def Projection_custom(self,Basis,x):
+    LatexText = Container(emph("After applying the projection we will get the following projected vector : "))
+    p = np.zeros_like(x)
+    LatexText += "\\\\ \ \\\\ \pi_{U} x = "
+    for i in range(Basis.shape[1]):
+      b = Basis[:,i]
+      lambda_b = self.inner_product(b,x) / self.inner_product(b,b)
+      if(i == Basis.shape[1]-1):
+        LatexText += "\\frac{<b_{"+str(i+1)+"},x>}{<b_{"+str(i+1)+"},b_{"+str(i+1)+"}}.b_{"+str(i+1)+"}"
+      else:
+        LatexText += "\\frac{<b_{"+str(i+1)+"},x>}{<b_{"+str(i+1)+"},b_{"+str(i+1)+"}}.b_{"+str(i+1)+"} + "
+      p = p + ( lambda_b * b )
+    LatexText += Container(emph("From there the resulted projected vector will be : ")+bvector(p))
+    return p,LatexText
+
+  def project(self,Space,x):
+    LatexText =  emph(" Your Input Space is ") +", U = span\\left ("+ bmatrix(Space) +" \\right ), x = "+bvector(x)+"\\\\ \ \\\\"
+    Basis,ls = self.Basis(Space)
+    LatexText += ls
+    is_Orthogonal,ls = self.is_Orthogonal_Space(Basis)
+    LatexText += ls
+    if((is_Orthogonal is False) and (self.dot_space is True)):
+      LatexText += Container(emph("The space is not orthogonal and the inner space is set to the dot product so we should apply the standard dot projection"))
+      D,ls = self.Dot_Projection(Basis,x)
+      LatexText += ls
+      return D,LatexText
+    elif(is_Orthogonal is False):
+      LatexText += Container(emph("The space is not orthogonal and the inner product is not set as the dot product so we should apply the Gram shmidt method to turn the basis into an orthonormal basis "))
+      Basis,ls = self.Gram_Shmidt(Basis)
+      LatexText += ls
+      LatexText += Container(emph("After applying the gramshmidt method we will be remain with the basis ")+bmatrix(Basis)+emph("which are now orthogonal "))
+      LatexText += Container(emph("now we will apply the basic projection which applyied on different inner products"))
+      P,ls = self.Projection_custom(Basis,x)
+      LatexText += ls
+      return P,LatexText
+    else:
+      LatexText += Container(emph("The space is an orthogonal space and the inner product is not set as the dot product so we will apply the normal projection"))
+      P,ls = self.Projection_custom(Basis,x)
+      LatexText += ls
+      return P,LatexText
+
+  def affine_project(self,Space,x0,x): # L = x0 + U
+    LatexText =  emph(" Your Input Space is ") +", U = span\\left ("+ bmatrix(Space) +" \\right ),x_0 = "+bvector(x0)+", x = "+bvector(x)+"\\\\ \ \\\\"
+    LatexText += emph("we should start by calculating :")
+    LatexText += Container("x = x-x_0 = "+bvector(x)+" - "+bvector(x0)+" = "+bvector(x-x0))
+    x -= x0
+    Basis,ls = self.Basis(Space)
+    LatexText += ls
+    is_Orthogonal,ls = self.is_Orthogonal_Space(Basis)
+    LatexText += ls
+    if((is_Orthogonal is False) and (self.dot_space is True)):
+      LatexText += Container(emph("The space is not orthogonal and the inner space is set to the dot product so we should apply the standard dot projection"))
+      D,ls = self.Dot_Projection(Basis,x)
+      LatexText += ls
+      LatexText += Container(emph("the final step is to add the offset vector x0 to the projected vector :"))
+      LatexText += Container("x_0 + \pi_U x = "+bvector(x0)+" + "+bvector(D)+" = "+ bvector(x0 +D))
+      return x0 +D,LatexText
+    elif(is_Orthogonal is False):
+      LatexText += Container(emph("The space is not orthogonal and the inner product is not set as the dot product so we should apply the Gram shmidt method to turn the basis into an orthonormal basis "))
+      Basis,ls = self.Gram_Shmidt(Basis)
+      LatexText += ls
+      LatexText += Container(emph("After applying the gramshmidt method we will be remain with the basis ")+bmatrix(Basis)+emph("which are now orthogonal "))
+      LatexText += Container(emph("now we will apply the basic projection which applyied on different inner products"))
+      P,ls = self.Projection_custom(Basis,x)
+      LatexText += ls
+      LatexText += Container(emph("the final step is to add the offset vector x0 to the projected vector :"))
+      LatexText += Container("x_0 + \pi_U x = "+bvector(x0)+" + "+bvector(P)+" = "+ bvector(x0 +P))
+      return P+x0,LatexText
+    else:
+      LatexText += Container(emph("The space is an orthogonal space and the inner product is not set as the dot product so we will apply the normal projection"))
+      P,ls = self.Projection_custom(Basis,x)
+      LatexText += ls
+      LatexText += Container(emph("the final step is to add the offset vector x0 to the projected vector :"))
+      LatexText += Container("x_0 + \pi_U x = "+bvector(x0)+" + "+bvector(P)+" = "+ bvector(x0 +P))
+      return P+x0,LatexText
+
+
+
+
+class Projection_C(Resource):
+    def get(self):
+        return {
+        'message': "Projection_C Get"
+        }
+
+    def post(self):
+        print(self)
+        
+        LatexText = ""
+        A = np.array(request.json["matrix1"])
+        x = np.array(request.json["matrix2"])[0]
+        U_Span = np.array(request.json["matrix3"])
+        product_type = np.array(request.json["choice"])
+   
+        if(product_type == 0):
+            prj = Projection()
+        else:
+            prj = Projection(Products(A).inner_product)
+        
+        
+        p,LatexText = prj.project(U_Span,x)
+
+        return {'output':LatexText,"result":p.tolist()}   
+
+class Affine_Projection(Resource):
+    def get(self):
+        return {
+        'message': "Affine_Projection Get"
+        }
+
+    def post(self):
+        print(self)
+        
+        LatexText = ""
+        A = np.array(request.json["matrix1"])
+        x = np.array(request.json["matrix2"])[0]
+        U_Span = np.array(request.json["matrix3"])
+        x0 = np.array(request.json["matrix4"])[0]
+        product_type = np.array(request.json["choice"])
+   
+        if(product_type == 0):
+            prj = Projection()
+        else:
+            prj = Projection(Products(A).inner_product)
+        
+        
+        p,LatexText = prj.affine_project(U_Span,x0,x)
+
+        return {'output':LatexText,"result":p.tolist()}   

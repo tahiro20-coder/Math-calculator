@@ -43,6 +43,9 @@ import Convexity from '../sellami_components/Task/Convexity';
 import Invertibility from '../sellami_components/Task/Invertibility';
 import Orthogonality from '../sellami_components/Task/Orthogonality';
 import Independency from '../sellami_components/Task/Independency';
+import Angle from '../sellami_components/Task/Angle';
+import Projection from '../sellami_components/Task/Projection';
+import Affine_Projection from '../sellami_components/Task/Affine_Projection';
 import '../sellami_components/Css/calcstyle.css';
 import '../sellami_components/Css/Components.css';
 import {useParams} from 'react-router-dom';
@@ -75,6 +78,9 @@ function CalcPage(){
         "Basis" : <Basis/>,
         "Kernel" : <Kernel/>,
         "Rank" : <Rank/>,
+        "Angle" : <Angle/>,
+        "Projection" : <Projection />,
+        "Affine_Projection" : <Affine_Projection />,
         "Gram_Shmidt" : <Gram_Shmidt/>,
         "Particular_Solution" : <Particular_Solution/>,
         "General_solution" : <General_solution/>,
