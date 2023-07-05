@@ -46,6 +46,9 @@ import Independency from '../sellami_components/Task/Independency';
 import Angle from '../sellami_components/Task/Angle';
 import Projection from '../sellami_components/Task/Projection';
 import Affine_Projection from '../sellami_components/Task/Affine_Projection';
+import Gradient_Descent from '../sellami_components/Task/Gradient_Descent';
+import Steepest_Gradient_Descent from '../sellami_components/Task/Steepest_Gradient_Descent';
+import Conjugate_Gradient_Descent from '../sellami_components/Task/Conjugate_Gradient_Descent';
 import '../sellami_components/Css/calcstyle.css';
 import '../sellami_components/Css/Components.css';
 import {useParams} from 'react-router-dom';
@@ -85,6 +88,9 @@ function CalcPage(){
         "Particular_Solution" : <Particular_Solution/>,
         "General_solution" : <General_solution/>,
         "LU_Solv" : <LU_Solv/>,
+        "Gradient_Descent" : <Gradient_Descent />,
+        "Steepest_Gradient_Descent" : <Steepest_Gradient_Descent />,
+        "Conjugate_Gradient_Descent" : <Conjugate_Gradient_Descent />,
         "Diagonizable" : <Diagonizable/>,
         "Convexity" : <Convexity/>,
         "Invertibility" : <Invertibility/>,

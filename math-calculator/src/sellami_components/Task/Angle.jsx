@@ -69,31 +69,45 @@ const Angle = () => {
       .catch(error => console.log('error',error))
     }
     const handleReset = () =>{
-      document.getElementsByName("0,0")[1].value = 0
-      if((sizeX >= 2) && (sizeX >= 2)){
-        document.getElementsByName("1,1")[0].value = 0
+      if(choice===1){
+        document.getElementsByName("0,0")[0].value = 0
+        if((sizeX >= 2) && (sizeX >= 2)){
+          document.getElementsByName("1,1")[0].value = 0
+        }
+        if(sizeX >= 2){
+          document.getElementsByName("1,0")[0].value = 0
+        }
+        if(sizeX >= 2){
+          document.getElementsByName("0,1")[0].value = 0
+        }
+
+        document.getElementsByName("0,0")[1].value = 0
+        document.getElementsByName("0,0")[2].value = 0
+
+        if(sizeX >= 2){
+          document.getElementsByName("1,0")[1].value = 0
+          document.getElementsByName("1,0")[2].value = 0
+        }
+
+
       }
-      if(sizeX >= 2){
-        document.getElementsByName("1,0")[0].value = 0
-      }
-      if(sizeX >= 2){
-        document.getElementsByName("0,1")[0].value = 0
-      }
-  
+      
+      setChoice(0)
       setSizeX(2)
       setMatrix1(Array(2).fill(0).map(row => new Array(2).fill(0)))
       setMatrix2(Array(2).fill(0).map(row => new Array(1).fill(0)))
       setMatrix3(Array(2).fill(0).map(row => new Array(1).fill(0)))
       setoutput("")
 
-    document.getElementsByName("0,0")[1].value = 0
-    document.getElementsByName("0,0")[2].value = 0
-
-    if(sizeX >= 2){
-      document.getElementsByName("1,0")[1].value = 0
-      document.getElementsByName("1,0")[2].value = 0
-    }
-
+    
+      document.getElementsByName("0,0")[0].value = 0
+      document.getElementsByName("0,0")[1].value = 0
+      
+      if(sizeX >= 2){
+        document.getElementsByName("1,0")[0].value = 0
+        document.getElementsByName("1,0")[1].value = 0
+        
+      }
 
     }
     useEffect (() => {

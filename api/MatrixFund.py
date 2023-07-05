@@ -280,18 +280,20 @@ class Determinant(Resource):
         
         LatexText = ""
         Matrix = np.array(request.json["matrix1"])
-   
+    
         a,j,i,sum=1,0,0,0
 
         if(Matrix.shape[0]!=Matrix.shape[1]):
             LatexText += Container(emph('The Input Matrix: A =')+bmatrix(Matrix)+emph('Is not a Square Matrix'))
-            return "error",LatexText
+            return {'output':LatexText,"result":["error"]}  
         else:
             LatexText += Container(emph('The Input Matrix: A =')+bmatrix(Matrix)+emph('Is a Square Matrix'))
             LatexText += emph('det(A) = ')
 
             if(Matrix.shape[0]==2 and Matrix.shape[1]==2):
-                return Matrix[0,0]*Matrix[1,1]-Matrix[1,0]*Matrix[0,1]
+                sol = (Matrix[0,0]*Matrix[1,1]-Matrix[1,0]*Matrix[0,1])
+                LatexText += f"({Matrix[0,0]}*{Matrix[1,1]})-({Matrix[1,0]}*{Matrix[0,1]}) = {sol}"
+                return {'output':LatexText,"result":np.array([[sol]]).tolist()}  
             else:
                 for j in range(0,Matrix.shape[1]):
                     a=i+j
@@ -305,7 +307,7 @@ class Determinant(Resource):
                     sum = sum + ((-1)**a)*Matrix[i,j]*self.calc_det(mat)
 
         LatexText += emph('= '+str(sum))
-        return {'output':LatexText,"result":sum.tolist()}  
+        return {'output':LatexText,"result":np.array([[sum]]).tolist()}  
 
 
 
@@ -346,10 +348,33 @@ class Products:
 
     return x.T @ y
   def inner_product(self,x,y):
-    if(A is None):
+    if(self.A is None):
       self.A = np.eye(x.shape[0])
     return (x.T @ self.A @ y)
 
+  def isSymmetric(self,tol=1e-8):
+    """"
+    check the matrix if it's symetrique
+    """
+    return np.all(np.abs(self.A-self.A.T) < tol)
+  def HeisenBerge_EigenValues_Algorithm(self,tol = 1e-5):
+    Q,R = np.linalg.qr(self.A)
+    for i in range(500):
+        A_K = self.A@Q
+        H = Q@A_K
+        Q,R = np.linalg.qr(A_K)
+    H = Q.T @ self.A@Q
+    EV = np.diag(H).copy()
+    EV[abs(EV) < tol] = 0.0
+    return EV
+  def check_matrix_positive_symetric(self,tol = 1e-5):
+    eigen_values = self.HeisenBerge_EigenValues_Algorithm(tol)
+    eigen_values[abs(eigen_values) < tol] = 0.0
+
+    if(self.isSymmetric(tol)==True and np.all(eigen_values >= 0)==True):
+      return 1
+    else:
+      return -1
 class Angle(Resource):
     def get(self):
         return {
@@ -364,34 +389,43 @@ class Angle(Resource):
         x = np.array(request.json["matrix2"])[0]
         y = np.array(request.json["matrix3"])[0]
         product_type = np.array(request.json["choice"])
-   
+
+        if((x==0).all() or(y==0).all()):
+            LatexText += Container(emph("You Cant calculate Angles using a zero vector"))
+            return {'output':LatexText,"result":[[-1]]}   
+        
         if(product_type==0):
             # the inner product = dot product
             LatexText += emph('computing the angle between:')+'\\\\'
             LatexText += Container(emph('x=')+bmatrix(x)+emph(' , y= ')+bmatrix(y))
             LatexText += emph('using <x,y> :=')+f"x^{'T'}y"+'\\\\'
             pr = Products()
-            product_x_y = pr.Standard_inner_product(x,y)[0,0]
-            norm_x = pr.Standard_inner_product(x,x)[0,0]
-            norm_y = pr.Standard_inner_product(y,y)[0,0]
+            product_x_y = pr.Standard_inner_product(x,y)
+            norm_x = pr.Standard_inner_product(x,x)
+            norm_y = pr.Standard_inner_product(y,y)
             cos_angle = np.arccos(product_x_y/np.sqrt(norm_x*norm_y))
             angle = (cos_angle*180/np.pi)
 
             a,b = f"\sqrt{norm_x}",f"\sqrt{norm_y}"
             f = "\dfrac{"+str(product_x_y)+"}{"+a+b+"} = "+str(cos_angle)+"rad = "+f"{str(angle)}^{'o'}"+'\\\\'
             LatexText += emph('cos ω =')+ f
-
             return {'output':LatexText,"result":angle.tolist()}   
         if(product_type==1):
+            if((A==0).all()):
+                LatexText += Container(emph("You Cant calculate Angles using a zero Matrix "))
+                return {'output':LatexText,"result":[[-1]]}   
             # the inner product defined as <x,y> = x.T@A@y
             LatexText += emph('computing the angle between:')+'\\\\'
             LatexText += Container(emph('x=')+bmatrix(x)+emph(' , y= ')+bmatrix(y) +emph(' ,B = ')+bmatrix(A))
             LatexText += emph('using <x,y> :=')+f"x^{'T'}By"+'\\\\'
 
             pr = Products(A)
-            product_x_y = pr.inner_product(x,y)[0,0]
-            norm_x = pr.inner_product(x,x)[0,0]
-            norm_y = pr.inner_product(y,y)[0,0]
+            if(pr.check_matrix_positive_symetric()==-1):
+                LatexText += emph('The B matrix must be symmetric and positive define')
+                return {'output':LatexText,"result":[[-1]]}   
+            product_x_y = pr.inner_product(x,y)
+            norm_x = pr.inner_product(x,x)
+            norm_y = pr.inner_product(y,y)
             cos_angle = np.arccos(product_x_y/np.sqrt(norm_x*norm_y))
             angle = (cos_angle*180/np.pi)
 
@@ -427,6 +461,7 @@ class Projection:
     # swaping pointer(index)
     LatexText += Container(emph("The current matrix is ")+bmatrix(A))
     swap_idx = col
+    cop = A.copy()
     # select pivot value
     pivot = A[col][col]
     # finding  the next Number not equat to zero in same columns in remaining rows
@@ -444,8 +479,8 @@ class Projection:
         LatexText += Container(emph("After swaping with the ")+str(col + swap_idx+1)+emph(" row we get the following matrix ")+bmatrix(A))
     # if pivot still zero thats mean all remaining rows are  zeros  so abort the function
     if pivot == 0:# return the current  A
-        LatexText += Container(emph("All the rows has 0 pivot so we cant continue calculation,Therefor we will be end with the following matrix ")+bmatrix(A))
-        return A,LatexText
+        LatexText += Container(emph("All the rows has 0 pivot so we cant continue calculation,Therefor we will be end with the following matrix ")+bmatrix(cop))
+        return cop,LatexText
 
     if(A[col][col] != 1):
       # divide the current row at Pivot to get 1 in the diagonal
@@ -614,11 +649,17 @@ class Projection_C(Resource):
         x = np.array(request.json["matrix2"])[0]
         U_Span = np.array(request.json["matrix3"])
         product_type = np.array(request.json["choice"])
-   
+        if((U_Span == 0).all()):
+            LatexText += Container(emph("You cant do projection using full zeros span"))
+            return {'output':LatexText,"result":[[-1]]}   
         if(product_type == 0):
             prj = Projection()
         else:
-            prj = Projection(Products(A).inner_product)
+            pr = Products(A)
+            if(pr.check_matrix_positive_symetric()==-1):
+                LatexText += emph('The A matrix must be symmetric and positive define')
+                return {'output':LatexText,"result":[[-1]]}   
+            prj = Projection(pr.inner_product)
         
         
         p,LatexText = prj.project(U_Span,x)
@@ -640,11 +681,17 @@ class Affine_Projection(Resource):
         U_Span = np.array(request.json["matrix3"])
         x0 = np.array(request.json["matrix4"])[0]
         product_type = np.array(request.json["choice"])
-   
+        if((U_Span == 0).all()):
+            LatexText += Container(emph("You cant do projection using full zeros span"))
+            return {'output':LatexText,"result":[[-1]]}   
         if(product_type == 0):
             prj = Projection()
         else:
-            prj = Projection(Products(A).inner_product)
+            pr = Products(A)
+            if(pr.check_matrix_positive_symetric()==-1):
+                LatexText += emph('The A matrix must be symmetric and positive define')
+                return {'output':LatexText,"result":[[-1]]}   
+            prj = Projection(pr.inner_product)
         
         
         p,LatexText = prj.affine_project(U_Span,x0,x)

@@ -58,7 +58,7 @@ const Convexity = () => {
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
-    document.getElementsByName("0,0")[1].value = 0
+    document.getElementsByName("0,0")[0].value = 0
     if((sizeX >= 2) && (sizeY >= 2)){
       document.getElementsByName("1,1")[0].value = 0
     }
@@ -90,7 +90,7 @@ const Convexity = () => {
         
         <Title title={"Inputs"}/>
 
-        <Container title={"The Size of the Matrix"} content={
+        <Container title={"The Size of the Matrix A"} content={
             <>
                 <NumberInput number = {sizeX} HandleChangeValue = {setSizeX}/>
                 <div className='p-2'>X</div>

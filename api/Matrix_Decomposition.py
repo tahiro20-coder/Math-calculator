@@ -4,6 +4,7 @@ import numpy as np
 import math as mt
 from sympy import *
 import sympy as sym
+import sympy as sp
 import scipy.linalg as la
 from sympy import sqrt
 
@@ -330,36 +331,135 @@ class Cholosky_Decomposition(Resource):
             LatexText += Container("L = "+bmatrix(ch_matrix))
             return {'output':LatexText,"result":ch_matrix.tolist()}   
 
+def Gaussian_Elm(A,col=0,isReduit=False,tol = 1e-5):
+    LatexText = ""
+    A[abs(A) < tol] = 0.0
+    n,m = A.shape
+    A = A.astype(float)
+    #existing Conditions
+    if col >= min(n,m):
+        return A,LatexText
+    if(col!=0):
+      LatexText+=Container(emph("Then we Evaluate the next column which is the column number ")+str(col+1))
+    else:
+      LatexText += Container(emph("we will be applying the transformations column by column so we will start by the first column"))
+    # swaping pointer(index)
+    LatexText += Container(emph("The current matrix is ")+bmatrix(A))
+    swap_idx = col
+    cop = A.copy()
+    # select pivot value
+    pivot = A[col][col]
+    # finding  the next Number not equat to zero in same columns in remaining rows
+    while pivot == 0 and col + swap_idx < A.shape[0]:
+        if(swap_idx == col):
+          LatexText += Container(emph("The pivot is 0 so we should swap rows until we find the non pivot row one "))
+        else:
+          LatexText += Container(emph("but This swap doesnt prevent the zero pivot so we should continue swaping"))
+        # swaping rows col , col+swap_index
+        A[[col, col + swap_idx]] = A[[col + swap_idx, col]]
+        # incrememnt row swaping pointer
+        swap_idx += 1
+        #new pivot value
+        pivot = A[col][col]
+        LatexText += Container(emph("After swaping with the ")+str(col + swap_idx)+emph(" row we get the following matrix ")+bmatrix(A))
+    # if pivot still zero thats mean all remaining rows are  zeros  so abort the function
+    if pivot == 0:# return the current  A
+        LatexText += Container(emph("All the rows has 0 pivot so we cant continue calculation,Therefor we will be end with the following matrix ")+bmatrix(cop))
+        return cop,LatexText
+
+    if(A[col][col] != 1):
+      # divide the current row at Pivot to get 1 in the diagonal
+      A[col] = A[col]/A[col][col]
+      LatexText += Container(emph("then we will divide the current row of the pivot by the pivot itself to get 1 in the diagonal , that will result the following matrix : ")+bmatrix(A))
+    #rows under the diagonal
+    for row in range(col+1 ,n):
+        rate = A[row][col]/A[col][col]
+        A[row] -= rate * A[col]
+    LatexText += Container(emph("then next step is to transform the under diagonal rows where we get the following matrix : ")+bmatrix(A))
+    #above the diagonal
+    if isReduit ==True:
+        for row in range(0 ,col):
+            rate = A[row][col]/A[col][col]
+            A[row] -= rate * A[col]
+        LatexText += Container(emph("And also because we want the reduced form we will calculate the upper diagonal rows where we finally get the matrix : ")+bmatrix(A))
+    #the call the function for the next col
+    g,ls = Gaussian_Elm(A,col+1,isReduit=isReduit)
+    LatexText += ls
+    return g,LatexText
+def Apply_Gaussian_Elm(A,isReduit=False):
+    LatexText = emph(" Your Input is ") +", A = "+ bmatrix(A) +"\\\\ \ \\\\"
+    g,ls = Gaussian_Elm(A,0,isReduit)
+    LatexText += ls
+    LatexText += Container(emph("At the end the Echelon form of the input matrix ")+bmatrix(A)+emph(" is ")+bmatrix(g))
+    return g,LatexText
+def Kernel(U_Span):
+    LatexText =  emph(" Your Input Subspace is ") +", U = span \\left ("+ bmatrix(U_Span) +" \\right )\\\\ \ \\\\"
+    LatexText += Container(emph("we will apply the Gaussian elimination on the space to eliminate the basis vectors"))
+    U_reduced,ls = Apply_Gaussian_Elm(U_Span)
+    ls = ls.replace(" Your Input is " ,"we will start by the Space matrix ")
+    LatexText += ls
+    Kernel = []
+    for i in range(0,U_reduced.shape[1]):
+      if(U_reduced[i,i] == 0): # this is a Kernel
+        Kernel.append(U_Span[:,i])
+    LatexText += Container(emph("After extracting the non pivot columns which forms the kernel space we find that the kernel of the space is : "))
+    LatexText += Container("Ker(U) = Span \\left ("+bmatrix(np.array(Kernel).T)+"\\right )")
+    return np.array(Kernel).T,LatexText
 
 # defined inner product
 def inner(a,b):
-    return np.sum(a.T*b)
+    return np.sum(a.T@b)
 #====================================
 # Projection between tow vector
 def projection(a,b):
+    if(inner(a,a) == 0):
+        return np.zeros_like(a)
     return (inner(a,b)/inner(a,a))*a
 #====================================
 def norm(V):
-    return np.sqrt(np.sum(V.T*V))
+    return np.sqrt(np.sum(V.T@V))
 #====================================
 # Gram methode
 def Gram(A,b):
     B=b-projection(A,b)
     return B
 def Schmidt(A):
+    if(norm(A) == 0):
+        return np.zeros_like(A)
     return A/norm(A)
 def gram_schmidt(A):
     # create an empty matrix to store the orthonormal basis
     Q = np.zeros((A.shape))
     Q[:,0] = Schmidt(A[:,0])
     # iterate over the vectors and orthonormalize them
-    for i in range(1,A.shape[0]):
+    k = 0
+    if((Q[:,0] != 0).any()):
+        k+=1
+    for i in range(1,A.shape[1]):
         Q[:,i] = A[:,i]
         for j in range(i):
             Q[:,i] -= projection(Q[:,j],A[:,i])
         Q[:,i] = Schmidt(Q[:,i])
 
-    return Q
+        if((Q[:,i] != 0).any()):
+            k+=1
+
+    QL = np.zeros((Q.shape[0],k))
+    n = 0
+    for i in range(A.shape[1]):
+        if((Q[:,i] != 0).any()):
+            QL[:,n] = Q[:,i]
+            n += 1
+    if(QL.shape[1] < A.shape[0]):
+        # QL_Augm = np.column_stack([QL,b])
+        # v,ls = Kernel(QL.T)
+        M = sp.Matrix(QL.T)
+        N = np.array(M.nullspace()).astype(float)
+        QL_Augm = QL.copy()
+        for i in range(N.shape[0]):
+            QL_Augm = np.column_stack([QL_Augm,N[i]])
+        return QL_Augm
+    return QL
 
 class QR_Decomposition(Resource):
     def get(self):
