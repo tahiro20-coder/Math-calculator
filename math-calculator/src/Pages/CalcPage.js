@@ -38,7 +38,7 @@ import Particular_Solution from '../sellami_components/Task/Particular_Solution'
 import General_solution from '../sellami_components/Task/General_solution';
 import LU_Solv from '../sellami_components/Task/LU_Solv';
 import Eigenvalues_and_Eigenvectors from '../sellami_components/Task/Eigenvalues_and_Eigenvectors';
-import Diagonizable from '../sellami_components/Task/diagonizable';
+import Diagonizable from '../sellami_components/Task/Diagonizable';
 import Convexity from '../sellami_components/Task/Convexity';
 import Invertibility from '../sellami_components/Task/Invertibility';
 import Orthogonality from '../sellami_components/Task/Orthogonality';
