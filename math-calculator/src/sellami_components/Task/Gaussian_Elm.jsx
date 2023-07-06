@@ -30,7 +30,7 @@ in **Echlon Form**.}
 
 
 
-\\\\ for more : \\\\ https://byjus.com/maths/gauss-elimination-method/}
+\\\\ \\textit{for more : \\\\ https://byjus.com/maths/gauss-elimination-method/}
 `
 
 const Gaussian_Elm = () => {
