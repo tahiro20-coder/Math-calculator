@@ -87,7 +87,7 @@ const Gram_Shmidt = () => {
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
-    document.getElementsByName("0,0")[1].value = 0
+    document.getElementsByName("0,0")[0].value = 0
     if((sizeX >= 2) && (sizeY >= 2)){
       document.getElementsByName("1,1")[0].value = 0
     }

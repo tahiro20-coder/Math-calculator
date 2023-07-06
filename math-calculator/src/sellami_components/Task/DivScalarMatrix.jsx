@@ -40,7 +40,7 @@ const DivScalarMatrix = () => {
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
-    document.getElementsByName("0,0")[1].value = 0
+    document.getElementsByName("0,0")[0].value = 0
     if((sizeX >= 2) && (sizeY >= 2)){
       document.getElementsByName("1,1")[0].value = 0
     }
@@ -86,7 +86,7 @@ const DivScalarMatrix = () => {
         }/>
 
         <Container title={"The Scalar"} content={
-        < InputParameter  value = {scalar} handleChange = {setScalar} min={1}/>
+        < InputParameter  value = {scalar} handleChange = {setScalar} except={0}/>
         }/>
         
         <div className='d-flex justify-content-center'>

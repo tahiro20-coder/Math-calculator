@@ -44,6 +44,9 @@ function DropDownMenu ({selected}){
     "Angle" : "Angle between vectors",
     "Projection" : "Orthogonal Projection",
     "Affine_Projection" : "Orthogonal Projection onto an Affine subspace",
+    "Gradient_Descent" : "Gradient Descent for quadratic functions",
+    "Steepest_Gradient_Descent" : "Steepest Gradient Descent",
+    "Conjugate_Gradient_Descent" : "Conjugate Gradient Descent",
     "Eigen_Decomposition": "Eigen Decomposition",
     "LU" : "LU Decomposition",
     "SVD" : "Singular Values Decomposition",
@@ -60,7 +63,7 @@ function DropDownMenu ({selected}){
         <Dropdown className='w-100 '>
         <Dropdown.Toggle className=' dropdown_btn' variant="success" id="dropdown-basic">
             {
-              selected == null ? "Dropdown Button" : TitleList[selected]
+              selected == null ? "What to do ? " : TitleList[selected]
             }
             
         </Dropdown.Toggle>

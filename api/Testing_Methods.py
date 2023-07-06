@@ -4,6 +4,7 @@ import numpy as np
 import math as mt
 from sympy import *
 import sympy as sym
+import sympy as sp
 import scipy.linalg as la
 from sympy import sqrt
 
@@ -140,6 +141,68 @@ def Nprint(a):
 def Lprint(a):
     display(Latex(f'${a}$'))
 
+def Gaussian_Elm(A,col=0,isReduit=False,tol = 1e-5):
+    LatexText = ""
+    A[abs(A) < tol] = 0.0
+    n,m = A.shape
+    A = A.astype(float)
+    #existing Conditions
+    if col >= min(n,m):
+        return A,LatexText
+    if(col!=0):
+      LatexText+=Container(emph("Then we Evaluate the next column which is the column number ")+str(col+1))
+    else:
+      LatexText += Container(emph("we will be applying the transformations column by column so we will start by the first column"))
+    # swaping pointer(index)
+    LatexText += Container(emph("The current matrix is ")+bmatrix(A))
+    swap_idx = col
+    cop = A.copy()
+    # select pivot value
+    pivot = A[col][col]
+    # finding  the next Number not equat to zero in same columns in remaining rows
+    while pivot == 0 and col + swap_idx < A.shape[0]:
+        if(swap_idx == col):
+          LatexText += Container(emph("The pivot is 0 so we should swap rows until we find the non pivot row one "))
+        else:
+          LatexText += Container(emph("but This swap doesnt prevent the zero pivot so we should continue swaping"))
+        # swaping rows col , col+swap_index
+        A[[col, col + swap_idx]] = A[[col + swap_idx, col]]
+        # incrememnt row swaping pointer
+        swap_idx += 1
+        #new pivot value
+        pivot = A[col][col]
+        LatexText += Container(emph("After swaping with the ")+str(col + swap_idx)+emph(" row we get the following matrix ")+bmatrix(A))
+    # if pivot still zero thats mean all remaining rows are  zeros  so abort the function
+    if pivot == 0:# return the current  A
+        LatexText += Container(emph("All the rows has 0 pivot so we cant continue calculation,Therefor we will be end with the following matrix ")+bmatrix(cop))
+        return cop,LatexText
+
+    if(A[col][col] != 1):
+      # divide the current row at Pivot to get 1 in the diagonal
+      A[col] = A[col]/A[col][col]
+      LatexText += Container(emph("then we will divide the current row of the pivot by the pivot itself to get 1 in the diagonal , that will result the following matrix : ")+bmatrix(A))
+    #rows under the diagonal
+    for row in range(col+1 ,n):
+        rate = A[row][col]/A[col][col]
+        A[row] -= rate * A[col]
+    LatexText += Container(emph("then next step is to transform the under diagonal rows where we get the following matrix : ")+bmatrix(A))
+    #above the diagonal
+    if isReduit ==True:
+        for row in range(0 ,col):
+            rate = A[row][col]/A[col][col]
+            A[row] -= rate * A[col]
+        LatexText += Container(emph("And also because we want the reduced form we will calculate the upper diagonal rows where we finally get the matrix : ")+bmatrix(A))
+    #the call the function for the next col
+    g,ls = Gaussian_Elm(A,col+1,isReduit=isReduit)
+    LatexText += ls
+    return g,LatexText
+def Apply_Gaussian_Elm(A,isReduit=False):
+    LatexText = emph(" Your Input is ") +", A = "+ bmatrix(A) +"\\\\ \ \\\\"
+    g,ls = Gaussian_Elm(A,0,isReduit)
+    LatexText += ls
+    LatexText += Container(emph("At the end the Echelon form of the input matrix ")+bmatrix(A)+emph(" is ")+bmatrix(g))
+    return g,LatexText
+
 
 class Diagonizable(Resource):
     def get(self):
@@ -213,7 +276,7 @@ class Convexity(Resource):
         
         LatexText = ""
         A = np.array(request.json["matrix1"])
-
+        tol = 1e-5
         LatexText =  emph(" Your Input is ") +", A = "+ bmatrix(A) +"\\\\ \ \\\\"
 
 
@@ -265,7 +328,9 @@ def form_determinant(Matrix):
         LatexText += emph('det(A) = ')
 
         if(Matrix.shape[0]==2 and Matrix.shape[1]==2):
-            return Matrix[0,0]*Matrix[1,1]-Matrix[1,0]*Matrix[0,1]
+            sol = (Matrix[0,0]*Matrix[1,1]-Matrix[1,0]*Matrix[0,1])
+            LatexText += f"({Matrix[0,0]}*{Matrix[1,1]})-({Matrix[1,0]}*{Matrix[0,1]}) = {sol}"
+            return sol,LatexText
         else:
             for j in range(0,Matrix.shape[1]):
                 a=i+j
@@ -334,7 +399,7 @@ class Orthogonality(Resource):
         if(tester):
             LatexText += Container(emph("After evaluation we find that all the basis are orthogonal ,Then the space is an Orthogonal space"))
         
-        return {'output':LatexText,"result":tester.tolist()}  
+        return {'output':LatexText,"result":[[tester]]}  
     
 
 class Independency(Resource):

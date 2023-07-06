@@ -41,7 +41,7 @@ const Inifinity_VNorm = () => {
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
-    document.getElementsByName("0,0")[1].value = 0
+    document.getElementsByName("0,0")[0].value = 0
 
     if(sizeY >= 2){
       document.getElementsByName("1,0")[0].value = 0

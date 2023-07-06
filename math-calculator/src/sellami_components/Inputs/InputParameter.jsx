@@ -1,10 +1,10 @@
 import React from 'react'
 
-const InputParameter = ({value,handleChange , min=0}) => {
+const InputParameter = ({value,handleChange , min,max,except}) => {
   return (
     <input
                         defaultValue={value}
-
+                      value={value}
                       type='text'
                       onKeyPress={(event) => {
                         // console.log(event.target.value)
@@ -24,8 +24,18 @@ const InputParameter = ({value,handleChange , min=0}) => {
                       onInput={(event)=>{
                         if(event.target.value !== ''){
                           event.target.value = event.target.value[0] + event.target.value.substring(1).replace('+','').replace('-','')
-                          if(Number(event.target.value) <min){
-                            event.target.value = min
+                          if(Number(event.target.value) == except){
+                            event.target.value = except+1
+                          }
+                          if(min != null){
+                            if(Number(event.target.value) <min){
+                              event.target.value = min
+                            }
+                          }
+                          if(max != null){
+                            if(Number(event.target.value) >max){
+                              event.target.value = max
+                            }
                           }
                           handleChange(Number(event.target.value))
                         }
@@ -33,8 +43,19 @@ const InputParameter = ({value,handleChange , min=0}) => {
                       }}
                       onBlur={(event)=>{
                         if((event.target.value === '-' ) || (event.target.value === '+' ) || (event.target.value === '')){
-                          event.target.value = min
-                          handleChange(min)
+                          if(min != null){
+                            event.target.value = min
+                            handleChange(min)
+                          }else{
+                            if(except === 0){
+                              event.target.value = 1
+                              handleChange(1)
+                            }else{
+                              event.target.value = 0
+                              handleChange(0)
+                            }
+                          }
+                          
                         }
                         
                       }}

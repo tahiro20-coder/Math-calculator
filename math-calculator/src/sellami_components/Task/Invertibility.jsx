@@ -34,15 +34,14 @@ them to check if a matrix is **invertible or not** we use : }\\\\
 
 const Invertibility = () => {
   const [sizeX,setSizeX] = useState(2)
-  const [sizeY,setSizeY] = useState(2)
-  const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
+  const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
+  const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
-    let temp = Array(sizeX).fill(0).map(row => new Array(sizeY).fill(0))
+    let temp = Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0))
     for (let i = 0; i < Math.min(matrix1.length,sizeX) ; i++) {
-      for (let j = 0; j <  Math.min(matrix1[0].length,sizeY) ; j++) {
+      for (let j = 0; j <  Math.min(matrix1[0].length,sizeX) ; j++) {
         temp[i][j] = matrix1[i][j]
       }
     }
@@ -57,11 +56,11 @@ const Invertibility = () => {
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
-    document.getElementsByName("0,0")[1].value = 0
-    if((sizeX >= 2) && (sizeY >= 2)){
+    document.getElementsByName("0,0")[0].value = 0
+    if((sizeX >= 2) && (sizeX >= 2)){
       document.getElementsByName("1,1")[0].value = 0
     }
-    if(sizeY >= 2){
+    if(sizeX >= 2){
       document.getElementsByName("1,0")[0].value = 0
     }
     if(sizeX >= 2){
@@ -69,19 +68,18 @@ const Invertibility = () => {
     }
 
     setSizeX(2)
-    setSizeY(2)
     setMatrix1(Array(2).fill(0).map(row => new Array(2).fill(0)))
     setoutput("")
   }
   useEffect (() => {
-    let temp1 = Array(sizeX).fill(0).map(row => new Array(sizeY).fill(0))
+    let temp1 = Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0))
     for (let i = 0; i < Math.min(matrix1.length,sizeX) ; i++) {
-      for (let j = 0; j <  Math.min(matrix1[0].length,sizeY) ; j++) {
+      for (let j = 0; j <  Math.min(matrix1[0].length,sizeX) ; j++) {
         temp1[i][j] = matrix1[i][j]
       }
     }
     setMatrix1(temp1)
-  }, [sizeX,sizeY]);
+  }, [sizeX]);
   return (
     <div>
         <Title title={"Description"}/>
@@ -92,13 +90,11 @@ const Invertibility = () => {
         <Container title={"The Size of the Matrix"} content={
             <>
                 <NumberInput number = {sizeX} HandleChangeValue = {setSizeX}/>
-                <div className='p-2'>X</div>
-                <NumberInput number = {sizeY} HandleChangeValue = {setSizeY}/>
             </>
         }/>
 
         <Container title={"The Matrix"} content={
-        < MatrixEntry  sizeX = {sizeX} sizeY = {sizeY} HandleMatrixChange = {HandleMatrix1Change} />
+        < MatrixEntry  sizeX = {sizeX} sizeY = {sizeX} HandleMatrixChange = {HandleMatrix1Change} />
         }/>
         
         <div className='d-flex justify-content-center'>

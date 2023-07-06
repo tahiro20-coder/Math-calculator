@@ -30,8 +30,9 @@ The set of all possible solutions is called the **solution set**.}\\\\
 const General_solution = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
+  const [sizeY2,setSizeY2] = useState(1)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [matrix2,setMatrix2] = useState(Array(1).fill(0).map(row => new Array(sizeX).fill(0)))
+  const [matrix2,setMatrix2] = useState(Array(sizeY2).fill(0).map(row => new Array(sizeX).fill(0)))
   const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
@@ -47,9 +48,9 @@ const General_solution = () => {
     setMatrix1(temp)
   }
   const HandleMatrix2Change = (indexX,indexY,Value) =>{
-    let temp = Array(sizeX).fill(0).map(row => new Array(1).fill(0))
+    let temp = Array(sizeX).fill(0).map(row => new Array(sizeY2).fill(0))
     for (let i = 0; i < Math.min(matrix2.length,sizeX) ; i++) {
-      for (let j = 0; j <  Math.min(matrix2[0].length,1) ; j++) {
+      for (let j = 0; j <  Math.min(matrix2[0].length,sizeY2) ; j++) {
         temp[i][j] = matrix2[i][j]
       }
     }
@@ -71,6 +72,14 @@ const General_solution = () => {
     if(sizeY >= 2){
       document.getElementsByName("1,0")[0].value = 0
     }
+
+    if((sizeX >= 2) && (sizeY2 >= 2)){
+      document.getElementsByName("1,1")[1].value = 0
+    }
+    if(sizeY2 >= 2){
+      document.getElementsByName("1,0")[1].value = 0
+    }
+
     if(sizeX >= 2){
       document.getElementsByName("0,1")[0].value = 0
       document.getElementsByName("0,1")[1].value = 0
@@ -78,22 +87,30 @@ const General_solution = () => {
 
     setSizeX(2)
     setSizeY(2)
+    setSizeY2(2)
     setMatrix1(Array(2).fill(0).map(row => new Array(2).fill(0)))
-    setMatrix2(Array(1).fill(0).map(row => new Array(2).fill(0)))
+    setMatrix2(Array(2).fill(0).map(row => new Array(2).fill(0)))
     setoutput("")
   }
   useEffect (() => {
     let temp1 = Array(sizeX).fill(0).map(row => new Array(sizeY).fill(0))
-    let temp2 = Array(sizeX).fill(0).map(row => new Array(sizeY).fill(0))
+    
     for (let i = 0; i < Math.min(matrix1.length,sizeX) ; i++) {
       for (let j = 0; j <  Math.min(matrix1[0].length,sizeY) ; j++) {
         temp1[i][j] = matrix1[i][j]
-        temp2[i][j] = matrix2[i][j]
       }
     }
     setMatrix1(temp1)
+
+    let temp2 = Array(sizeX).fill(0).map(row => new Array(sizeY2).fill(0))
+    for (let i = 0; i < Math.min(matrix2.length,sizeX) ; i++) {
+      for (let j = 0; j <  Math.min(matrix2[0].length,sizeY2) ; j++) {
+        temp2[i][j] = matrix2[i][j]
+      }
+    }
     setMatrix2(temp2)
-  }, [sizeX,sizeY]);
+
+  }, [sizeX,sizeY,sizeY2]);
   return (
     <div>
         <Title title={"Description"}/>
@@ -113,9 +130,18 @@ const General_solution = () => {
         < MatrixEntry  sizeX = {sizeX} sizeY = {sizeY} HandleMatrixChange = {HandleMatrix1Change} />
         }/>
 
-        <Container title={"Vector b"} content={
-        < MatrixEntry  sizeX = {sizeX} sizeY = {1} HandleMatrixChange = {HandleMatrix2Change} />
+      <Container title={"The Size of b"} content={
+            <>
+                <NumberInput number = {sizeX} HandleChangeValue = {setSizeX}/>
+                <div className='p-2'>X</div>
+                <NumberInput number = {sizeY2} HandleChangeValue = {setSizeY2}/>
+            </>
         }/>
+
+        <Container title={"b"} content={
+        < MatrixEntry  sizeX = {sizeX} sizeY = {sizeY2} HandleMatrixChange = {HandleMatrix2Change} />
+        }/>
+
         <div className='d-flex justify-content-center'>
           <div className='submit'>
             <button  onClick={handleSubmit}>Calculate</button>

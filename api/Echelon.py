@@ -155,6 +155,7 @@ def Gaussian_Elm(A,col=0,isReduit=False,tol = 1e-5):
     # swaping pointer(index)
     LatexText += Container(emph("The current matrix is ")+bmatrix(A))
     swap_idx = col
+    cop = A.copy()
     # select pivot value
     pivot = A[col][col]
     # finding  the next Number not equat to zero in same columns in remaining rows
@@ -169,11 +170,11 @@ def Gaussian_Elm(A,col=0,isReduit=False,tol = 1e-5):
         swap_idx += 1
         #new pivot value
         pivot = A[col][col]
-        LatexText += Container(emph("After swaping with the ")+str(col + swap_idx+1)+emph(" row we get the following matrix ")+bmatrix(A))
+        LatexText += Container(emph("After swaping with the ")+str(col + swap_idx)+emph(" row we get the following matrix ")+bmatrix(A))
     # if pivot still zero thats mean all remaining rows are  zeros  so abort the function
     if pivot == 0:# return the current  A
-        LatexText += Container(emph("All the rows has 0 pivot so we cant continue calculation,Therefor we will be end with the following matrix ")+bmatrix(A))
-        return A,LatexText
+        LatexText += Container(emph("All the rows has 0 pivot so we cant continue calculation,Therefor we will be end with the following matrix ")+bmatrix(cop))
+        return cop,LatexText
 
     if(A[col][col] != 1):
       # divide the current row at Pivot to get 1 in the diagonal
@@ -259,6 +260,9 @@ class Gram_Shmidt(Resource):
         B = np.array(request.json["matrix1"])
 
         LatexText =  emph(" Your Input Subspace is ") +", U = span \\left ("+ bmatrix(B) +" \\right )\\\\ \ \\\\"
+        if((B==0).all()):
+            LatexText += Container(emph("Your input is a zero matrix there is nothing to do about it"))
+            return {'output':LatexText,"result":[["Error"]]}   
         LatexText += Container(emph("The new Basis Space after applying the gram shmidt method will be : "))
         C = [B[:,0].copy()]
         LatexText += Container("u_1 = b_1 = "+bvector(B[:,0].copy()))
@@ -288,13 +292,16 @@ class Kernel(Resource):
 
         LatexText =  emph(" Your Input Subspace is ") +", U = span \\left ("+ bmatrix(U_Span) +" \\right )\\\\ \ \\\\"
         LatexText += Container(emph("we will apply the Gaussian elimination on the space to eliminate the basis vectors"))
-        U_reduced,ls = Apply_Gaussian_Elm(U_Span)
+        U_pik,ls = Apply_Gaussian_Elm(U_Span,isReduit=True)
         ls = ls.replace(" Your Input is " ,"we will start by the Space matrix ")
         LatexText += ls
         Kernel = []
+        U_reduced = np.zeros((U_pik.shape[1],U_pik.shape[1]))
+        U_reduced[:U_pik.shape[0],:U_pik.shape[1]] = U_pik
         for i in range(0,U_reduced.shape[1]):
             if(U_reduced[i,i] == 0): # this is a Kernel
-                Kernel.append(U_Span[:,i])
+                U_reduced[i,i] = -1
+                Kernel.append(U_reduced[:,i])
         LatexText += Container(emph("After extracting the non pivot columns which forms the kernel space we find that the kernel of the space is : "))
         LatexText += Container("Ker(U) = Span \\left ("+bmatrix(np.array(Kernel).T)+"\\right )")
 
@@ -317,6 +324,8 @@ class Rank(Resource):
         LatexText += Container(emph("we will apply the Gaussian elimination on the space to eliminate the kernel vectors"))
         U_reduced,ls = Apply_Gaussian_Elm(U_Span)
         Basis = []
+        LatexText += Container(emph("where the echelon form of will be"))
+        LatexText += Container("U_{echelon} = "+bmatrix(U_reduced))
         for i in range(0,U_reduced.shape[1]):
             if(U_reduced[i,i] == 1): # this is a basis
                 Basis.append(U_Span[:,i])
@@ -324,9 +333,13 @@ class Rank(Resource):
         LatexText += Container("Basis = Span \\left ("+bmatrix(np.array(Basis).T)+"\\right )")
 
         LatexText += Container(emph("From there the rank is the size of the basis so it will be : "))
-        LatexText += Container("Rank(U) = "+str(np.array(Basis).T.shape[1]))
-
-        return {'output':LatexText,"result":(np.array(Basis).T.shape[1]).tolist()}   
+        if(len(Basis) == 0):
+            LatexText += Container("Rank(U) = "+str(0))
+            return {'output':LatexText,"result":[[0]]}   
+        else:
+            LatexText += Container("Rank(U) = "+str(np.array(Basis).T.shape[1]))
+            return {'output':LatexText,"result":[[np.array(Basis).T.shape[1]]]}   
+        
 
 
 class Particular_Solution_C(Resource):
@@ -357,9 +370,25 @@ class Particular_Solution_C(Resource):
                 LatexText += Container(emph("There exist a Zero row after the transformation of A faced by a valued transformed b so it is impossible to find a solution in this case"))
                 return {'output':LatexText,"result":[]}   
         sol = np.zeros((U.shape[1],b.shape[1]))
-        sol[:Solution.shape[0],:Solution.shape[1]] = Solution
-        LatexText += Container(emph("Then we will extract the particular solution where the solution will be : ")+bmatrix(sol))
 
+        sol[:Solution.shape[0],:Solution.shape[1]] = Solution
+        LatexText += Container(emph("Then we will extract the particular solution where the solution will be : "))
+        LatexText += "\\begin{bmatrix}"
+        if(sol.shape[1] == 1):
+            LatexText += "x_1"
+            for i in range(1,sol.shape[0]):
+                LatexText += "\\\\ x_{"+str(i+1)+"}"
+        else:
+            
+            for i in range(sol.shape[0]):
+                for j in range(sol.shape[1]):
+                    if(j == sol.shape[1]-1):
+                        LatexText += "x_{"+str(i+1)+str(j+1)+"}"
+                    else:
+                        LatexText += "x_{"+str(i+1)+str(j+1)+"} &"
+                LatexText += "\\\\"
+           
+        LatexText += "\\end{bmatrix}" +" = "+ bmatrix(sol)
         return {'output':LatexText,"result":sol.tolist()}   
 
 class General_solution(Resource):
@@ -413,6 +442,56 @@ class General_solution(Resource):
 
         return {'output':LatexText,"result":sol.tolist()}  
 
+def LU(a):
+    np.set_printoptions(suppress=True)
+    LatexText = emph(" Your Input is , A = ") + bmatrix(a) +"\\\\ \ \\\\"
+    LatexText += emph("Insert Identity Matrix To L And A To U")+"\\\\ \ \\\\"
+    l=np.eye(len(a)).astype(float)
+    p=np.eye(len(a))
+    u=a.copy().astype(float)
+    LatexText +=Container(emph("L = ")+bmatrix(l) +emph(" , U = ")+bmatrix(u))
+    for j in range(min(u.shape[0],u.shape[1])):
+        if(j!=len(u)-1 and u[j,j].round(5)==0):
+            LatexText += emph("We Have 0 In The Pivot Element U"+'['+str(j)+','+str(j)+']')+"\\"+emph("So We Need To Search First Non Zero Under This Element And Swap Rows")+"\\\\ \ \\\\"
+            k=1
+            while(u[j+k,j].round(5)==0):
+                k=k+1
+                if(j+k==len(a)):
+                    LatexText += emph("Stop Because We Dont Have Any Non Zero Under Pivot Element U"+'['+str(j)+','+str(j)+']')+"\\\\ \ \\\\"
+                    if 0 not in p.diagonal():
+                        LatexText += emph("Result:")+"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
+                    else:
+                        LatexText += emph("Result:")+"\\\\ \ \\\\"+emph("P = ")+bmatrix(p) +"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
+                    return l,u,p,LatexText
+            if 0 not in p.diagonal():
+                LatexText += emph("Create And Insert Identity Matrix To Permutation Matrix P")+'\\\\ \ \\\\'
+                LatexText +=emph("P = ")+bmatrix(p) +"\\\\ \ \\\\"
+            LatexText += emph("Swap Row"+str(j)+" with Row"+str(j+k)+" in P")+'\\\\ \ \\\\'
+            p[j],p[j+k]=p[j+k].copy(),p[j].copy()
+            LatexText += emph("P = ")+bmatrix(p)+'\\\\ \ \\\\'
+            LatexText += emph("Swap Row"+str(j)+" with Row"+str(j+k)+" in U")+'\\\\ \ \\\\'
+            u[j],u[j+k]=u[j+k].copy(),u[j].copy()
+            LatexText +=emph("U = ")+bmatrix(u)+'\\\\ \ \\\\'
+            if(j!=0):
+                LatexText += emph("Swap Correspendent Elements In L")+"\\\\ \ \\\\"
+                l[j,:j],l[j+k,:j]=l[j+k,:j].copy(),l[j,:j].copy()
+                LatexText += emph("L = ")+bmatrix(l)+'\\\\ \ \\\\'
+        for i in range(j+1,u.shape[0]):
+            if(u[i,j]==0):
+                LatexText += emph("U["+str(i)+','+str(j)+"] Already Equal 0 So Go To The Next Step")+"\\\\ \ \\\\"
+                continue
+            LatexText += emph("Add U["+str(i)+','+str(j)+"] / U["+str(j)+','+str(j)+"] = "+str(u[i,j])+" / "+str(u[j,j])+" = "+str(u[i,j]/u[j,j])+" in L["+str(i)+','+str(j)+"]")+'\\\\ \ \\\\'
+            l[i,j]=(u[i,j]/u[j,j])
+            LatexText += emph("L = ")+bmatrix(l)+'\\\\ \ \\\\'
+            LatexText += emph("Substruct ("+str(u[i,j]/u[j,j])+")*Row"+str(j)+" From Row"+str(i)+" In U")+'\\\\ \ \\\\'
+            u[i]=u[i]-(u[i,j]/u[j,j])*u[j]
+            LatexText += emph("U = ")+bmatrix(u)+'\\\\ \ \\\\'
+    LatexText += emph("There Is No Other Element Non Zero Under The Diagonal In U (U Upper Triangular) So Stop ")+"\\\\ \ \\\\"
+    if 0 not in p.diagonal():
+        LatexText += emph("Result:")+"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
+    else:
+        LatexText += emph("Result:")+"\\\\ \ \\\\"+emph("P = ")+bmatrix(p) +"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
+    return l,u,p,LatexText
 
 def Particular_Solution(A,b):
   LatexText = emph(" Your Input is ") +", A = "+ bmatrix(A) +" , b = "+bmatrix(b)+"\\\\ \ \\\\"
@@ -567,7 +646,9 @@ class Eigenvalues_and_Eigenvectors:
 
     #case the matrix is 2*2 for quique calculation we will use easy method
     if self.mat.shape[0]==2:
-      return self.eignvalues2by2()
+      EV,LatexText = self.eignvalues2by2()
+      self.eigenSet = list(set(EV))[::-1]
+      return EV,LatexText
 
     LatexText += Container(emph("To calculate the eigen values we will use the HeisenBerge algorithm with 500 iteration where the eigen values will be "))
 
@@ -580,9 +661,10 @@ class Eigenvalues_and_Eigenvectors:
     H = Q.T @ matrix@Q
     EV = np.diag(H).copy()
     EV[abs(EV) < tol] = 0.0
-
+    
     self.eigenvalues = EV
     self.eigenSet = list(set(EV))[::-1]
+
     LatexText += Format_EigenValues(EV)
     return EV,LatexText
 
@@ -591,7 +673,7 @@ class Eigenvalues_and_Eigenvectors:
     LatexText = Container(emph("For each eigenvalue λ,we will solve the homogeneous system")+ " ( A - \lambda I)x = 0")
     # Create an empty list to store the eigenvectors
     eign = []
-
+    
     # Iterate over each eigenvalue (rounded to 5 decimal places)
     for eignvalue in self.eigenSet:
         # Create a matrix by subtracting the rounded eigenvalue times the identity matrix
@@ -611,6 +693,7 @@ class Eigenvalues_and_Eigenvectors:
                 sol.append( g[:,k])
 
         LatexText += Container(emph("after extracting the null space we will get the following eigen values  : "))
+
         LatexText += Format_EigenSpect([eignvalue],[sol])
         eign.append(sol)
 
@@ -625,7 +708,7 @@ class Eigenvalues_and_Eigenvectors:
     evect,ls = self.eignvectos_solve_homogen(ev)
     LatexText += ls
     LatexText += Container(emph("At the end we find that the eigen values and eigen vectors of the matrix ")+bmatrix(matrix)+emph(" are equal to : "))
-    LatexText += Format_EigenSpect(ev,evect)
+    LatexText += Format_EigenSpect(self.eigenSet,evect)
     return ev,evect,LatexText
 
 class Eigenvalues_and_Eigenvectors_C(Resource):
@@ -642,4 +725,4 @@ class Eigenvalues_and_Eigenvectors_C(Resource):
 
         ev,evct,LatexText = Eigenvalues_and_Eigenvectors(A).Find(A)
 
-        return {'output':LatexText,"result":[ev.tolist(),evct.tolist()]}  
+        return {'output':LatexText}  

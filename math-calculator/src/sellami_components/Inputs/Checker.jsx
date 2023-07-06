@@ -4,7 +4,13 @@ const Checker = ({label,check,HandleCheckchange}) => {
   return (
     <div>
         <FormGroup>
-        <FormControlLabel control={<Checkbox  checked={check} onChange={HandleCheckchange}/>} label={label} />
+        <FormControlLabel control={<Checkbox  checked={check} onChange={()=>{
+          if(check === 0){
+            HandleCheckchange(1)
+          }else{
+            HandleCheckchange(0)
+          }
+        }}/>} label={label} />
         </FormGroup>
     </div>
   )

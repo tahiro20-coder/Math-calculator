@@ -33,6 +33,17 @@ export default class Distance {
             .then(response => response.json())
             .catch(error => console.log(error))
     }
+    static Manhattan_VDistance(content) {
+        return fetch(`http://localhost:5000/Manhattan_VDistance`, {
+                'method': 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(content)
+            })
+            .then(response => response.json())
+            .catch(error => console.log(error))
+    }
     static Euclidean_VDistance(content) {
         return fetch(`http://localhost:5000/Euclidean_VDistance`, {
                 'method': 'POST',

@@ -10,6 +10,7 @@ from api.MatrixFund import Transpose,Inverse_matrix,Trace,Determinant,Angle,Proj
 from api.Matrix_Decomposition import Eigen_Decomposition,LU,Cholosky_Decomposition,QR_Decomposition,SVD
 from api.Echelon import Gaussian_Elmination,Basis,Gram_Shmidt,Kernel,Rank,Particular_Solution_C,General_solution,LU_Solv_C,Eigenvalues_and_Eigenvectors_C
 from api.Testing_Methods import Diagonizable,Convexity,Invertibility,Orthogonality,Independency
+from api.Gradients import Gradient_Descent_C,Steepest_Gradient_Descent_C,Conjugate_Gradient_Descent_C
 from scripts.scp import functo
 import sys
 
@@ -91,8 +92,12 @@ api.add_resource(Orthogonality, '/Orthogonality')
 api.add_resource(Independency, '/Independency')
 
 api.add_resource(Angle, '/Angle')
-api.add_resource(Projection_C, '/Projection_C')
+api.add_resource(Projection_C, '/Projection')
 api.add_resource(Affine_Projection, '/Affine_Projection')
+
+api.add_resource(Gradient_Descent_C, '/Gradient_Descent')
+api.add_resource(Steepest_Gradient_Descent_C, '/Steepest_Gradient_Descent')
+api.add_resource(Conjugate_Gradient_Descent_C, '/Conjugate_Gradient_Descent')
 
 
 api.add_resource(mat, '/mat')
