@@ -5,62 +5,32 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Echelon from '../api/Echelon';
+import {Emph,NewLine,HyperLink} from '../Inputs/StyleDescription'
 
 
 
-const Description = `
+let Description = 
+Emph ('the Gram Schmidt process is a method for orthonormalizing a set of vectors in an inner product space, most commonly the Euclidean space Rn equipped with the standard inner product.')
++NewLine()
++Emph('The Gram Schmidt process takes a finite, linearly independent set of vectors $S = \{{v_1, ..., v_k}\}$ for k ≤ n and generates an orthogonal set $S′ = \{{u_1, ..., u_k}\}$ that spans the same k-dimensional subspace of Rn as S.')
++NewLine()
++Emph('We define the projection operator by:')
++NewLine()
++'{\\displaystyle \\operatorname {proj} _{\\mathbf {u} }(\\mathbf {v} )={\\frac {\\langle \\mathbf {v} ,\\mathbf {u} \\rangle }{\\langle \\mathbf {u} ,\\mathbf {u} \\rangle }}{\\mathbf {u} },}'
++NewLine()
++Emph('where $\\langle \\mathbf {v} ,\\mathbf {u} \\rangle $ denotes the inner product of the vectors v and u. This operator projects the vector v orthogonally onto the line spanned by vector u. If u = 0, we define ${\\displaystyle \\operatorname {proj} _{\\mathbf {0} }(\\mathbf {v} ):=\\mathbf {0} }$, i.e., the projection map ${\\displaystyle \\operatorname {proj} _{\\mathbf {0} }} $is the zero map, sending every vector to the zero vector.')
++NewLine()
++HyperLink("https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process")
 
 
 
-\\textit{the Gram–Schmidt process is a method for orthonormalizing a 
-set of vectors in an inner product space, most commonly the Euclidean 
-space Rn equipped with the standard inner product. The Gram–Schmidt process
- takes a finite, linearly independent set of vectors} S = \{{v_1, ..., v_k}\}
- \\textit{for k ≤ n and generates an orthogonal set }S′ = \{{u_1, ..., u_k}\} \\textit{that spans 
- the same k-dimensional subspace of Rn as S.}\\\\
-
-
- \\textit{We define the projection operator by}\\\\
-
-{\\displaystyle \\operatorname {proj} _{\\mathbf {u} }(\\mathbf {v} 
-    )={\\frac {\\langle \\mathbf {v} ,\\mathbf {u} \\rangle }{\\langle \\mathbf {u} ,
-    \\mathbf {u} \\rangle }}{\\mathbf {u} },}\\\\
-
-    \\textit{where}\\\\
-\\langle \\mathbf {v} ,\\mathbf {u} \\rangle 
-\\textit{denotes the inner 
-product of the vectors v and u. This operator projects the vector 
-v orthogonally onto the line spanned by vector u. If u = 0, we define } \\\\
-{\\displaystyle \\operatorname {proj} _{\\mathbf {0} }(\\mathbf {v} ):=\\mathbf {0} },
-\\textit{i.e., the projection map} 
-{\\displaystyle \\operatorname {proj} _{\\mathbf {0} }} 
-\\textit{is the zero map, sending every vector to the zero vector.}\\\\
-
-\\textit{The Gram–Schmidt process then works as follows:}\\\\
-
-
-{\\displaystyle {\\begin{aligned}\\mathbf {u} _{1}&=\\mathbf {v} _{1},
-&\\!\\mathbf {e} _{1}&={\\frac {\\mathbf {u} _{1}}{\\|\\mathbf {u} _{1}\\|}}
-\\\\\\mathbf {u} _{2}&=\\mathbf {v} _{2}-\\operatorname {proj} _{\\mathbf {u} _{1}}
-(\\mathbf {v} _{2}),&\\!\\mathbf {e} _{2}&={\\frac {\\mathbf {u} _{2}}{\\|\\mathbf {u} 
-_{2}\\|}}\\\\\\mathbf {u} _{3}&=\\mathbf {v} _{3}-\\operatorname {proj} _{\\mathbf {u} 
-_{1}}(\\mathbf {v} _{3})-\\operatorname {proj} _{\\mathbf {u} _{2}}(\\mathbf {v}
-     _{3}),&\\!\\mathbf {e} _{3}&={\\frac {\\mathbf {u} _{3}}{\\|\\mathbf {u} _{3}\\|}}
-     \\\\\\mathbf {u} _{4}&=\\mathbf {v} _{4}-\\operatorname {proj} _{\\mathbf {u} _{1}}
-     (\\mathbf {v} _{4})-\\operatorname {proj} _{\\mathbf {u} _{2}}(\\mathbf {v} _{4})-
-     \\operatorname {proj} _{\\mathbf {u} _{3}}(\\mathbf {v} _{4}),&\\!\\mathbf {e} _{4}
-     &={\\mathbf {u} _{4} \\over \\|\\mathbf {u} _{4}\\|}\\\\&{}\\ \\ \\vdots &&{}\\ \\ \\vdots 
-     \\\\\\mathbf {u} _{k}&=\\mathbf {v} _{k}-\\sum _{j=1}^{k-1}\\operatorname {proj} 
-     _{\\mathbf {u} _{j}}(\\mathbf {v} _{k}),&\\!\\mathbf {e} _{k}&={\\frac {\\mathbf {u} 
-     _{k}}{\\|\\mathbf {u} _{k}\\|}}.\\end{aligned}}} \\\\
 
 
 
-     \\textit{\\\\for more : \\\\https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt\\_process}
 
 
 
-`
+
 
 const Gram_Shmidt = () => {
   const [sizeX,setSizeX] = useState(2)

@@ -5,10 +5,26 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Matrix_Decomposition from '../api/Matrix_Decomposition';
+import {Emph,NewLine,Bold} from '../Inputs/StyleDescription'
 
 
+const Description = 
+Emph('QR Decomposition :')+NewLine()
++'A = QR'+NewLine()
++Emph('where :')+NewLine()+'A'+Emph(': m × n matrix')
++NewLine()+'Q'+Emph(': m × m orthogonal matrix.')
++NewLine()+'R'+Emph(': m × n upper triangular matrix.')
++NewLine()+NewLine()
++"A = \\begin{bmatrix} \\mathbf{q_1} & \\mathbf{q_2} & \\dots & \\mathbf{q_m} \\end{bmatrix}\\begin{bmatrix} r_{11} & r_{12} & \\dots & r_{1n} \\\\ 0 & r_{22} & \\dots & r_{2n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\dots & r_{mn} \\end{bmatrix}"
++NewLine()
++Emph('Calculat Q: for calculate this matrix we use Gram-Schmidt methode :')+NewLine()
++Emph('Gram :')+NewLine()
++'\\mathbf{v}_1 = \\mathbf{u}_1'+NewLine()
++'\\mathbf{v}_i = \\mathbf{u}_i - \\sum_{j=1}^{i-1} \\text{proj}_{\\mathbf{v}_j}(\\mathbf{u}_i)'+NewLine()
++Emph('to Calculate R we have:')+NewLine()
++'A = Q R \\\\Q^T A =Q^T Q R\\\\R = Q^T A'
 
-const Description = `
+/*`
 
 \\textit{QR Decomposition :} \\\\
 
@@ -36,7 +52,7 @@ A = \\begin{bmatrix} \\mathbf{q_1} & \\mathbf{q_2} & \\dots & \\mathbf{q_m} \\en
     Q^T A =Q^T Q R
     \\\\
 R = Q^T A
-`
+`*/
 
 const QR_Decomposition = () => {
   const [sizeX,setSizeX] = useState(2)
