@@ -19,7 +19,7 @@ const Description = `
 const Euclidean_VNorm = () => {
   const [sizeY,setSizeY] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(1).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(1).fill(0)))
+  // const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(1).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -36,7 +36,7 @@ const Euclidean_VNorm = () => {
 
   const handleSubmit = () =>{
     Norms.Euclidean_VNorm({matrix1})
-      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -59,6 +59,7 @@ const Euclidean_VNorm = () => {
       }
     }
     setMatrix1(temp1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeY]);
   return (
     <div>

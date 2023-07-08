@@ -1,11 +1,10 @@
 import React from 'react'
-import {useEffect, useState } from 'react';
 
 
 function MatrixEntry ({sizeX , sizeY, HandleMatrixChange}){
     let matrix = Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0))
     
-    const input_size = 50
+    // const input_size = 50
     const ins = 15
   return (
     <div className='d-flex justify-content-center MinputCont' style={{"width":((32*ins) - sizeY*ins) +"vw"}}>

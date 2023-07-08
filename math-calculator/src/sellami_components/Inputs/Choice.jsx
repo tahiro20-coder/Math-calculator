@@ -2,7 +2,7 @@ import React from 'react'
 import "../Css/Components.css"
 const Choice = ({choice = 0,setChoice}) => {
   const HandleChange = () =>{
-    if(choice == 0){
+    if(choice === 0){
         setChoice(1)
     }else{
         setChoice(0)

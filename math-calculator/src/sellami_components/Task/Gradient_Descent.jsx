@@ -23,8 +23,8 @@ time, and the cost function within gradient descent specifically acts as a
 
 
 
-\\textit{For More : \\\\ https://www.ibm.com/topics/gradient-descent#:~:text=Gradient%20descent%20is%20an%20optimization,
-each%20iteration%20of%20parameter%20updates.}
+\\textit{For More : \\\\ https://www.ibm.com/topics/gradient-descent}\\#\\textit{:~:text=Gradient\\%20descent\\%20is\\%20an\\%20optimization,
+each\\%20iteration\\%20of\\%20parameter\\%20updates.}
 
 `
 
@@ -37,7 +37,7 @@ const Gradient_Descent = () => {
   const [max_iterations,setMax_iterations]  = useState(50)
   const [p,setP]  = useState(0.1)
   const [tol,setTol]  = useState(0.000001)
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
+  // const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -75,7 +75,7 @@ const Gradient_Descent = () => {
   }
   const handleSubmit = () =>{
     Gradients.Gradient_Descent({matrix1,matrix2,c,matrix3,p,tol,max_iterations})
-      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -126,7 +126,7 @@ const Gradient_Descent = () => {
     setMatrix3(temp3)
     setMatrix2(temp2)
 
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX]);
   return (
     <div>

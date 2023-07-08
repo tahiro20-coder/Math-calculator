@@ -19,7 +19,7 @@ const Dot_Product = () => {
   const [size2Y,setSize2Y] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(size1Y).fill(0).map(row => new Array(sizeX).fill(0)))
   const [matrix2,setMatrix2] = useState(Array(size2Y).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(size2Y).fill(0).map(row => new Array(size1Y).fill(0)))
+  // const [resultMatrix,setresultMatrix] = useState(Array(size2Y).fill(0).map(row => new Array(size1Y).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -46,7 +46,7 @@ const Dot_Product = () => {
   }
   const handleSubmit = () =>{
     StandardFAPIService.Dot_Product({matrix1,matrix2})
-      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -94,10 +94,12 @@ const Dot_Product = () => {
   
     setMatrix1(temp1)
     setMatrix2(temp2)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX,size1Y,size2Y]);
   return (
     <div>
         <Title title={"Description"}/>
+        
         <Container title={"Function Description"} mathcontent={ Description}/>
         
         <Title title={"Inputs"}/>

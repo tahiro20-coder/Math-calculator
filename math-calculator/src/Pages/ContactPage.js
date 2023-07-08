@@ -37,7 +37,7 @@ function ContactPage(){
         
     }
     return(
-      <div className="container-xxl mt-5" style={{height:"57%"}}>
+      <div className="container-xxl mt-5" style={{height:"fit-content"}}>
       <h2 className="mb-3">Please feel free to give your feedback:</h2>
       <form ref={form} onSubmit={onSubmit}>
         <div className="mb-3">

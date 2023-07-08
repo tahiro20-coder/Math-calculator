@@ -12,7 +12,7 @@ const Description = `
       
       \\textit{ Let A be a square n × n matrix with n linearly independent eigenvectors qi 
       (where i = 1, ..., n). Then A can be factorized as}
-       \mathbf{A}=\mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^{-1} 
+       \\mathbf{A}=\\mathbf{Q}\\mathbf{\\Lambda}\\mathbf{Q}^{-1} 
        \\textit{where Q is the square n × n matrix whose ith column is the eigenvector qi of A, 
         and Λ is the diagonal matrix whose diagonal elements are the corresponding eigenvalues,}
         Λ_{ii} = λ_i \\\\ \\textit{-Note that only diagonalizable matrices can be factorized in this way.}
@@ -23,7 +23,7 @@ const Description = `
 const Eigen_Decomposition = () => {
     const [sizeX,setSizeX] = useState(2)
     const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
-    const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
+    // const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
     const [output,setoutput] = useState("")
   
     const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -40,7 +40,7 @@ const Eigen_Decomposition = () => {
   
     const handleSubmit = () =>{
         Matrix_Decomposition.Eigen_Decomposition({matrix1})
-        .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+        .then((response) => { setoutput(response["output"])})
         .catch(error => console.log('error',error))
       }
     const handleReset = () =>{
@@ -67,6 +67,7 @@ const Eigen_Decomposition = () => {
         }
       }
       setMatrix1(temp1)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sizeX]);
     return (
       <div>

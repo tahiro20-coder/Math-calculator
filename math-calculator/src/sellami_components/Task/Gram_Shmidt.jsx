@@ -15,8 +15,8 @@ const Description = `
 \\textit{the Gram–Schmidt process is a method for orthonormalizing a 
 set of vectors in an inner product space, most commonly the Euclidean 
 space Rn equipped with the standard inner product. The Gram–Schmidt process
- takes a finite, linearly independent set of vectors} S = \{{v_1, ..., v_k}\}
- \\textit{for k ≤ n and generates an orthogonal set }S′ = \{{u_1, ..., u_k}\} \\textit{that spans 
+ takes a finite, linearly independent set of vectors} S = \\{{v_1, ..., v_k}\\}
+ \\textit{for k ≤ n and generates an orthogonal set }S′ = \\{{u_1, ..., u_k}\\} \\textit{that spans 
  the same k-dimensional subspace of Rn as S.}\\\\
 
 
@@ -56,7 +56,7 @@ _{1}}(\\mathbf {v} _{3})-\\operatorname {proj} _{\\mathbf {u} _{2}}(\\mathbf {v}
 
 
 
-     \\textit{\\\\for more : \\\\https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt\\_process}
+     \\textit{\\\\ for more : \\\\ https://en.wikipedia.org/wiki/Gram\\%E2\\%80\\%93Schmidt\\_process }
 
 
 
@@ -66,7 +66,7 @@ const Gram_Shmidt = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
+  //const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -83,7 +83,7 @@ const Gram_Shmidt = () => {
 
   const handleSubmit = () =>{
     Echelon.Gram_Shmidt({matrix1})
-      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -111,6 +111,7 @@ const Gram_Shmidt = () => {
       }
     }
     setMatrix1(temp1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX,sizeY]);
   return (
     <div>

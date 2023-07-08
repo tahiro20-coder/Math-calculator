@@ -29,7 +29,7 @@ const Projection = () => {
 
   const [matrix3,setMatrix3] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
 
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
+  // const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -68,11 +68,11 @@ const Projection = () => {
   
   const handleSubmit = () =>{
     MatrixFund.Projection({matrix1,matrix2,matrix3,choice})
-      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
     const handleReset = () =>{
-      if(choice == 1){
+      if(choice === 1){
         document.getElementsByName("0,0")[2].value = 0
         if((sizeX >= 2) && (sizeY >= 2)){
         document.getElementsByName("1,1")[1].value = 0
@@ -141,6 +141,7 @@ const Projection = () => {
       }
     }
     setMatrix3(temp1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX,sizeY]);
 
   return (

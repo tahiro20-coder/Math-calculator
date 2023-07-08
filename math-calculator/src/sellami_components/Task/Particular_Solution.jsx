@@ -31,7 +31,7 @@ const Particular_Solution = () => {
   const [sizeY2,setSizeY2] = useState(1)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [matrix2,setMatrix2] = useState(Array(sizeY2).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
+  //const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -58,7 +58,7 @@ const Particular_Solution = () => {
   }
   const handleSubmit = () =>{
     Echelon.Particular_Solution({matrix1,matrix2})
-      .then((response) => {console.log("jakobian",response["result"]);setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => {console.log("jakobian",response["result"]); setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -107,7 +107,7 @@ const Particular_Solution = () => {
       }
     }
     setMatrix2(temp2)
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX,sizeY,sizeY2]);
   return (
     <div>

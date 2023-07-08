@@ -18,9 +18,9 @@ on the corresponding matrix of coefficients. We can also use this method to esti
 of the following:} \\\\
 
 
-\\textit{ 1.   The rank of the given matrix}\\
-\\textit{ 2.   The determinant of a square matrix}\\
-\\textit{ 3.   The inverse of an invertible matrix}\\
+\\textit{ 1.   The rank of the given matrix}\\\\
+\\textit{ 2.   The determinant of a square matrix}\\\\
+\\textit{ 3.   The inverse of an invertible matrix}\\\\
 
 \\textit{ To perform row reduction on a matrix, we have to complete a sequence of 
 elementary row operations **(adding-swaping-mulitplaying)** to transform 
@@ -30,7 +30,7 @@ in **Echlon Form**.}
 
 
 
-\\\\ for more : \\\\ https://byjus.com/maths/gauss-elimination-method/}
+\\textit{ \\\\ for more : \\\\ https://athsbyjus.com/m/gauss-elimination-method/}
 `
 
 const Gaussian_Elm = () => {
@@ -38,7 +38,7 @@ const Gaussian_Elm = () => {
   const [sizeY,setSizeY] = useState(2)
   const [check1,setcheck1] = useState(false)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
+  //const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -55,7 +55,7 @@ const Gaussian_Elm = () => {
 
   const handleSubmit = () =>{
     Echelon.Gaussian_Elm({matrix1,check1})
-      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -84,6 +84,7 @@ const Gaussian_Elm = () => {
       }
     }
     setMatrix1(temp1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX,sizeY]);
   return (
     <div>

@@ -13,10 +13,10 @@ const Description = `
 \\textit{QR Decomposition :} \\\\
 
    A = QR 
-   \\textit{**where** :}<br>
-    A \\textit{: m × n matrix } .<br>
-    Q \\textit{: m × m orthogonal matrix.}<br>
-    R \\textit{: m × n upper triangular matrix.}<br>
+   \\textit{**where** :}\\\\
+    A \\textit{: m × n matrix } .\\\\
+    Q \\textit{: m × m orthogonal matrix.}\\\\
+    R \\textit{: m × n upper triangular matrix.}\\\\
 
 A = \\begin{bmatrix} \\mathbf{q_1} & \\mathbf{q_2} & \\dots & \\mathbf{q_m} \\end{bmatrix}
 \\begin{bmatrix} r_{11} & r_{12} & \\dots & r_{1n} \\\\ 0 & r_{22} & \\dots & r_{2n} 
@@ -24,12 +24,12 @@ A = \\begin{bmatrix} \\mathbf{q_1} & \\mathbf{q_2} & \\dots & \\mathbf{q_m} \\en
 
 \\textit{**Calculat**} Q  :\\\\
 \\textit{for calculate this matrix we use Gram-Schmidt methode :}
-<br>
-\\textit{**Gram :**<br>}\\\\
-\\textit{**\\mathbf{v}_1 = \\mathbf{u}_1**}
-<br>
+\\\\
+\\textit{**Gram :**\\\\}
+**\\mathbf{v}_1 = \\mathbf{u}_1**
+\\\\
 **\\mathbf{v}_i = \\mathbf{u}_i - \\sum_{j=1}^{i-1} \\text{proj}_{\\mathbf{v}_j}(\\mathbf{u}_i)**
-<br>
+\\\\
 \\textit{to Calculate R}\\\\
 \\textit{We have :}
     A = Q R \\\\
@@ -42,7 +42,7 @@ const QR_Decomposition = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
+  //const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -59,7 +59,7 @@ const QR_Decomposition = () => {
 
   const handleSubmit = () =>{
     Matrix_Decomposition.QR_Decomposition({matrix1})
-      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -87,6 +87,7 @@ const QR_Decomposition = () => {
       }
     }
     setMatrix1(temp1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX,sizeY]);
   return (
     <div>

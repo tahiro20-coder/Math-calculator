@@ -9,6 +9,16 @@
 }
 
 @font-face {
+    font-family: roboto_bold;
+    src: url(../fonts/RobotoMono-Bold.ttf);
+}
+
+@font-face {
+    font-family: roboto_semi;
+    src: url(../fonts/RobotoMono-SemiBold.ttf);
+}
+
+@font-face {
     font-family: inter;
     src: url(../fonts/Inter-Regular.ttf);
 }
