@@ -6,7 +6,7 @@ import Title from '../Title';
 
 const Gradient_Linear_Regression = () => {
   let [data,setdata] = useState([]);
-  const [pos,setpos] = useState(0)
+  // const [pos,setpos] = useState(0)
   const graph = useRef(null);
   let [theta_0,settheta_0] = useState(0);
   let [theta_1,settheta_1] = useState(1);
@@ -32,7 +32,7 @@ const Gradient_Linear_Regression = () => {
     }
     if (graph.current) {
       // console.log(graph)
-      setpos(graph.current.getBoundingClientRect());
+      // setpos(graph.current.getBoundingClientRect());
     }
     // drawLine();
    
@@ -62,6 +62,7 @@ const Gradient_Linear_Regression = () => {
     return () => {
       clearInterval(timer1); 
       clearInterval(timer2); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [running,data]);
   
   const HandleGraphClick = (e)=>{
@@ -95,7 +96,7 @@ const Gradient_Linear_Regression = () => {
 
     let n = data.length;
     let learningRate = 0.000001;
-    let errorsum = 0
+    // let errorsum = 0
     // calc the cost //
     for (let i = 0; i < n; i++) {
         let x = data[i].x;
@@ -108,12 +109,12 @@ const Gradient_Linear_Regression = () => {
         // costSum_1 += (learningRate / n) * error * x;
         costSum_0 += error * 1000000
         costSum_1 += x*error 
-        errorsum += (guess-y)**2
+        // errorsum += (guess-y)**2
     }
     //  //
     // console.log("chane",learningRate * ((-2/n)*costSum_0),learningRate * ((-2/n)*costSum_1))
     // console.log(theta_0,theta_1)
-    errorsum /= n
+    // errorsum /= n
     theta_0 -= learningRate * ((1/n)*costSum_0);
     theta_1 -= learningRate * ((1/n)*costSum_1);
 
@@ -185,7 +186,7 @@ const Gradient_Linear_Regression = () => {
       )
 
       let graphPoints = document.querySelectorAll(".gradient-decent .graph .point");
-      if(name == "x"){
+      if(name === "x"){
         graphPoints[number].style.left = value + "px";
     
       }else{

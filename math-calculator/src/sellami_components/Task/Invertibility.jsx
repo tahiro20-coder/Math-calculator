@@ -13,7 +13,7 @@ const Description = `
 \\textit{In linear algebra, an $n$-by-$n$ square matrix }A\\textit{ is called **invertible** 
 (also nonsingular, nondegenerate or (rarely used) regular), if there exists 
 an} n\\textit{-by-}n\\textit{ square matrix $B$ such that:}\\\\
-{\displaystyle \mathbf {AB} =\mathbf {BA} =\mathbf {I} _{n},}\\\\
+{\\displaystyle \\mathbf {AB} =\\mathbf {BA} =\\mathbf {I} _{n},}\\\\
 
 \\textit{Matrix **inversion** is the process of finding the matrix } B\\textit{ that 
 satisfies the prior equation for a given invertible matrix }A.\\\\
@@ -35,7 +35,7 @@ them to check if a matrix is **invertible or not** we use : }\\\\
 const Invertibility = () => {
   const [sizeX,setSizeX] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
+  // const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -52,7 +52,7 @@ const Invertibility = () => {
 
   const handleSubmit = () =>{
     Testing_Methods.Invertibility({matrix1})
-      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -79,6 +79,7 @@ const Invertibility = () => {
       }
     }
     setMatrix1(temp1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX]);
   return (
     <div>

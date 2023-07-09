@@ -8,7 +8,7 @@ import Echelon from '../api/Echelon';
 import {Emph,NewLine,Bold} from '../Inputs/StyleDescription'
 
 
-const Description = 
+/*const Description = 
 Emph('Eigenvalues are the special set of scalars associated with the system of linear equations.It is mostly used in matrix equations. ‘Eigen’ is a German word that means ‘proper’ or‘characteristic’. Therefore, the term eigenvalue can be termed as characteristic value,characteristic root, proper values or latent roots as well. In simple words, the eigenvalueis a scalar that is used to transform the eigenvector. The basic equation is:')
 +NewLine()
 +'Ax = λx'
@@ -18,14 +18,29 @@ Emph('Eigenvalues are the special set of scalars associated with the system of l
 +NewLine()
 +Emph('An '+Bold('Eigenspace')+' of vector {“x”}')
 +Emph('consists of a set of all eigenvectors with the equivalent eigenvalue {“λ”} collectively with the zero vector. Though, the zero vector is not an eigenvector.' )
-+NewLine()
++NewLine()*/
 
+const Description = `
+\\textit{Eigenvalues are the special set of scalars associated with the system of linear equations.
+ It is mostly used in matrix equations. ‘Eigen’ is a German word that means ‘proper’ or
+  ‘characteristic’. Therefore, the term eigenvalue can be termed as characteristic value,
+   characteristic root, proper values or latent roots as well. In simple words, the eigenvalue
+    is a scalar that is used to transform the eigenvector. The basic equation is:}\\\\
+Ax = λx\\\\
 
+\\textit{The number or scalar value} {“λ”}\\textit{ is an eigenvalue of **A**.}\\\\
+
+\\textit{An **Eigenspace** of vector} {“x”}\\textit{ consists of a set of all eigenvectors with the 
+equivalent eigenvalue }{“λ”} \\textit{collectively with the zero vector. Though, the zero 
+vector is not an eigenvector.}\\\\
+
+\\textit{\\\\for more : \\\\ https://byjus.com/maths/eigen-values/}\\#\\textit{definition}
+`
 
 const Eigenvalues_and_Eigenvectors = () => {
   const [sizeX,setSizeX] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
+  // const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -69,6 +84,7 @@ const Eigenvalues_and_Eigenvectors = () => {
       }
     }
     setMatrix1(temp1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX]);
   return (
     <div>

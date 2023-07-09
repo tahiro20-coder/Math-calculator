@@ -28,7 +28,7 @@ A \\textit{is called **diagonalizable** or **non-defective** if it is similar
 const Diagonizable = () => {
   const [sizeX,setSizeX] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
+  // const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -45,7 +45,7 @@ const Diagonizable = () => {
 
   const handleSubmit = () =>{
     Testing_Methods.Diagonizable({matrix1})
-      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -72,6 +72,7 @@ const Diagonizable = () => {
       }
     }
     setMatrix1(temp1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX]);
   return (
     <div>

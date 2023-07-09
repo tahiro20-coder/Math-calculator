@@ -31,7 +31,7 @@ G_k = L(∇J(x^{(0)})^⊤, ∇J(x^{(1)})^⊤, . . . , ∇J(x^{(k)})^⊤) ⊂ R^n
 
 J(x^{k+1})=\\underset{v ∈ x^{(k)}+G_k}{min}J(v)\\\\
 
-\\textit{For More : \\\\ K.Boanan cours + https://en.wikipedia.org/wiki/Conjugate_gradient_method}
+\\textit{For More : \\\\ K.Boanan cours + https://en.wikipedia.org/wiki/Conjugate\\_gradient\\_method}
 `
 
 const Conjugate_Gradient_Descent = () => {
@@ -42,7 +42,7 @@ const Conjugate_Gradient_Descent = () => {
   const [c,setC]  = useState(0)
   const [max_iterations,setMax_iterations]  = useState(50)
   const [tol,setTol]  = useState(0.000001)
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
+  // const [resultMatrix,setresultMatrix] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -80,7 +80,7 @@ const Conjugate_Gradient_Descent = () => {
   }
   const handleSubmit = () =>{
     Gradients.Conjugate_Gradient_Descent({matrix1,matrix2,c,matrix3,tol,max_iterations})
-      .then((response) => {console.log("jakobian",response["result"]);setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => {console.log("jakobian",response["result"]); setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -128,7 +128,7 @@ const Conjugate_Gradient_Descent = () => {
     setMatrix3(temp3)
     setMatrix2(temp2)
 
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX]);
   return (
     <div>

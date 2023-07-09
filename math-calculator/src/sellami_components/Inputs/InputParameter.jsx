@@ -3,7 +3,7 @@ import React from 'react'
 const InputParameter = ({value,handleChange , min,max,except}) => {
   return (
     <input
-                        defaultValue={value}
+                        // defaultValue={value}
                       value={value}
                       type='text'
                       onKeyPress={(event) => {
@@ -24,7 +24,7 @@ const InputParameter = ({value,handleChange , min,max,except}) => {
                       onInput={(event)=>{
                         if(event.target.value !== ''){
                           event.target.value = event.target.value[0] + event.target.value.substring(1).replace('+','').replace('-','')
-                          if(Number(event.target.value) == except){
+                          if(Number(event.target.value) === except){
                             event.target.value = except+1
                           }
                           if(min != null){

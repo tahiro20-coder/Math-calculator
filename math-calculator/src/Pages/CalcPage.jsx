@@ -38,7 +38,7 @@ import Particular_Solution from '../sellami_components/Task/Particular_Solution'
 import General_solution from '../sellami_components/Task/General_solution';
 import LU_Solv from '../sellami_components/Task/LU_Solv';
 import Eigenvalues_and_Eigenvectors from '../sellami_components/Task/Eigenvalues_and_Eigenvectors';
-import Diagonizable from '../sellami_components/Task/Diagonizable';
+import Diagonizable from '../sellami_components/Task/diagonizable';
 import Convexity from '../sellami_components/Task/Convexity';
 import Invertibility from '../sellami_components/Task/Invertibility';
 import Orthogonality from '../sellami_components/Task/Orthogonality';
@@ -53,61 +53,65 @@ import '../sellami_components/Css/calcstyle.css';
 import '../sellami_components/Css/Components.css';
 import {useParams} from 'react-router-dom';
 
+
 function CalcPage(){
     const { func } = useParams() 
     const Pages = {
-        "" : <></>,
-        "AddMatrices"  : <AddMatrices/>,
-        "DivScalarMatrix" : <DivScalarMatrix/>,
-        "Dot_Product"  : <Dot_Product/>,
-        "one_norm" : <One_norm/>,
-        "Euclidean_Norm" : <Euclidean_Norm/>,
-        "Inifinity_norm" : <Inifinity_norm/>,
-        "Manhattan_Norm" : <Manhattan_Norm/>,
-        "Euclidean_VNorm" : <Euclidean_VNorm/>,
-        "Inifinity_VNorm" : <Inifinity_VNorm/>,
-        "Lp_Norm" : <Lp_Norm/>,
-        "Manhattan_Distance" : <Manhattan_Distance/>,
-        "Euclidean_Distance" : <Euclidean_Distance/>,
-        "Infinity_Distance" : <Infinity_Distance/>,
-        "Manhattan_VDistance" : <Manhattan_VDistance/>,
-        "Euclidean_VDistance": <Euclidean_VDistance/>,
-        "Infinity_VDistance" : <Infinity_VDistance/>,
-        "Transpose" : <Transpose/>,
-        "Inverse_matrix" : <Inverse_matrix/>,
-        "Trace" : <Trace/>,
-        "Determinant" : <Determinant/>,
-        "Gaussian_Elm" : <Gaussian_Elm/>,
-        "Basis" : <Basis/>,
-        "Kernel" : <Kernel/>,
-        "Rank" : <Rank/>,
-        "Angle" : <Angle/>,
-        "Projection" : <Projection />,
-        "Affine_Projection" : <Affine_Projection />,
-        "Gram_Shmidt" : <Gram_Shmidt/>,
-        "Particular_Solution" : <Particular_Solution/>,
-        "General_solution" : <General_solution/>,
-        "LU_Solv" : <LU_Solv/>,
-        "Gradient_Descent" : <Gradient_Descent />,
-        "Steepest_Gradient_Descent" : <Steepest_Gradient_Descent />,
-        "Conjugate_Gradient_Descent" : <Conjugate_Gradient_Descent />,
-        "Diagonizable" : <Diagonizable/>,
-        "Convexity" : <Convexity/>,
-        "Invertibility" : <Invertibility/>,
-        "Orthogonality" : <Orthogonality/>,
-        "Independency" : <Independency/>,
-        "Eigenvalues_and_Eigenvectors" : <Eigenvalues_and_Eigenvectors/>,
-        "Eigen_Decomposition" : <Eigen_Decomposition/>,
-        "LU" : <LU/>,
-        "SVD" : <SVD/>,
-        "Cholosky_Decomposition" : <Cholosky_Decomposition/>,
-        "QR_Decomposition" : <QR_Decomposition/>,
-        "Gradient_Linear_Regression": <Gradient_Linear_Regression />,
-        "MulMatrcies" : <MulMatrcies/>,
-        "MulScalarMatrix" :  <MulScalarMatrix/>,
-        "SubMatrcies" : <SubMatrcies/>,
+        "" : React.Fragment,
+        "AddMatrices"  : AddMatrices,
+        "DivScalarMatrix" : DivScalarMatrix,
+        "Dot_Product"  : Dot_Product,
+        "one_norm" : One_norm,
+        "Euclidean_Norm" : Euclidean_Norm,
+        "Inifinity_norm" : Inifinity_norm,
+        "Manhattan_Norm" : Manhattan_Norm,
+        "Euclidean_VNorm" : Euclidean_VNorm,
+        "Inifinity_VNorm" : Inifinity_VNorm,
+        "Lp_Norm" : Lp_Norm,
+        "Manhattan_Distance" : Manhattan_Distance,
+        "Euclidean_Distance" : Euclidean_Distance,
+        "Infinity_Distance" : Infinity_Distance,
+        "Manhattan_VDistance" : Manhattan_VDistance,
+        "Euclidean_VDistance": Euclidean_VDistance,
+        "Infinity_VDistance" : Infinity_VDistance,
+        "Transpose" : Transpose,
+        "Inverse_matrix" : Inverse_matrix,
+        "Trace" : Trace,
+        "Determinant" : Determinant,
+        "Gaussian_Elm" : Gaussian_Elm,
+        "Basis" : Basis,
+        "Kernel" : Kernel,
+        "Rank" : Rank,
+        "Angle" : Angle,
+        "Projection" : Projection ,
+        "Affine_Projection" : Affine_Projection ,
+        "Gram_Shmidt" : Gram_Shmidt,
+        "Particular_Solution" : Particular_Solution,
+        "General_solution" : General_solution,
+        "LU_Solv" : LU_Solv,
+        "Gradient_Descent" : Gradient_Descent ,
+        "Steepest_Gradient_Descent" : Steepest_Gradient_Descent ,
+        "Conjugate_Gradient_Descent" : Conjugate_Gradient_Descent ,
+        "Diagonizable" : Diagonizable,
+        "Convexity" : Convexity,
+        "Invertibility" : Invertibility,
+        "Orthogonality" : Orthogonality,
+        "Independency" : Independency,
+        "Eigenvalues_and_Eigenvectors" : Eigenvalues_and_Eigenvectors,
+        "Eigen_Decomposition" : Eigen_Decomposition,
+        "LU" : LU,
+        "SVD" : SVD,
+        "Cholosky_Decomposition" : Cholosky_Decomposition,
+        "QR_Decomposition" : QR_Decomposition,
+        "Gradient_Linear_Regression": Gradient_Linear_Regression ,
+        "MulMatrcies" : MulMatrcies,
+        "MulScalarMatrix" :  MulScalarMatrix,
+        "SubMatrcies" : SubMatrcies,
     }
-
+    const handle_page = (func)=>{
+        const  Comp  = Pages[func];
+        return <Comp  />
+    }
     return(
         <div className= "container content text-center" >
             <span className='Header' >
@@ -117,12 +121,10 @@ function CalcPage(){
                 You can choose the linear algebra problem that you want to solve from the bottom menu
             </span>
             <DropDownMenu selected={func}/>
-
-
             
 
             {
-                func != null ?  Pages[func] : <></>
+                func != null ? handle_page(func) : <></>
             }
 
             <div className='h-100'></div>

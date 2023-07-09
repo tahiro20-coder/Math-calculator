@@ -16,7 +16,7 @@ independent if there exists no nontrivial linear combination of the vectors
 that equals the zero vector. If such a linear combination exists, then the 
 vectors are said to be linearly dependent.}\\\\
 
-\\textit{A sequence of vectors }{\displaystyle \\mathbf {v} _{1},\\mathbf {v} _{2},\\dots ,\\mathbf {v} _{k}}
+\\textit{A sequence of vectors }{\\displaystyle \\mathbf {v} _{1},\\mathbf {v} _{2},\\dots ,\\mathbf {v} _{k}}
 \\textit{from a vector space V is said to be linearly dependent, if there exist scalars }
 {\\displaystyle a_{1},a_{2},\\dots ,a_{k},} \\textit{not all zero, such that:}\\\\
 {\\displaystyle a_{1}\\mathbf {v} _{1}+a_{2}\\mathbf {v} _{2}+\\cdots +a_{k}\\mathbf {v} _{k}=\\mathbf {0} ,}
@@ -34,7 +34,7 @@ const Independency = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
+  //const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -51,7 +51,7 @@ const Independency = () => {
 
   const handleSubmit = () =>{
     Testing_Methods.Independency({matrix1})
-      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -79,6 +79,7 @@ const Independency = () => {
       }
     }
     setMatrix1(temp1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX,sizeY]);
   return (
     <div>

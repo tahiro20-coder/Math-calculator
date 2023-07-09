@@ -50,5 +50,9 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "typescript": "^5.0.2",
+        "cross-env": "^7.0.3"
     }
 }

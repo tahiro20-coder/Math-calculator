@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Button from 'react-bootstrap/Button';
 import { Dash,Plus } from "react-bootstrap-icons";
 function NumberInput ({number,HandleChangeValue}){

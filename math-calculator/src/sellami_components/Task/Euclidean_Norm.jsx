@@ -20,7 +20,7 @@ const Euclidean_Norm = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
+  //const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -37,7 +37,7 @@ const Euclidean_Norm = () => {
 
   const handleSubmit = () =>{
     Norms.Euclidean_Norm({matrix1})
-      .then((response) => {setresultMatrix(response["result"]);setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -65,6 +65,7 @@ const Euclidean_Norm = () => {
       }
     }
     setMatrix1(temp1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX,sizeY]);
   return (
     <div>

@@ -2,7 +2,7 @@ import React , {useState,useEffect} from 'react'
 import error_image from "../Images/Error.png"
 import "../Styles/Redirect.css"
 import { useNavigate } from "react-router-dom";
-const Redirect = () => {
+const RedirectPage = () => {
     const [timeLeft, setTimeLeft] = useState(5);
     const navigate = useNavigate();
 
@@ -27,6 +27,7 @@ useEffect(() => {
     return () => clearInterval(intervalId);
     // add timeLeft as a dependency to re-rerun the effect
     // when we update it
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft]);
   return (
     <div className='d-flex justify-content-around errorContainer'>
@@ -47,4 +48,4 @@ useEffect(() => {
   )
 }
 
-export default Redirect
+export default RedirectPage
