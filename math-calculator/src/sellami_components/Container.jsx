@@ -1,7 +1,6 @@
 import React from 'react'
 import { BlockMath } from 'react-katex'; 
 
-
 const Container = ({title,content,mathcontent}) => {
 
   var tds = document.querySelectorAll("span");
@@ -21,8 +20,8 @@ const Container = ({title,content,mathcontent}) => {
             null
           }
           {
-            mathcontent != null ?
-            <div className='m-3 conti '>
+             mathcontent != null ?
+             <div className='m-3 conti'>
             <BlockMath math={mathcontent} />
             </div> :
             null

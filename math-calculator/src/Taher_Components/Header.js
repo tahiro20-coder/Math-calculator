@@ -14,10 +14,11 @@ function CustomLink({to, children, ...props}){
   const resolvedPath = useResolvedPath(to)
   const isactive = useMatch({path: resolvedPath.pathname, end: true})
   console.log(to,url.includes(to)?"active":"")
+  console.log(isactive)
   return(
     <Link to={to} {...props}>
       {/* ("active" && isactive )+  */}
-      <Nav.Link  className={url.includes(to)?"active":"inactive" } href={to} >{children}</Nav.Link>
+      <Nav  className={url.includes(to)?"active":"inactive" } href={to} >{children}</Nav>
     </Link>
   );
 

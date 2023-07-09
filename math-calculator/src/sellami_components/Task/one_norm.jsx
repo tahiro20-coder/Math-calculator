@@ -12,7 +12,7 @@ const Description = `
 \\Vert A \\Vert_1 = \\max_{1 \\leq j \\leq n} \\left(\\sum_{i=1}^{n} \\vert a_{ij}\\vert \\right) \\\\
 
 \\textit{(the maximum absolute column sum). Put simply we sum the absolute values down each column
-    and then take the biggest answer.}\\\\ \\textit{for more : https://nucinkis-lab.cc.ic.ac.uk/HELM/workbooks/workbook\\_30/30\\_4\\_matrx\\_norms.pdf}
+    and then take the biggest answer.\\\\for more : \\\\ https://nucinkis-lab.cc.ic.ac.uk/HELM/workbooks/workbook\\_30/30\\_4\\_matrx\\_norms.pdf}
 `
 
 const One_norm = () => {

@@ -17,11 +17,13 @@
     /* color: #178A9F; */
     background-color: transparent !important;
     height: 100px;
+    
 }
 
 .active {
     color: #116A7B;
     font-weight: 600;
+    
 }
 
 .inactive {
@@ -31,11 +33,14 @@
 
 .link_page {
     text-decoration: none;
+    padding: 1em;
+    font-size: 1.2rem;
+    
 }
 
 .nav-link {
     color: #666666;
-    font-size: 1.1em;
+    font-size: 1.5em;
 }
 
 .shape {

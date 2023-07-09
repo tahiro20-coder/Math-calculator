@@ -22,7 +22,7 @@ The set of all possible solutions is called the **solution set**.}\\\\
 2.   The system has a single unique solution (**Particular Solution**).\\\\
 3.   The system has no solution.}
 
-\\textit{For More : \\\\ https://en.wikipedia.org/wiki/System\\of\\linear\\equations}
+\\textit{For More : \\\\ https://en.wikipedia.org/wiki/System\\_of\\_linear\\_equations}
 
 
 `
