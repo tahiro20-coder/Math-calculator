@@ -6,3 +6,4 @@ numpy==1.23.3
 Requests==2.31.0
 scipy==1.11.1
 sympy==1.11.1
+gunicorn==19.7.1
