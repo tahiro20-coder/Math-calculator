@@ -1,11 +1,10 @@
 import React from 'react'
-import {useEffect, useState } from 'react';
 
 
 function MatrixEntry ({sizeX , sizeY, HandleMatrixChange}){
     let matrix = Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0))
     
-    const input_size = 50
+    // const input_size = 50
     const ins = 15
   return (
     <div className='d-flex justify-content-center MinputCont' style={{"width":((32*ins) - sizeY*ins) +"vw"}}>
@@ -22,11 +21,21 @@ function MatrixEntry ({sizeX , sizeY, HandleMatrixChange}){
                       onKeyPress={(event) => {
                         // console.log(event.target.value)
                         if ((!/[0-9]/.test(event.key))&&(event.key !== '+') && (event.key !== "-")) {
-                        event.preventDefault();
+                          if(event.key === "."){
+                            if(event.target.value[0] === "." || event.target.value === ""){
+                              event.preventDefault();
+                            }
+                            if((event.target.value.match(/\./g) || []).length >= 2){
+                              event.preventDefault();
+                            }
+                          }else{
+                            event.preventDefault();
+                          }
                         }
                       }}
                       onInput={(event)=>{
                         if(event.target.value !== ''){
+                          
                           event.target.value = event.target.value[0] + event.target.value.substring(1).replace('+','').replace('-','')
                           let [indexY,indexX] = event.target.name.split(",")
                           // matrix[Number(indexX)][Number(indexY)] = Number(event.target.value)
@@ -36,7 +45,8 @@ function MatrixEntry ({sizeX , sizeY, HandleMatrixChange}){
                           
                       }}
                       onBlur={(event)=>{
-                        if((event.target.value === '-' ) || (event.target.value === '+' )){
+                        
+                        if((event.target.value === '-' ) || (event.target.value === '+' ) || (event.target.value === '')){
                           event.target.value = 0
                           let [indexY,indexX] = event.target.name.split(",")
                           HandleMatrixChange(indexX,indexY,0);

@@ -12,6 +12,18 @@ body {
     height: 66%;
 }
 
+a {
+    text-decoration: none !important;
+}
+
+
+/* .katex-html {
+    display: flex !important;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-wrap: break-word;
+} */
+
 
 /* * {
     text-align: center;

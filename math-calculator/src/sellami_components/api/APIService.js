@@ -1,16 +1,3 @@
-function arrayToJSONObject(arr) {
-    //header
-    // vacate headers/keys
-    console.log(arr)
-    let keys = arr.shift()
-        // create JSON objects from Array
-    let result = arr.map(arr =>
-        Object.assign({}, ...arr.map((x, i) => ({
-            [keys[i]]: x
-        })))
-    );
-    return { "matrix": result };
-}
 export default class APIService {
     // Insert an article
     static add(body) {

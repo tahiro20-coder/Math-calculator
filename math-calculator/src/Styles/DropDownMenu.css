@@ -1,0 +1,55 @@
+.conti {
+    /* display: inline-block;
+    vertical-align: bottom; */
+    opacity: 0;
+    overflow: hidden;
+    animation: slow 1s ease forwards;
+}
+
+@keyframes slow {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.dropdown_btn {
+    color: black !important;
+    background-color: transparent !important;
+    border: 2px solid black !important;
+    border-radius: 5px !important;
+    height: 50px !important;
+    width: 32.5vw;
+    min-width: 225px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown_menu {
+    width: 32.5vw;
+    min-width: 225px;
+}
+
+.dropdown-item.active {
+    background-color: #1C98AF !important;
+}
+
+.dropdown-item:active {
+    background-color: #21b5cf !important;
+    color: white !important;
+}
+
+.dropdown-item.active a {
+    color: white !important;
+}
+
+.dropdown-item a {
+    color: black;
+}
+
+.dropdown-menu {
+    max-height: 35vh;
+    overflow-y: auto;
+}

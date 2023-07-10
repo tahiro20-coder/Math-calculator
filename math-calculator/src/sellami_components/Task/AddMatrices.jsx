@@ -3,17 +3,22 @@ import NumberInput from '../Inputs/NumberInput';
 import MatrixEntry from '../Inputs/MatrixEntry';
 import Container from '../Container';
 import Title from '../Title';
-import APIService from '../api/APIService';
+import StandardFAPIService from '../api/StandardFAPIService';
 import 'katex/dist/katex.min.css';
-import { BlockMath } from 'react-katex'; 
-import renderLatexMatrix from "../LatexRender"
+
+
+
+const Description = `
+  the Calculator will add two matrices item by item where the result and 
+  the input matricies will be the same size
+`
 
 const AddMatrices = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [matrix2,setMatrix2] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
-  const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
+  // //const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
 
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
@@ -39,8 +44,8 @@ const AddMatrices = () => {
     setMatrix2(temp)
   }
   const handleSubmit = () =>{
-      APIService.addMatricies({matrix1,matrix2})
-      .then((response) => {setresultMatrix(response["output"]);setoutput(" ")})
+    StandardFAPIService.addMatricies({matrix1,matrix2})
+      .then((response) => {setoutput(response["output"])})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -76,9 +81,13 @@ const AddMatrices = () => {
     }
     setMatrix1(temp1)
     setMatrix2(temp2)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sizeX,sizeY]);
   return (
     <div>
+        <Title title={"Description"}/>
+        <Container title={"Function Description"} content={ Description}/>
+        
         <Title title={"Inputs"}/>
 
         <Container title={"The Size of the Matrices"} content={
@@ -109,12 +118,8 @@ const AddMatrices = () => {
         <>
         <Title title={"Output"}/>
 
-        <Container title={"Results"} content={
-            <>
-                <BlockMath math={"A = " + renderLatexMatrix(matrix1) +
-                 "+ B = " +renderLatexMatrix(matrix2) +" = "+ 
-                 renderLatexMatrix(resultMatrix) }/>
-            </>
+        <Container title={"Results"} mathcontent={
+            output
         }/>
         </>
         }

@@ -1,11 +1,47 @@
-* {
+/* * {
     font-family: 'Inter', sans-serif;
-    /* padding: 0;
-    margin: 0; */
+    padding: 0;
+    margin: 0;
+} */
+
+.intro-title-A,
+.objective-title,
+.team-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800 !important;
+    -webkit-font-smoothing: antialiased;
+    /* font-family: "roboto_semi" !important; */
+    font-size: 4rem;
+    /* font-weight: 300; */
+    color: #116A7B;
+    color: #262626;
+    line-height: 125%;
+    padding-left: 0.5em;
+}
+
+.objshape {
+    /* position: absolute; */
+    width: 40px;
+    height: 40px;
+    /* margin-top: -45px; */
+    z-index: -1;
+    background-color: #116A7B;
+    clip-path: polygon(0 0, 85% 0, 100% 100%, 15% 100%);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    clip-path: polygon(50% 0%, 100% 38%, 100% 100%, 50% 100%, 0% 38%);
+    clip-path: polygon(0 0, 50% 0, 100% 50%, 50% 100%, 0 100%, 25% 50%);
+    margin-right: 10px;
+}
+
+.mmbcont {
+    width: 20%;
 }
 
 @media (max-width: 1000px) {
     .intro-img {
         display: none;
+    }
+    .mmbcont {
+        width: 50%;
     }
 }
