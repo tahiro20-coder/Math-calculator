@@ -517,15 +517,15 @@ def sigma(mat):
 
     S=np.zeros(mat.shape)
     p=mat.T@mat
-    λ=egen_valeus(p)
-    LatexText += Container(emph("the Singular values are calculated as following : ")+"\sigma_k = \sqrt{{\lambda_k}} "+emph("where ")+"k = 1\\dots"+str(len(λ)))
+    f=egen_valeus(p)
+    LatexText += Container(emph("the Singular values are calculated as following : ")+"\sigma_k = \sqrt{{\lambda_k}} "+emph("where ")+"k = 1\\dots"+str(len(f)))
     if mat.shape[0]==mat.shape[1]:
-         for i in range(len(λ)):
-            S[i,i]=sqrt(λ[i])
+         for i in range(len(f)):
+            S[i,i]=sqrt(f[i])
     else:
-         for i in range(len(λ)):
-            if float(λ[i])>0.01:
-                S[i,i]=sqrt(λ[i])
+         for i in range(len(f)):
+            if float(f[i])>0.01:
+                S[i,i]=sqrt(f[i])
     LatexText += Container(emph("From there we have ")+"\\Sigma = "+bmatrix(S))
     return S,LatexText
 def typ_float(mat):
