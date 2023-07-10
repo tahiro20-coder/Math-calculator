@@ -4,6 +4,6 @@ Flask_RESTful==0.3.10
 fonttools==4.37.4
 numpy==1.21.6
 Requests==2.31.0
-scipy==1.11.1
+scipy==1.7.3
 sympy==1.11.1
 gunicorn==19.7.1
