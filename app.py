@@ -15,7 +15,7 @@ from scripts.scp import functo
 import sys
 
 app = Flask(__name__, static_url_path='', static_folder='fronted/build')
-CORS(app) #comment this on deployment
+#CORS(app) #comment this on deployment
 api = Api(app)
 
 @app.route("/", defaults={'path':''})
