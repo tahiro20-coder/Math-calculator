@@ -1,7 +1,7 @@
 export default class APIService {
     // Insert an article
     static add(body) {
-        return fetch(`http://localhost:5000/add`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/add`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -12,7 +12,7 @@ export default class APIService {
             .catch(error => console.log(error))
     }
     static addMatricies(content) {
-        return fetch(`http://localhost:5000/addMatricies`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/addMatricies`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'

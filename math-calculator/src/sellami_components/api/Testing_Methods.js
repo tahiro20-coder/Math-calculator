@@ -1,6 +1,6 @@
 export default class Testing_Methods {
     static Diagonizable(content) {
-        return fetch(`http://localhost:5000/Diagonizable`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Diagonizable`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -11,7 +11,7 @@ export default class Testing_Methods {
             .catch(error => console.log(error))
     }
     static Convexity(content) {
-        return fetch(`http://localhost:5000/Convexity`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Convexity`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -22,7 +22,7 @@ export default class Testing_Methods {
             .catch(error => console.log(error))
     }
     static Invertibility(content) {
-        return fetch(`http://localhost:5000/Invertibility`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Invertibility`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ export default class Testing_Methods {
             .catch(error => console.log(error))
     }
     static Orthogonality(content) {
-        return fetch(`http://localhost:5000/Orthogonality`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Orthogonality`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ export default class Testing_Methods {
             .catch(error => console.log(error))
     }
     static Independency(content) {
-        return fetch(`http://localhost:5000/Independency`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Independency`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -1,6 +1,6 @@
 export default class MatrixFund {
     static Inverse_matrix(content) {
-        return fetch(`http://localhost:5000/Inverse_matrix`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Inverse_matrix`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -11,7 +11,7 @@ export default class MatrixFund {
             .catch(error => console.log(error))
     }
     static Transpose(content) {
-        return fetch(`http://localhost:5000/Transpose`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Transpose`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -22,7 +22,7 @@ export default class MatrixFund {
             .catch(error => console.log(error))
     }
     static Trace(content) {
-        return fetch(`http://localhost:5000/Trace`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Trace`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ export default class MatrixFund {
             .catch(error => console.log(error))
     }
     static Determinant(content) {
-        return fetch(`http://localhost:5000/Determinant`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Determinant`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ export default class MatrixFund {
             .catch(error => console.log(error))
     }
     static Angle(content) {
-        return fetch(`http://localhost:5000/Angle`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Angle`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ export default class MatrixFund {
             .catch(error => console.log(error))
     }
     static Projection(content) {
-        return fetch(`http://localhost:5000/Projection`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Projection`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ export default class MatrixFund {
             .catch(error => console.log(error))
     }
     static Affine_Projection(content) {
-        return fetch(`http://localhost:5000/Affine_Projection`, {
+        return fetch(`https://easy-algebra-backend.onrender.com/Affine_Projection`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
