@@ -1,7 +1,7 @@
 import '../src/Styles/App.css';
 import "./Styles/Fonts.css";
-import Header from './Taher_components/Header.js';
-import Footer from './Taher_components/Footer.js';
+import Header from '../src/Taher_components/Header';
+import Footer from '../src/Taher_components/Footer';
 import PageContent from './Taher_components/PageContent.js';
 import React from 'react'
 
