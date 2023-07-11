@@ -3,6 +3,7 @@ export default class StandardFAPIService {
     static addMatricies(content) {
         return fetch(`https://easy-algebra-backend.onrender.com/addMatricies`, {
                 'method': 'POST',
+                mode: "cors",
                 headers: {
                     'Content-Type': 'application/json'
                 },
