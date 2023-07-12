@@ -11,16 +11,16 @@ import Matrix_Decomposition from '../api/Matrix_Decomposition';
 const Description = `
 
 \\textit{The Singular Value Decomposition is a matrix decomposition
-that can be applied to any matrix} A ∈ R^{m×n}.\\textit{ It is a
+that can be applied to any matrix} \\; A ∈ R^{m×n}.\\textit{ It is a
 decomposition of the form}\\\\
 
 A = U.Σ.V^T
 \\textit{
-Where}
-U ∈ R^{m×m}\\textit{ is an orthogonal matrix with columns} u_i, i = 1..m,
-\\textit{and an orthogonal matrix } V ∈ R^{n×n}
-\\textit{ with columns} v_j, j = 1..n.\\textit{ While} Σ ∈ R^{m×n}
-\\textit{ such that} Σ_{ii}= σ_i ≥ 0\\textit{ and} Σ_{ij} = 0 \\textit{ for} i \\neq j
+Where} \\;
+U ∈ R^{m×m}\\textit{ is an orthogonal matrix with columns} \\; u_i, i = 1..m,
+\\textit{and an orthogonal matrix }\\; V ∈ R^{n×n}
+\\textit{ with columns} \\; v_j, j = 1..n.\\textit{ While}\\; Σ ∈ R^{m×n}
+\\textit{ such that}\\; Σ_{ii}= σ_i ≥ 0\\textit{ and}\\; Σ_{ij} = 0 \\textit{ for} \\; i \\neq j
 `
 
 const SVD = () => {

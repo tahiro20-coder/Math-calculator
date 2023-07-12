@@ -5,16 +5,16 @@ import Container from '../Container';
 import Title from '../Title';
 import Norms from '../api/Norms';
 import 'katex/dist/katex.min.css';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
 \\Vert A \\Vert_1 = \\max_{1 \\leq j \\leq n} \\left(\\sum_{i=1}^{n} \\vert a_{ij}\\vert \\right) \\\\
 
 \\textit{(the maximum absolute column sum). Put simply we sum the absolute values down each column
-    and then take the biggest answer.\\\\for more : \\\\ https://nucinkis-lab.cc.ic.ac.uk/HELM/workbooks/workbook\\_30/30\\_4\\_matrx\\_norms.pdf}
+    and then take the biggest answer. }
 `
-
+const link = "https://nucinkis-lab.cc.ic.ac.uk/HELM/workbooks/workbook_30/30_4_matrx_norms.pdf"
 const One_norm = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -69,7 +69,9 @@ const One_norm = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

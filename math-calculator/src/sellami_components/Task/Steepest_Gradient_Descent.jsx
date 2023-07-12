@@ -19,7 +19,7 @@ const Description = `
 J(x) = \\frac{1}{2}⟨A x, x⟩ − ⟨b, x⟩ + c\\\\
 
 
-\\textit{with }A ∈ R^{n×n} \\textit{symetric definite positive matrix ,} b ∈ R^n \\textit{and} c ∈ R.\\\\
+\\textit{with }A ∈ R^{n×n} \\textit{symetric definite positive matrix ,} b ∈ R^n \\textit{and} \\; c ∈ R.\\\\
 
 
 `

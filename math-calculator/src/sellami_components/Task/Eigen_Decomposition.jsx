@@ -5,21 +5,20 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Matrix_Decomposition from '../api/Matrix_Decomposition';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
       
       \\textit{ Let A be a square n × n matrix with n linearly independent eigenvectors qi 
-      (where i = 1, ..., n). Then A can be factorized as}
+      (where i = 1, ..., n). Then A can be factorized as} \\\\ 
        \\mathbf{A}=\\mathbf{Q}\\mathbf{\\Lambda}\\mathbf{Q}^{-1} 
        \\textit{where Q is the square n × n matrix whose ith column is the eigenvector qi of A, 
         and Λ is the diagonal matrix whose diagonal elements are the corresponding eigenvalues,}
         Λ_{ii} = λ_i \\\\ \\textit{-Note that only diagonalizable matrices can be factorized in this way.}
-        \\textit{\\\\for more : \\\\https://en.wikipedia.org/wiki/Eigendecomposition\\_of\\_a\\_matrix}
         
 `
-
+const link = "https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix"
 const Eigen_Decomposition = () => {
     const [sizeX,setSizeX] = useState(2)
     const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
@@ -72,7 +71,9 @@ const Eigen_Decomposition = () => {
     return (
       <div>
           <Title title={"Description"}/>
-          <Container title={"Function Description"} mathcontent={ Description}/>
+          <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
           
           <Title title={"Inputs"}/>
   

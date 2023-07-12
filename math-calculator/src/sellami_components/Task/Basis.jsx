@@ -5,22 +5,22 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Echelon from '../api/Echelon';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
 
 
-\\textit{ a set } B \\textit{ is a basis if its elements are **linearly independent** 
-and every element of} V \\textit{ is a **linear combination of elements of B**. In other words, 
-a **basis is a linearly independent spanning set**.}\\\\
-\\textit{ It means that $V$ can we spanned by} B. \\\\
-\\textit{ To get} B \\textit{ you need to do a gussian elemination to} V 
-\\textit{ where the pivot columns are the elments of} B .
-\\textit{\\\\for more : \\\\https://en.wikipedia.org/wiki/Basis\\_(linear\\_algebra)}
+\\textit{ a set } B \\textit{ is a basis if its elements are \\textbf{linearly independent}
+and every element of} \\;  V \\textit{ is a \\textbf{linear combination of elements of B}. In other words, 
+a \\textbf{basis is a linearly independent spanning set}.}\\\\
+\\textit{ It means that V can we spanned by} \\, B. \\\\
+\\textit{ To get} \\, B \\textit{ you need to do a gussian elemination to} \\; V 
+\\textit{ where the pivot columns are the elments of} \\, B .
 
 
 `
+const link = "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
 
 const Basis = () => {
   const [sizeX,setSizeX] = useState(2)
@@ -76,7 +76,9 @@ const Basis = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

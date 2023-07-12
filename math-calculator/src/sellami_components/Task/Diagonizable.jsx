@@ -4,7 +4,7 @@ import MatrixEntry from '../Inputs/MatrixEntry';
 import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
-
+import Reference from '../Inputs/Reference';
 import Testing_Methods from '../api/Testing_Methods';
 
 
@@ -12,19 +12,17 @@ const Description = `
 
 
 \\textit{In linear algebra, a square matrix}
-A \\textit{is called **diagonalizable** or **non-defective** if it is similar 
+A \\textit{is called \\textbf{diagonalizable} or \\textbf{non-defective} if it is similar 
     to a diagonal matrix, i.e., if there exists an invertible matrix 
 }P\\textit{ and a diagonal matrix }D\\textit{ such that }{\\displaystyle P^{-1}AP=D}, 
-\\textit{ or equivalently} {\\displaystyle A=PDP^{-1}}.\\textit{ (Such P, D are not unique.)
-**Diagonalization** is the process of finding the above} P\\textit{ and }D.
+\\textit{ or equivalently} \\; {\\displaystyle A=PDP^{-1}}.\\textit{ (Such P, D are not unique.)
+  \\textbf{Diagonalization} is the process of finding the above} P\\textit{ and }D.
 
 
-
-\\textit{\\\\for more : \\\\ https://en.wikipedia.org/wiki/Diagonalizable\\_matrix}
 
 
 `
-
+const link = "https://en.wikipedia.org/wiki/Diagonalizable_matrix"
 const Diagonizable = () => {
   const [sizeX,setSizeX] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
@@ -77,7 +75,9 @@ const Diagonizable = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

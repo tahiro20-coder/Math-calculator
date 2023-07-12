@@ -5,24 +5,23 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Echelon from '../api/Echelon';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
 
 \\textit{In mathematics, the kernel of a linear map, also known as the null space or nullspace, 
 is the linear subspace of the domain of the map which is mapped to the zero vector. 
-That is, given a linear map L : V → W between two vector spaces V and W, the kernel of
+That is, given a linear map } \\\\ \\textit{L : V → W between two vector spaces V and W, the kernel of
  L is the vector space of all elements v of V such that L(v) = 0, where 0 denotes the 
  zero vector in W, or more symbolically:}\\\\
 
 
 {\\displaystyle \\ker(L)=\\left\\{\\mathbf {v} \\in V\\mid L(\\mathbf {v} )=\\mathbf {0} \\right\\}=L^{-1}(0).}
 
-\\textit{\\\\for more : \\\\https://en.wikipedia.org/wiki/Kernel\\_(linear\\_algebra)}
 
 `
-
+const link="https://en.wikipedia.org/wiki/Kernel_(linear_algebra)"
 const Kernel = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -77,7 +76,9 @@ const Kernel = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

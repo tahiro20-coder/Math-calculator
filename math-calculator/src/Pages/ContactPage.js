@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
-
-
+import Container from 'react-bootstrap/Container';
+import "../Styles/ContactPage.css"
 function ContactPage(){
     const [formStatus, setFormStatus] = useState('Send')
     const form = useRef();
@@ -31,7 +31,19 @@ function ContactPage(){
         
     }
     return(
-      <div className="container-xxl mt-5" style={{height:"60.2%"}}>
+      <div>
+      <Container fluid="xxl" className='CPT'>
+          <div className="CPTTitle">
+            Contact Us
+          </div>
+          <div className='CPTdesc'>
+            Here you can send us your feedback, problems, sujessions and anything you want to tell us about
+            feel free and write what ever you want to say we will read it later.
+          </div>
+        </Container>
+      <div className="container-xxl mt-5 main-ctp"  style={{height:"fit-content"}}>
+        
+
       <h2 className="mb-3">Please feel free to give your feedback:</h2>
       <form ref={form} onSubmit={onSubmit}>
         <div className="mb-3">
@@ -63,7 +75,7 @@ function ContactPage(){
         </button>
       </form>
     </div>
-
+    </div>
     );
 }
 

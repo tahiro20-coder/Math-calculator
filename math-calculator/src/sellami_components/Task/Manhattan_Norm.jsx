@@ -5,16 +5,16 @@ import Container from '../Container';
 import Title from '../Title';
 import Norms from '../api/Norms';
 import 'katex/dist/katex.min.css';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
 \\Vert x \\Vert_1 = \\sum_{i=1}^n\\vert x_i \\vert \\\\
 
 \\textit{The L¹ norm is defined as the sum of the absolute values of the components of a given vector.
-    \\\\for more : \\\\ https://builtin.com/data-science/vector-norms}
+  }
 `
-
+const link = "https://builtin.com/data-science/vector-norms"
 const Manhattan_Norm = () => {
   const [sizeY,setSizeY] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(1).fill(0)))
@@ -63,7 +63,9 @@ const Manhattan_Norm = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

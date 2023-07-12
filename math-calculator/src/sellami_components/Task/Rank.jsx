@@ -17,7 +17,7 @@ This, in turn, is identical to the dimension of the vector space spanned by its 
  There are multiple equivalent definitions of rank. A matrix's rank is one of its most 
  fundamental characteristics.}\\\\
 
- \\textit{The rank is commonly denoted by} rank(A)\\textit{ or }rk(A); 
+ \\textit{The rank is commonly denoted by} \\; rank(A)\\textit{ or }rk(A); 
  \\textit{sometimes the parentheses are not written, as in} rank A.
 `
 

@@ -27,7 +27,7 @@ function DropDownMenu ({selected}){
     "Inverse_matrix" : "Matrix Inverse",
     "Trace" : "Trace",
     "Determinant" : "Determinant",
-    "Gaussian_Elm" : "Gaussian_Elimination",
+    "Gaussian_Elm" : "Gaussian Elimination",
     "Basis" : "Basis Extraction",
     "Kernel" : "Null Space",
     "Rank" : "Rank",
@@ -63,7 +63,7 @@ function DropDownMenu ({selected}){
         <Dropdown className='w-100 '>
         <Dropdown.Toggle className=' dropdown_btn' variant="success" id="dropdown-basic">
             {
-              selected == null ? "What to do ? " : TitleList[selected]
+              selected == null ? "Choose a Function " : TitleList[selected]
             }
             
         </Dropdown.Toggle>
@@ -71,7 +71,12 @@ function DropDownMenu ({selected}){
         <Dropdown.Menu className='dropdown_menu'>
         {Object.entries(TitleList).map(([keyV, value])=>{
           return <Dropdown.Item key={keyV}  className={selected===keyV? "active" : ""} >
-          <Link to={'/Calculator/'+keyV} className='d-flex w-100'>{value}</Link>
+          <Link to={'/Calculator/'+keyV} className='d-flex w-100'>
+            <span>
+            {value}
+            </span>
+
+          </Link>
           </Dropdown.Item>
         })}
 {/*         

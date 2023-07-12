@@ -4,7 +4,7 @@ import MatrixEntry from '../Inputs/MatrixEntry';
 import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
-
+import Reference from '../Inputs/Reference';
 import Testing_Methods from '../api/Testing_Methods';
 
 
@@ -20,19 +20,18 @@ optimization algorithms.\\\\
 we use the Theorem:\\\\}
 
 
-\\textit{*   f is **convex** if and only if} ∇^{2}f(x)\\textit{ is **positive semi definite** for all} x ∈ dom f\\\\
+\\textit{   f is \\textbf{convex} \\; if and only if} \\; ∇^{2}f(x)\\textit{ is \\textbf{positive semi definite} \\; for all} \\; x ∈ dom f\\\\
 
-\\textit{*   If} ∇^{2}f(x)\\textit{ is **positive definite** for all} x ∈ dom f\\textit{ then }f \\textit{is **strictly convex**.}\\\\
+\\textit{   If} \\; ∇^{2}f(x)\\textit{ is \\textbf{positive definite} for all} \\; x ∈ dom f\\textit{ then } f \\textit{is \\textbf{strictly convex}.}\\\\
 
 
 
-\\textit{To tell wheither the function is convex or not by calculating the eignvalues of }∇^{2}f(x)\\\\
+\\textit{To tell wheither the function is convex or not by calculating the eignvalues of } \\; ∇^{2}f(x)\\\\
 
-\\textit{resource: K.Boanan cours}
 
 
 `
-
+const link = "K.Boanan cours"
 const Convexity = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -87,7 +86,9 @@ const Convexity = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

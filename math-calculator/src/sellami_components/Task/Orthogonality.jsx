@@ -5,23 +5,23 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Testing_Methods from '../api/Testing_Methods';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
 
 
-\\textit{ a set } B \\textit{ is a Orthogonality if its elements are **linearly independent** 
-and every element of} V \\textit{ is a **linear combination of elements of B**. In other words, 
-a **Orthogonality is a linearly independent spanning set**.}\\\\
-\\textit{ It means that }V\\textit{  can we spanned by} B. \\\\
-\\textit{ To get} B \\textit{ you need to do a gussian elemination to} V 
-\\textit{ where the pivot columns are the elments of} B .
-\\textit{\\\\for more : \\\\https://en.wikipedia.org/wiki/Orthogonality\\_(linear\\_algebra)}
+\\textit{ a set } B \\textit{ is a Orthogonality if its elements are \\textbf{linearly independent}
+and every element of} \\; V \\textit{ is a \\textbf{linear combination of elements of B}. In other words, 
+a \\textbf{Orthogonality is a linearly independent spanning set}.}\\\\
+\\textit{ It means that }V\\textit{  can we spanned by} \\; B. \\\\
+\\textit{ To get} \\; B \\textit{ you need to do a gussian elemination to} \\; V 
+\\textit{ where the pivot columns are the elments of}\\; B .
+
 
 
 `
-
+const link = "https://en.wikipedia.org/wiki/Orthogonality_(linear_algebra)"
 const Orthogonality = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -76,7 +76,9 @@ const Orthogonality = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

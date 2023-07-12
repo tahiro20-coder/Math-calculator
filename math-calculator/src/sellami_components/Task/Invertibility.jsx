@@ -6,32 +6,31 @@ import Title from '../Title';
 import 'katex/dist/katex.min.css';
 
 import Testing_Methods from '../api/Testing_Methods';
-
+import Reference from '../Inputs/Reference';
 
 const Description = `
 
-\\textit{In linear algebra, an $n$-by-$n$ square matrix }A\\textit{ is called **invertible** 
+\\textit{In linear algebra, an $n$-by-$n$ square matrix }A\\textit{ is called \\textbf{invertible}
 (also nonsingular, nondegenerate or (rarely used) regular), if there exists 
-an} n\\textit{-by-}n\\textit{ square matrix $B$ such that:}\\\\
+an} \\; n\\textit{-by-}n\\textit{ square matrix B such that:}\\\\
 {\\displaystyle \\mathbf {AB} =\\mathbf {BA} =\\mathbf {I} _{n},}\\\\
 
-\\textit{Matrix **inversion** is the process of finding the matrix } B\\textit{ that 
+\\textit{Matrix \\textbf{inversion} is the process of finding the matrix } B\\textit{ that 
 satisfies the prior equation for a given invertible matrix }A.\\\\
 
-\\textit{**Notice:**}\\\\
+\\textit{\\textbf{Notice:}}\\\\
 \\textit{An invertible matrix has proprties that satisfies and we use one of 
-them to check if a matrix is **invertible or not** we use : }\\\\
+them to check if a matrix is \\textbf{invertible or not} we use : }\\\\
 
 
-\\textit{*    The determinant of }A\\textit{ is nonzero: det }A ≠ 0.\\textit{ (In general, a 
+\\textit{    The determinant of }A\\textit{ is nonzero: det }A ≠ 0.\\textit{ (In general, a 
     square matrix over a commutative ring is invertible if and only if its 
     determinant is a unit in that ring.)}
 
-\\textit{\\\\for more : \\\\ https://en.wikipedia.org/wiki/Invertible\\_matrix}
 
 
 `
-
+const link = "https://en.wikipedia.org/wiki/Invertible_matrix"
 const Invertibility = () => {
   const [sizeX,setSizeX] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
@@ -84,7 +83,9 @@ const Invertibility = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

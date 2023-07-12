@@ -5,26 +5,25 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Echelon from '../api/Echelon';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
 \\textit{A solution of a linear system is an assignment of values to the variables }
 {x_1, x_2, ..., x_n}\\textit{ such that each of the equations is satisfied. 
-The set of all possible solutions is called the **solution set**.}\\\\
+The set of all possible solutions is called the \\textbf{solution set}.}\\\\
 
 \\textit{A linear system may behave in any one of three possible ways:}\\\\
 
 
 
-\\textit{1.   The system has infinitely many solutions (**General solution**).\\\\
-2.   The system has a single unique solution (**Particular Solution**).\\\\
-3.   The system has no solution.}
+\\textit{1.   The system has infinitely many solutions (\\textbf{General solution}).}\\\\
+\\textit{2.   The system has a single unique solution (\\textbf{Particular Solution}).}\\\\
+\\textit{3.   The system has no solution.}
 
-\\textit{For More : \\\\ https://en.wikipedia.org/wiki/System\\_of\\_linear\\_equations}
 
 `
-
+const link = "https://en.wikipedia.org/wiki/System_of_linear_equations"
 const Particular_Solution = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -112,7 +111,9 @@ const Particular_Solution = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

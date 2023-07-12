@@ -5,30 +5,29 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Echelon from '../api/Echelon';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
 
-\\textit{We can use the **LU decomposition** to solve linear systems}
+\\textit{We can use the \\textbf{LU decomposition} to solve linear systems} \\\\
 {Ax = LUx = b},\\textit{ as follows:}\\\\
 
 
 \\textit{1.   Solve the linear system }{Ly = b},\\\\
 \\textit{2.   Solve the linear system }{Ux = y}.\\\\
 
-\\textit{**Notice:**\\\\
+\\textit{\\textbf{Notice:}\\\\
 LU factorization is very effective and cheap method
 (computationally), especially when solving different linear
 systems that are associated with the same matrix A (coefficient matrix).}\\\\
 
 {AX = B ⇐⇒ LUX = B}\\\\
 
-resource : K.Boanan Cours
 
 
 `
-
+const link ="K.Boanan Cours"
 const LU_Solv = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -116,7 +115,9 @@ const LU_Solv = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

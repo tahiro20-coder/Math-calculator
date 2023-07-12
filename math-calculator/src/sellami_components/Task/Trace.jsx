@@ -6,21 +6,20 @@ import Title from '../Title';
 import MatrixFund from '../api/MatrixFund';
 import 'katex/dist/katex.min.css';
 
-
+import Reference from '../Inputs/Reference';
 
 const Description = `
 
-tr(A)= \\sum_{i=1}^n a_{ii}
+tr(A)= \\sum_{i=1}^n a_{ii} \\\\
 
 
 \\textit{In linear algebra, the trace of a square matrix A,
 denoted tr(A) is defined to be the sum of elements on the main diagonal
 (from the upper left to the lower right) of A. The trace is only defined for a square matrix (n × n).}
 
-      \\textit{\\\\for more : \\\\https://en.wikipedia.org/wiki/Trace\\_(linear\\_algebra)}
       
 `
-
+const link = "https://en.wikipedia.org/wiki/Trace_(linear_algebra)"
 const Trace = () => {
     const [sizeX,setSizeX] = useState(2)
     const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
@@ -73,7 +72,9 @@ const Trace = () => {
     return (
       <div>
           <Title title={"Description"}/>
-          <Container title={"Function Description"} mathcontent={ Description}/>
+          <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
           
           <Title title={"Inputs"}/>
   

@@ -5,7 +5,7 @@ import Container from '../Container';
 import Title from '../Title';
 import Norms from '../api/Norms';
 import 'katex/dist/katex.min.css';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
@@ -13,9 +13,9 @@ const Description = `
 
 \\textit{(the square root of the sum of all the squares). This is similar to ordinary “Pythagorean” length
 where the size of a vector is found by taking the square root of the sum of the squares of all the
-elements.\\\\for more : \\\\ https://nucinkis-lab.cc.ic.ac.uk/HELM/workbooks/workbook\\_30/30\\_4\\_matrx\\_norms.pdf}
+elements.}
 `
-
+const link = "https://nucinkis-lab.cc.ic.ac.uk/HELM/workbooks/workbook_30/30_4_matrx_norms.pdf"
 const Euclidean_Norm = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -70,7 +70,9 @@ const Euclidean_Norm = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 
