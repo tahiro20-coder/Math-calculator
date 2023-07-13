@@ -11,6 +11,7 @@ import BBH from "../Images/BBH.jpg";
 import Islam from "../Images/Islam.jpg";
 import Seif from "../Images/Seif.jpg";
 import BN from "../Images/BN.jpg";
+import ML from "../Images/ML.jpg";
 import {CgShapeRhombus} from "react-icons/cg";
 import { Avatar } from '@mui/material';
 
@@ -97,6 +98,12 @@ const project_members = [
         role:'Frontend developer',
         img:BN,
         fb_link:"https://www.facebook.com/mohamed.habireh",
+    },
+    {
+        name:"Mohammed Amine",
+        role:"Quality Assurance Tester",
+        img:ML,
+        fb_link:"https://www.facebook.com/100038859726527/",
     }
 
 ]
