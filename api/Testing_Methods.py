@@ -220,7 +220,7 @@ class Diagonizable(Resource):
 
         LatexText =  emph(" Your Input is ") +", A = "+ bmatrix(array) +"\\\\ \ \\\\"
         LatexText += emph('we check if the Matrix is Diagonizable or Not?')+'\\\\ \ \\\\'
-        LatexText += emph('1)- First Step Calculate the Eigen Values and The Eigen Space of Each Eigen Value and we Have:')+"\\\\ \ \\\\"
+        LatexText += emph('\\textbf{1) First Step Calculate the Eigen Values and The Eigen Space of Each Eigen Value and we Have:}')+"\\\\ \ \\\\"
 
         a = sp.Matrix(array)
         eigen_info = a.eigenvects()
@@ -237,21 +237,25 @@ class Diagonizable(Resource):
             multiciplty_geo[i] = egen_vects.shape[1]
 
 
-        LatexText +=emph('2)- Second Step We Find The Algebraic Multiplicity and The Geometric Multiplicity To Find out if the Matrix if defective or not?')
+        LatexText +=emph('\\textbf{2) Second Step We Find The Algebraic Multiplicity and The Geometric Multiplicity To Find out if the Matrix if defective or not?}')
         LatexText += '\\\\ \ \\\\'
-        for i in range(len(eigen_info)):
-            eigen_value = float(eigen_info[i][0])
-            LatexText += emph("The Algebraic Multiplicity is :")+'\mu_A'+"("+str(eigen_value)+') = '+str(multiciplty_alg[i])+emph(' / The Geometric Multiplicity is :  dim Ker (A −')+"("+str(eigen_value)+")"+'I) = '+str(multiciplty_geo[i])
-            LatexText += '\\\\ \ \\\\'
-            LatexText += Container(emph("The matrix is not defective so it is diagonizable "))
+        r = True
 
         for i in range(len(eigen_info)):
             if(multiciplty_alg[i]>multiciplty_geo[i]):
                 eigen_value = float(eigen_info[i][0])
                 LatexText += emph('We Have Now : ')+'\mu_A'+"("+str(eigen_value)+') '+emph('> dim Ker (A −')+"("+str(eigen_value)+")"+'I)'
                 LatexText += '\\\\ \ \\\\'
-                LatexText += Container(emph('The Matrix is defective so it not diagonizable '))
+                LatexText += Container(emph('\\textbf{The Matrix is defective so it not diagonizable} '))
+                r = False
+            if(r == False):
                 return {'output':LatexText,"result":[0]}   
+        
+        for i in range(len(eigen_info)):
+            eigen_value = float(eigen_info[i][0])
+            LatexText += emph("The Algebraic Multiplicity is :")+'\mu_A'+"("+str(eigen_value)+') = '+str(multiciplty_alg[i])+"\\\\"+emph('The Geometric Multiplicity is :  dim Ker (A −')+"("+str(eigen_value)+")"+'I) = '+str(multiciplty_geo[i])
+            LatexText += '\\\\ \ \\\\'
+        LatexText += Container(emph("\\textbf{The matrix is not defective so it is diagonizable} "))
 
         return {'output':LatexText,"result":[1]}   
 
@@ -280,7 +284,7 @@ class Convexity(Resource):
         LatexText =  emph(" Your Input is ") +", A = "+ bmatrix(A) +"\\\\ \ \\\\"
 
 
-        LatexText += Container(emph("to check the function convexity we should calculate the eigen values of the matrix A"))
+        LatexText += Container(emph("\\textbf{1) to check the function convexity we should calculate the eigen values of the matrix A}"))
 
         eigen_values = HeisenBerge_EigenValues_Algorithm(A)
         eigen_values[abs(eigen_values) < tol] = 0.0
@@ -288,18 +292,18 @@ class Convexity(Resource):
 
         if((eigen_values > 0).all()):
             LatexText += Container(emph("All The Eigen Values Are Strictly Larger then 0"))
-            LatexText += Container(emph("Then The matrix A is definite positive and The Function F is a Strictly Convex function "))
+            LatexText += Container(emph("\\textbf{Then The matrix A is definite positive and The Function F is a Strictly Convex function} "))
             return {'output':LatexText,"result":[2]}   
         elif((eigen_values >= 0).all()):
             LatexText += Container(emph("All The Eigen Values Are Larger or equale to 0"))
-            LatexText += Container(emph("Then The matrix A is semidifinte positive and The Function F is a Convex function "))
+            LatexText += Container(emph("\\textbf{Then The matrix A is semidifinte positive and The Function F is a Convex function} "))
             return {'output':LatexText,"result":[1]}   
         else:
             LatexText += Container(emph("Since there exist a eigen values less then 0 where "))
             for i in range(eigen_values.size):
                 if(eigen_values<0):
                     LatexText += f"\\circ  \\lambda_{i} = {eigen_values[i]} < 0"
-            LatexText += Container(emph("Then The matrix A is not positive and The Function F is not a Convex function "))
+            LatexText += Container(emph("\\textbf{Then The matrix A is not positive and The Function F is not a Convex function }"))
             return {'output':LatexText,"result":[0]}   
 
 def calc_det(Matrix):
@@ -361,16 +365,16 @@ class Invertibility(Resource):
 
         LatexText =  emph(" Your Input is ") +", A = "+ bmatrix(A) +"\\\\ \ \\\\"
         a,ls = form_determinant(A)
-        LatexText += Container(emph("to check the Invertibility of the matrix we should calculate the determinant of it where"))
+        LatexText += Container(emph("\\textbf{1) to check the Invertibility of the matrix we should calculate the determinant of it where}"))
         LatexText += ls
         if(a == "error"):
             LatexText += Container(emph("The input matrix is not square so it is not invertible"))
             return {'output':LatexText,"result":[-1]}   
         if(a== 0):
-            LatexText += Container(emph("The determinant is equal to 0 so The input matrix ")+bmatrix(A)+emph(" is not invertible"))
+            LatexText += Container(emph("The determinant is equal to 0 so The input matrix ")+bmatrix(A)+emph(" \\textbf{is not invertible}"))
             return {'output':LatexText,"result":[0]}   
         else:
-            LatexText += Container(emph("The determinant is ")+str(a)+emph(" we doesnt equal to 0 ,Therefor the matrix ")+bmatrix(A)+emph(" is invertible"))
+            LatexText += Container(emph("The determinant is ")+str(a)+emph(" we doesnt equal to 0 ,Therefor the matrix ")+bmatrix(A)+emph(" \\textbf{is invertible}"))
             return {'output':LatexText,"result":[1]}   
 class Orthogonality(Resource):
     def get(self):
@@ -389,15 +393,15 @@ class Orthogonality(Resource):
         for i in range(SubSpace.shape[1]):
             for j in range(i+1,SubSpace.shape[1]):
                 if(SubSpace[:,i]@ SubSpace[:,j] != 0):
-                    LatexText += Container(emph("after evaluating we find that the vector ")+bvector(SubSpace[:,i])+emph(" is not orthogonal with the vector ")+bvector(SubSpace[:,j]))
-                    LatexText += Container(emph("where the inner product between them is ")+str(SubSpace[:,i]@ SubSpace[:,j]))
-                    LatexText += Container(emph("Therefor, the Space is not othogonal "))
+                    LatexText += Container(emph("\\textbf{after evaluating we find that the vector} ")+bvector(SubSpace[:,i])+emph(" \\textbf{is not orthogonal with the vector} ")+bvector(SubSpace[:,j]))
+                    LatexText += Container(emph("\\textbf{where the inner product between them is} ")+str(SubSpace[:,i]@ SubSpace[:,j]))
+                    LatexText += Container(emph("\\textbf{Therefor, the Space is not othogonal} "))
                     tester = False
                     break
             if(tester is False):
                 break
         if(tester):
-            LatexText += Container(emph("After evaluation we find that all the basis are orthogonal ,Then the space is an Orthogonal space"))
+            LatexText += Container(emph("\\textbf{After evaluation we find that all the basis are orthogonal ,Then the space is an Orthogonal space}"))
         
         return {'output':LatexText,"result":[[tester]]}  
     
@@ -415,16 +419,16 @@ class Independency(Resource):
         U_Span = np.array(request.json["matrix1"])
 
         LatexText =  emph(" Your Input Subspace is ") +", U = span \\left ("+ bmatrix(U_Span) +" \\right )\\\\ \ \\\\"
-        LatexText += Container(emph("we will apply the Gaussian elimination on the space to check if there exist a kernel span"))
+        LatexText += Container(emph("\\textbf{1) we will apply the Gaussian elimination on the space to check if there exist a kernel span}"))
         U_reduced,ls = Apply_Gaussian_Elm(U_Span)
         Kernel = []
         for i in range(0,U_reduced.shape[1]):
             if(U_reduced[i,i] == 0): # this is a kernel
                 Kernel.append(U_Span[:,i])
-                LatexText += Container(emph("The vector ")+bvector(U_Span[:,i])+emph(" is dependent with one or more of the other subspace vectors "))
-                LatexText += Container(emph("So the vectors are lineary dependent"))
+                LatexText += Container(emph("\\textbf{The vector} ")+bvector(U_Span[:,i])+emph("\\textbf{ is dependent with one or more of the other subspace vectors} "))
+                LatexText += Container(emph("\\textbf{So the vectors are lineary dependent}"))
                 return {'output':LatexText,"result":[0]}  
-        LatexText += Container(emph("There is no dependent vectors, so all of the subspace vectors are lineary independent"))
+        LatexText += Container(emph("\\textbf{There is no dependent vectors, so all of the subspace vectors are lineary independent}"))
         return {'output':LatexText,"result":[1]}  
         
 

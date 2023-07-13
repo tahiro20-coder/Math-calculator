@@ -152,13 +152,13 @@ class Manhattan_Distance(Resource):
         LatexText = emph(" Your Input is ") +", A = "+ bmatrix(matrix_1) + "  \  , and \  B = "+ bmatrix(matrix_2) +"\\\\ \ \\\\"
         if (matrix_1.shape==matrix_2.shape):
             d= np.subtract(matrix_1,matrix_2)
-            LatexText += emph(" We subtract the matrix A from the matrix B ")
+            LatexText += emph("\\textbf{1) We subtract the matrix A from the matrix B }")
             LatexText += Container(" d = \\vert A - B \\vert = "+bmatrix(matrix_1)+" - "+bmatrix(matrix_2)+" = \\left \\vert "+bmatrix(d)+"\\right \\vert = "+bmatrix(abs(d)))
             d = abs(d)
-            LatexText += emph("Then we calculate the sum of the distance matrix d ")
+            LatexText += emph("\\textbf{2) Then we calculate the sum of the distance matrix d }")
             LatexText += Container("d_1(A,B) = \sum_{i=1}^n\sum_{j=1}^m d_{ij} = "+str(sum(sum(d))))
             d = sum(sum(d))
-            LatexText += Container(emph("Therefor the Manhattan Distance between the matrcies A and B is ")+str(d))
+            LatexText += Container(emph("\\textbf{Therefor the Manhattan Distance between the matrcies A and B is }")+"\\textbf{"+str(d)+"}")
             return {'output':LatexText,"result":d.tolist()}
         else:
             LatexText += emph("The input Matricies has different Sizes So its impossible to calculate the distance between them")
@@ -180,16 +180,16 @@ class Euclidean_Distance(Resource):
         LatexText = emph(" Your Input is ") +", A = "+ bmatrix(matrix_1) + "  \  , and \  B = "+ bmatrix(matrix_2) +"\\\\ \ \\\\"
         if (matrix_1.shape==matrix_2.shape):
             d= np.subtract(matrix_1,matrix_2)
-            LatexText += emph(" We subtract the matrix A from the matrix B ")
+            LatexText += emph("\\textbf{1) We subtract the matrix A from the matrix B} ")
             LatexText += Container(" d = \\vert A - B \\vert = "+bmatrix(matrix_1)+" - "+bmatrix(matrix_2)+" = \\left ( "+bmatrix(d)+"\\right )^2 = "+bmatrix(d**2))
             d = d**2
-            LatexText += emph("Then we calculate the sum of the distance matrix d ")
+            LatexText += emph("\\textbf{2) Then we calculate the sum of the distance matrix d }")
             LatexText += Container("d_2(A,B) =\sqrt{ \sum_{i=1}^n\sum_{j=1}^m d_{ij} } = \sqrt{ "+str(sum(sum(d)))+"} = "+str(np.sqrt(sum(sum(d)))))
             d = np.sqrt(sum(sum(d)))
-            LatexText += Container(emph("Therefor the Euclidean Distance between the matrcies A and B is ")+str(d))
+            LatexText += Container(emph("\\textbf{Therefor the Euclidean Distance between the matrcies A and B is }")+"\\textbf{"+str(d)+"}")
             return {'output':LatexText,"result":d.tolist()}   
         else:
-            LatexText += emph("The input Matricies has different Sizes So its impossible to calculate the distance between them")
+            LatexText += emph("\\textbf{The input Matricies has different Sizes So its impossible to calculate the distance between them}")
             return {'output':LatexText,"result":[-1]}   
 
 class Infinity_Distance(Resource):
@@ -208,16 +208,16 @@ class Infinity_Distance(Resource):
         LatexText = emph(" Your Input is ") +", A = "+ bmatrix(matrix_1) + "  \  , and \  B = "+ bmatrix(matrix_2) +"\\\\ \ \\\\"
         if (matrix_1.shape==matrix_2.shape):
             d= np.subtract(matrix_1,matrix_2)
-            LatexText += emph(" We subtract the matrix A from the matrix B ")
+            LatexText += emph("\\textbf{1) We subtract the matrix A from the matrix B} ")
             LatexText += Container(" d = \\vert A - B \\vert = "+bmatrix(matrix_1)+" - "+bmatrix(matrix_2)+" = \\left \\vert "+bmatrix(d)+"\\right \\vert = "+bmatrix(d**2))
             d = d**2
-            LatexText += emph("Then we calculate the sum of the distance matrix d ")
+            LatexText += emph("\\textbf{2) Then we calculate the sum of the distance matrix d }")
             LatexText += Container("d_\\infty(A,B) = \max_{1\leq i \leq n}\max_{1\leq j \leq m} d_{ij} = "+str(d.max()))
             d = d.max()
-            LatexText += Container(emph("Therefor the infinity Distance between the matrcies A and B is ")+str(d))
+            LatexText += Container(emph("\\textbf{Therefor the infinity Distance between the matrcies A and B is} ")+"\\textbf{"+str(d)+"}")
             return {'output':LatexText,"result":d.tolist()}   
         else:
-            LatexText += emph("The input Matricies has different Sizes So its impossible to calculate the distance between them")
+            LatexText += emph("\\textbf{The input Matricies has different Sizes So its impossible to calculate the distance between them}")
             return {'output':LatexText,"result":[-1]}   
 
 
@@ -238,16 +238,16 @@ class Manhattan_VDistance(Resource):
         LatexText = emph(" Your Input is ") +", A = "+ bvector(vector1) + "  \  , and \  B = "+ bvector(vector2) +"\\\\ \ \\\\"
         if (vector1.shape==vector2.shape):
             d= np.subtract(vector1,vector2)
-            LatexText += emph(" We subtract the vector A from the vector B ")
+            LatexText += emph("\\textbf{1) We subtract the vector A from the vector B}")
             LatexText += Container(" d = \\vert A - B \\vert = "+bvector(vector1)+" - "+bvector(vector2)+" = \\left \\vert "+bvector(d)+"\\right \\vert = "+bvector(abs(d)))
             d = abs(d)
-            LatexText += emph("Then we calculate the sum of the distance vector d ")
+            LatexText += emph("\\textbf{2) Then we calculate the sum of the distance vector d}")
             LatexText += Container("d_1(A,B) = \sum_{i=1}^n d_{i} = "+str(sum(d)))
             d = sum(d)
-            LatexText += Container(emph("Therefor the Manhattan Distance between the vectors A and B is ")+str(d))
+            LatexText += Container(emph("\\textbf{Therefor the Manhattan Distance between the vectors A and B is} ")+"\\textbf{"+str(d)+"}")
             return {'output':LatexText,"result":d.tolist()}  
         else:
-            LatexText += emph("The input Vectors has different Sizes So its impossible to calculate the distance between them")
+            LatexText += emph("\\textbf{The input Vectors has different Sizes So its impossible to calculate the distance between them}")
             return {'output':LatexText,"result":[-1]}   
          
 class Euclidean_VDistance(Resource):
@@ -266,16 +266,16 @@ class Euclidean_VDistance(Resource):
         LatexText = emph(" Your Input is ") +", A = "+ bvector(vector_1) + "  \  , and \  B = "+ bvector(vector_2) +"\\\\ \ \\\\"
         if (vector_1.shape==vector_2.shape):
             d= np.subtract(vector_1,vector_2)
-            LatexText += emph(" We subtract the vector A from the vector B ")
+            LatexText += emph("\\textbf{1) We subtract the vector A from the vector B }")
             LatexText += Container(" d = \\vert A - B \\vert = "+bvector(vector_1)+" - "+bvector(vector_2)+" = \\left ( "+bvector(d)+"\\right )^2 = "+bvector(d**2))
             d = d**2
-            LatexText += emph("Then we calculate the sum of the distance vector d ")
+            LatexText += emph("\\textbf{2) Then we calculate the sum of the distance vector d} ")
             LatexText += Container("d_2(A,B) =\sqrt{ \sum_{i=1}^n d_{i} } = \sqrt{ "+str(sum(d))+"} = "+str(np.sqrt(sum(d))))
             d = np.sqrt(sum(d))
-            LatexText += Container(emph("Therefor the Euclidean Distance between the matrcies A and B is ")+str(d))
+            LatexText += Container(emph("\\textbf{Therefor the Euclidean Distance between the matrcies A and B is }")+"\\textbf{"+str(d)+"}")
             return {'output':LatexText,"result":d.tolist()}  
         else:
-            LatexText += emph("The input Vectors has different Sizes So its impossible to calculate the distance between them")
+            LatexText += emph("\\textbf{The input Vectors has different Sizes So its impossible to calculate the distance between them}")
             return {'output':LatexText,"result":[-1]} 
           
        
@@ -295,16 +295,16 @@ class Infinity_VDistance(Resource):
         LatexText = emph(" Your Input is ") +", A = "+ bvector(vector_1) + "  \  , and \  B = "+ bvector(vector_2) +"\\\\ \ \\\\"
         if (vector_1.shape==vector_2.shape):
             d= np.subtract(vector_1,vector_2)
-            LatexText += emph(" We subtract the vector A from the vector B ")
+            LatexText += emph("\\textbf{1) We subtract the vector A from the vector B}")
             LatexText += Container(" d = \\vert A - B \\vert = "+bvector(vector_1)+" - "+bvector(vector_2)+" = \\left \\vert "+bvector(d)+"\\right \\vert = "+bvector(d**2))
             d = d**2
-            LatexText += emph("Then we calculate the sum of the distance vector d ")
+            LatexText += emph("\\textbf{2) Then we calculate the sum of the distance vector d }")
             LatexText += Container("d_\\infty(A,B) = \max_{1\leq i \leq n} d_{i} = "+str(d.max()))
             d = d.max()
-            LatexText += Container(emph("Therefor the infinity Distance between the matrcies A and B is ")+str(d))
+            LatexText += Container(emph("\\textbf{Therefor the infinity Distance between the matrcies A and B is} ")+"\\textbf{"+str(d)+"}")
             return {'output':LatexText,"result":d.tolist()}  
         else:
-            LatexText += emph("The input Matricies has different Sizes So its impossible to calculate the distance between them")
+            LatexText += emph("\\textbf{The input Matricies has different Sizes So its impossible to calculate the distance between them}")
             return {'output':LatexText,"result":[-1]}  
         
   

@@ -145,7 +145,7 @@ def form_check_diagonizable(array):
     np.set_printoptions(precision=3,suppress=true)
     LatexText = ""
     LatexText += emph('Now we check if the Matrix is Diagonizable or Not?')+'\\\\ \ \\\\'
-    LatexText += emph('1)- First Step Calculate the Eigen Values and The Eigen Space of Each Eigen Value and we Have:')+"\\\\ \ \\\\"
+    LatexText += emph('\\textbf{1) First Step Calculate the Eigen Values and The Eigen Space of Each Eigen Value and we Have:}')+"\\\\ \ \\\\"
 
     a = Matrix(array)
     eigen_info = a.eigenvects()
@@ -162,11 +162,11 @@ def form_check_diagonizable(array):
         multiciplty_geo[i] = egen_vects.shape[1]
 
 
-    LatexText +=emph('2)- Second Step We Find The Algebraic Multiplicity and The Geometric Multiplicity To Find out if the Matrix if defective or not?')
+    LatexText +=emph('\\textbf{2) Second Step We Find The Algebraic Multiplicity and The Geometric Multiplicity To Find out if the Matrix if defective or not?}')
     LatexText += '\\\\ \ \\\\'
     for i in range(len(eigen_info)):
         eigen_value = float(eigen_info[i][0])
-        LatexText += emph("The Algebraic Multiplicity is :")+'\mu_A'+"("+str(eigen_value)+') = '+str(multiciplty_alg[i])+emph(' / The Geometric Multiplicity is :  dim Ker (A −')+"("+str(eigen_value)+")"+'I) = '+str(multiciplty_geo[i])
+        LatexText += emph("The Algebraic Multiplicity is :")+'\mu_A'+"("+str(eigen_value)+') = '+str(multiciplty_alg[i])+"\\\\"+emph('The Geometric Multiplicity is :  dim Ker (A −')+"("+str(eigen_value)+")"+'I) = '+str(multiciplty_geo[i])
         LatexText += '\\\\ \ \\\\'
 
     for i in range(len(eigen_info)):
@@ -202,7 +202,7 @@ class Eigen_Decomposition(Resource):
         LatexText = LatexText+LatexString
         if(var_diagonizable == 0):
 
-            error_msg= emph('The Matrix is defective so it not diagonizable and can not use eigen decomposition')
+            error_msg= emph('\\textbf{The Matrix is defective so it not diagonizable and can not use eigen decomposition}')
             LatexText += error_msg
             return {'output':LatexText,"result":[0,0],"P":[0],"D":[0]}  
         else:
@@ -235,7 +235,7 @@ class LU(Resource):
         
         np.set_printoptions(suppress=True)
         LatexText = emph(" Your Input is , A = ") + bmatrix(a) +"\\\\ \ \\\\"
-        LatexText += emph("Insert Identity Matrix To L And A To U")+"\\\\ \ \\\\"
+        LatexText += emph("\\textbf{Initialize L with Identity Matrix  And assign U with A)}")+"\\\\ \ \\\\"
         l=np.eye(len(a)).astype(float)
         p=np.eye(len(a))
         u=a.copy().astype(float)
@@ -249,9 +249,9 @@ class LU(Resource):
                     if(j+k==len(a)):
                         LatexText += emph("Stop Because We Dont Have Any Non Zero Under Pivot Element U"+'['+str(j)+','+str(j)+']')+"\\\\ \ \\\\"
                         if 0 not in p.diagonal():
-                            LatexText += emph("Result:")+"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
+                            LatexText += emph("\\textbf{Result:}")+"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
                         else:
-                            LatexText += emph("Result:")+"\\\\ \ \\\\"+emph("P = ")+bmatrix(p) +"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
+                            LatexText += emph("\\textbf{Result:}")+"\\\\ \ \\\\"+emph("P = ")+bmatrix(p) +"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
                         return {'output':LatexText,"result":[l.tolist(),u.tolist(),p.tolist()],"l":l.tolist(),"u":u.tolist(),"p":p.tolist()} 
                 if 0 not in p.diagonal():
                     LatexText += emph("Create And Insert Identity Matrix To Permutation Matrix P")+'\\\\ \ \\\\'
@@ -278,9 +278,9 @@ class LU(Resource):
                 LatexText += emph("U = ")+bmatrix(u)+'\\\\ \ \\\\'
         LatexText += emph("There Is No Other Element Non Zero Under The Diagonal In U (U Upper Triangular) So Stop ")+"\\\\ \ \\\\"
         if 0 not in p.diagonal():
-            LatexText += emph("Result:")+"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
+            LatexText += emph("\\textbf{Result:}")+"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
         else:
-            LatexText += emph("Result:")+"\\\\ \ \\\\"+emph("P = ")+bmatrix(p) +"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
+            LatexText += emph("\\textbf{Result:}")+"\\\\ \ \\\\"+emph("P = ")+bmatrix(p) +"\\\\ \ \\\\"+emph("L = ")+bmatrix(l) +"\\\\ \ \\\\"+emph("U = ")+bmatrix(u)
         return {'output':LatexText,"result":[l.tolist(),u.tolist(),p.tolist()],"l":l.tolist(),"u":u.tolist(),"p":p.tolist()} 
         
 def check_symmetric(a, rtol=1e-05, atol=1e-08):
@@ -305,15 +305,15 @@ class Cholosky_Decomposition(Resource):
             LatexText += Container(emph("The Matrix is not a square matrix,Thus you cant apply Cholosky decomposition on it"))
             return {'output':LatexText,"result":[]}  
         if(not check_symmetric(A)):
-            LatexText += Container(emph("The Matrix is not a symmetric matrix where ")+"A \neq A^T"+emph(" so it is impossible to apply Cholosky decomposition on it"))
+            LatexText += Container(emph("\\textbf{The Matrix is not a symmetric matrix where} ")+"A \\neq A^T"+emph(" \\textbf{so it is impossible to apply Cholosky decomposition on it}"))
             return {'output':LatexText,"result":[]}  
 
         if np.any(np.linalg.eigvals(matrix) < 0):
             LatexText += Container(emph("some or one of the eigen values of the input matrix are negative which are ")+str(np.linalg.eigvals(matrix)[np.linalg.eigvals(matrix) < 0])+emph(", so the matrix is not a positive definite matrix "))
-            LatexText += Container(emph(" so it is impossible to apply Cholosky decomposition on it"))
+            LatexText += Container(emph("\\textbf{so it is impossible to apply Cholosky decomposition on it} "))
             return {'output':LatexText,"result":[]}   
         else :
-            LatexText += Container(emph("The input matrix is a square symmetric positive definite matrix so Cholosky decomposition is calculable"))
+            LatexText += Container(emph("\\textbf{ The input matrix is a square symmetric positive definite matrix so Cholosky decomposition is calculable}"))
             ch_matrix = np.zeros(matrix.shape)
             ch_matrix[0,0] = np.sqrt(matrix[0,0])
             for i in range(m):
@@ -474,13 +474,13 @@ class QR_Decomposition(Resource):
         A = np.array(request.json["matrix1"])
         
         LatexText = emph(" Your Input is ") +", A = "+ bmatrix(A) +"\\\\ \ \\\\"
-        LatexText += Container(emph("first we will apply the gram schmidt on the matrix A to find the Q matrix "))
+        LatexText += Container(emph("\\textbf{1) we will apply the gram schmidt on the matrix A to find the Q matrix} "))
         Q = gram_schmidt(A)
-        LatexText += Container(emph("from there we will get the following Q matrix :")+" Q = "+bmatrix(Q))
+        LatexText += Container(emph("\\textbf{2) from there we will get the following Q matrix :}")+" Q = "+bmatrix(Q))
         R = np.round(Q.T @ A ,8)
-        LatexText += Container(emph("And then we will calculate the matrix R where ")+" R = Q^T.A")
+        LatexText += Container(emph("\\textbf{3) And then we will calculate the matrix R where} ")+" R = Q^T.A")
         LatexText += Container(emph("so ")+"R = "+bmatrix(Q.T)+"."+bmatrix(A)+" = "+bmatrix(R))
-        LatexText += Container(emph("At the end after applying the QR Decomposition on the input matrix ")+bmatrix(A)+emph("we get"))
+        LatexText += Container(emph("\\textbf{4) At the end after applying the QR Decomposition on the input matrix} ")+bmatrix(A)+emph("\\textbf{we get}"))
         LatexText += Container("Q = "+bmatrix(Q))
         LatexText += Container("R = "+bmatrix(R))
         return {'output':LatexText,"result":[Q.tolist(),R.tolist()],"Q":Q.tolist(),"R":R.tolist()}  
@@ -503,9 +503,9 @@ def V(mat):
     idx = eigenValues.argsort()[::-1]
     eigenValues = eigenValues[idx]
     eigenVectors = eigenVectors[:,idx]
-    LatexText = Container(emph("The next step is to find the eigen values and eigen vectors of the calculated matrix"))
+    LatexText = Container(emph("\\textbf{3) The next step is to find the eigen values and eigen vectors of the calculated matrix}"))
     LatexText += Container(Format_EigenSpace(eigenValues,eigenVectors))
-    LatexText += Container(emph("the next step is to Deduce the right singular vectors V as the founded eigenvectors"))
+    LatexText += Container(emph("\\textbf{4) the next step is to Deduce the right singular vectors V as the founded eigenvectors}"))
     LatexText += Container(emph("we will get ")+" V = "+bmatrix(eigenVectors))
     return eigenVectors,LatexText
 def  row_echelon_form(Matrix):
@@ -513,7 +513,7 @@ def  row_echelon_form(Matrix):
     m_rref, pivots = m.rref() # Compute reduced row echelon form (rref).
     return (m_rref)
 def sigma(mat):
-    LatexText = Container(emph("and then we should Compute the singular values"))
+    LatexText = Container(emph("\\textbf{5) and then we should Compute the singular values}"))
 
     S=np.zeros(mat.shape)
     p=mat.T@mat
@@ -535,7 +535,7 @@ def typ_float(mat):
             mat2[i,j]=float(mat[i,j])
     return mat2
 def sig0(mat):
-    LatexText = Container(emph("There is a 0 eigenvalue , to find the coresponding vector of U we should solve the equation : ")+"AA^T u_i = 0")
+    LatexText = Container(emph("There is a 0 eigenvalue , to find the coresponding vector of U we should solve the equation : ")+"AA^T u = 0")
     k=typ_float(row_echelon_form(mat@mat.T))
     Sol=np.zeros([k.shape[0],1])
     for i in range(k.shape[0]):
@@ -552,7 +552,7 @@ def sig0(mat):
     return np.delete(Sol, 0, 1),LatexText
 
 def U(mat,v,sigma):
-    LatexText = Container(emph("To Compute the Left singular vector U we use the following formula : ")+"u_i = \\frac{1}{\sigma_i} A v_i , i = 1\\dots r")
+    LatexText = Container(emph("\\textbf{6) To Compute the Left singular vector U we use the following formula : } ")+"u_i = \\frac{1}{\sigma_i} A v_i , i = 1\\dots r")
     p=mat.T@mat
     U=np.zeros([mat.shape[0],1])
     if mat.shape[0]==mat.shape[1] or mat.shape[0]<mat.shape[1]:
@@ -587,10 +587,10 @@ class SVD(Resource):
         mat = np.array(request.json["matrix1"])
         
         LatexText = emph(" Your Input is ") +", A = "+ bmatrix(mat) +"\\\\ \ \\\\"
-        LatexText += Container(emph("first we will need the transpose matrix which is : "))
+        LatexText += Container(emph("\\textbf{1) we will need the transpose matrix which is :} "))
         LatexText += Container(bmatrix(mat)+"^T = "+bmatrix(mat.T))
         P=mat.T@mat
-        LatexText += Container(emph("Then we will multiply the initial matrix with the transpose one :"))
+        LatexText += Container(emph("\\textbf{2) Then we will multiply the initial matrix with the transpose one :}"))
         LatexText += Container("A^TA = "+bmatrix(mat.T)+"."+bmatrix(mat)+" = "+bmatrix(P))
 
         v,ls = V(P)
@@ -602,7 +602,7 @@ class SVD(Resource):
         u,ls = U(mat,v,Sigma)
         LatexText += ls
 
-        LatexText += Container(emph("At the end for the input ")+bmatrix(mat))
+        LatexText += Container(emph("\\textbf{7) At the end for the input} ")+bmatrix(mat))
         LatexText += Container("U = "+bmatrix(u))
         LatexText += Container("\\Sigma = "+bmatrix(Sigma))
         LatexText += Container("V = "+bmatrix(v))
