@@ -159,11 +159,11 @@ def Gradient_Descent(A,b,c=0,x=None,p=0.1,Max_Iterations=50,tol = 1e-5,Steps=Tru
                 LatexText += Container("X^{"+str(i)+"} = "+bvector(x))
         difference = Quadratic_Derivative(x,A,b)
         if(i == 0):
-            LatexText += Container(emph("First We calculate the derivative as following "))
+            LatexText += Container(emph("\\textbf{1) First We calculate the derivative as following} "))
             LatexText += Container(f"\\nabla f(x) = Ax - b " )
             LatexText += Container(f"\\Rightarrow "+bmatrix(A)+"."+bvector(x)+" - "+bvector(b)+" = "+bvector(difference))
         if((difference<tol).all()):
-            LatexText += Container(emph("The Derivative is less then the tolerance where"))
+            LatexText += Container(emph("\\textbf{2) The Derivative is less then the tolerance where}"))
             LatexText += Container(f"\\nabla f(x) = "+bvector(difference)+" < {tol} = "+str(tol))
             break
         if(Calc_Steps):
@@ -174,7 +174,7 @@ def Gradient_Descent(A,b,c=0,x=None,p=0.1,Max_Iterations=50,tol = 1e-5,Steps=Tru
                 LatexText += Container("X^{"+str(i+1)+"} = "+bvector(x))
         x = x - p*difference
         Changments.append(x)
-    LatexText += Container(emph(" The Gradient Descent Completed where the final result is "))
+    LatexText += Container(emph("\\textbf{3) The Gradient Descent Completed where the final result is }"))
     LatexText += Container(f"x^* = "+bvector(x)+" , f(x^*) = "+str(Quadratic_Function(x,A,b,c)))
     return x,np.array(Changments),LatexText
 
@@ -221,16 +221,16 @@ def Steepest_Gradient_Descent(A,b,c=0,x=None,Max_Iterations=50,tol = 1e-5,Steps=
         p = ( norm(difference)**2 ) / ( (A@difference)@difference)
 
         if(i == 0):
-            LatexText += Container(emph("First We calculate the derivative as following "))
+            LatexText += Container(emph("\\textbf{1 )First We calculate the derivative as following }"))
             LatexText += Container(f"\\nabla f(x) = Ax - b " )
             LatexText += Container(f"\\Rightarrow "+bmatrix(A)+"."+bvector(x)+" - "+bvector(b)+" = "+bvector(difference))
 
-            LatexText += Container(emph("Then we should calculate the Step size variable ")+"\\rho")
+            LatexText += Container(emph("\\textbf{2) Then we should calculate the Step size variable }")+"\\rho")
             LatexText += Container("\\rho = \\frac{\\Vert Ax^{(k)} - b \\Vert^2 }{ \\langle A(Ax^{(k)}-b),Ax^{(k)}-b \\rangle} " )
             LatexText += Container("\\Rightarrow \\frac{\\Vert"+bvector(difference)+"\\Vert}{\\langle "+bmatrix(A)+"."+bvector(difference)+","+bvector(difference)+" \\rangle} = "+ str(p))
 
         if((difference<tol).all()):
-            LatexText += Container(emph("The Derivative is less then the tolerance where"))
+            LatexText += Container(emph("\\textbf{3) The Derivative is less then the tolerance where}"))
             LatexText += Container(f"\\nabla f(x) = "+bvector(difference)+" < {tol} = "+str(tol))
             LatexText += Container(" x^{"+str(i+1)+"} = x^{"+str(i)+"} - \\rho\\nabla f(x^{"+str(i)+"}) = "+bvector(x)+" - "+str(p)+bvector(difference))
             LatexText += Container("X^{"+str(i+1)+"} = "+bvector(x))
@@ -243,7 +243,7 @@ def Steepest_Gradient_Descent(A,b,c=0,x=None,Max_Iterations=50,tol = 1e-5,Steps=
                 LatexText += Container("X^{"+str(i+1)+"} = "+bvector(x))
         x = x - p*difference
         Changments.append(x)
-    LatexText += Container(emph(" The Steepest Gradient Descent Completed where the final result is "))
+    LatexText += Container(emph("\\textbf{4) The Steepest Gradient Descent Completed where the final result is }"))
     LatexText += Container(f"x^* = "+bvector(x)+" , f(x^*) = "+str(Quadratic_Function(x,A,b,c)))
     return x,np.array(Changments),LatexText
 
@@ -291,7 +291,7 @@ def Conjugate_Gradient_Descent(A,b,c=0,x=None,Max_Iterations=50,tol = 1e-5,Steps
                 LatexText += Container("d^{"+str(i)+"} =  \\nabla  J(x^{"+str(i)+"} + \\beta_{"+str(i-1)+"} d^{"+str(i-1)+"} = "+bvector(bk))
 
         if((difference==0).all()):
-            LatexText += Container(emph("The Derivative is equal to 0"))
+            LatexText += Container(emph("\\textbf{The Derivative is equal to 0}"))
             LatexText += Container("\\nabla J(x^{"+str(i)+"})^T = "+bvector(difference)+" = 0")
             LatexText += Container("X^{"+str(i)+"} = "+bvector(x))
             break
@@ -302,7 +302,7 @@ def Conjugate_Gradient_Descent(A,b,c=0,x=None,Max_Iterations=50,tol = 1e-5,Steps
 
 
         if(i == 0):
-            LatexText += Container(emph("First We calculate the derivative as following "))
+            LatexText += Container(emph("\\textbf{First We calculate the derivative as following }"))
             LatexText += Container("d^{"+str(i)+"} = Ax^{"+str(i)+"} - b " )
             LatexText += Container(f"\\Rightarrow "+bmatrix(A)+"."+bvector(x)+" - "+bvector(b)+" = "+bvector(difference))
 
@@ -332,7 +332,7 @@ def Conjugate_Gradient_Descent(A,b,c=0,x=None,Max_Iterations=50,tol = 1e-5,Steps
                 LatexText += Container("X^{"+str(i+1)+"} = "+bvector(x))
 
         Changments.append(x)
-    LatexText += Container(emph(" The Conjugate Gradient Descent Completed where the final result is "))
+    LatexText += Container(emph("\\textbf{The Conjugate Gradient Descent Completed where the final result is} "))
     LatexText += Container(f"x^* = "+bvector(x)+" , f(x^*) = "+str(Quadratic_Function(x,A,b,c)))
     return x,np.array(Changments),LatexText
 

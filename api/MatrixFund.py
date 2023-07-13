@@ -154,15 +154,15 @@ class Transpose(Resource):
         n, k = arr.shape[0], arr.shape[1]
         # Define zeros array for save the transpose matrix
         tr = np.zeros((k, n))
-        LatexText += Container(emph("At the begining we define a similar zeros matrix with the same size as the first matrix which are ")+str(k)+"."+str(n))
-        LatexText += Container(emph("The initial Transpose matrix is ")+bmatrix(tr))
+        LatexText += Container(emph("\\textbf{1) At the begining we define a similar zeros matrix with the same size as the first matrix which are }")+"\\textbf{"+str(k)+"."+str(n)+"}")
+        LatexText += Container(emph("\\textbf{2) The initial Transpose matrix is }")+bmatrix(tr))
         # Boucle for each index of matrix
         for i in range(n):
             for j in range(k):
                 tr[j, i] = arr[i, j]
             LatexText += Container(emph(f"Flipping the {str(i+1)} row results the folowing ")+bmatrix(tr))
         # Return the tr transpose matrix
-        LatexText += Container(emph("Therefor the resulted transpose matrix is equal to ")+bmatrix(tr))
+        LatexText += Container(emph("\\textbf{3) Therefor the resulted transpose matrix is equal to }")+bmatrix(tr))
 
         return {'output':LatexText,"result":tr.tolist()}   
 
@@ -186,21 +186,21 @@ class Inverse_matrix(Resource):
         rank = np.linalg.matrix_rank(arr)
         if l == m:
             if np.linalg.det(arr) == 0:
-                LatexText += Container(emph("The Determinant of the Matrix A is equal to 0 so the matrix has no inverse"))
+                LatexText += Container(emph("\\textbf{The Determinant of the Matrix A is equal to 0 so the matrix has no inverse}"))
                 return None,LatexText
             elif rank<l:
-                LatexText += Container(emph("The Rank of the matrix is equal to ")+str(rank)+emph(" which is less than the size of the matrix that is ")+str(l))
-                LatexText += emph(" Then the matrix has no inverse")
+                LatexText += Container(emph("\\textbf{The Rank of the matrix is equal to }")+str(rank)+emph(" \\textbf{which is less than the size of the matrix that is} ")+str(l))
+                LatexText += emph(" \\textbf{Then the matrix has no inverse}")
                 return None,LatexText
 
         elif l != m:
-            LatexText += emph("The matrix is not a square matrix where the number of rows does not equal to the number of columns")
+            LatexText += emph("\\textbf{The matrix is not a square matrix where the number of rows does not equal to the number of columns}")
             return None
-        LatexText += Container(emph("The matrix has a determinant of ")+str(np.linalg.det(arr))+emph(" and the matrix is a full rank matrix, this means that we can continue calculating the inverse matrix normally"))
-        LatexText += Container(emph("First we will define the identity matix that has the same size of the input matrix ")+bmatrix(b))
+        LatexText += Container(emph("\\textbf{The matrix has a determinant of }")+str(np.linalg.det(arr))+emph(" \\textbf{and the matrix is a full rank matrix, this means that we can continue calculating the inverse matrix normally}"))
+        LatexText += Container(emph("\\textbf{1) First we will define the identity matix that has the same size of the input matrix} ")+bmatrix(b))
         # Augment the matrix with the identity matrix
         augmented = np.concatenate((arr, b), axis=1)
-        LatexText += Container(emph("Then we will idenity the Aumented matrix which is the concatenation between the input and the identity matrix,this will give the following matrix : "))
+        LatexText += Container(emph("\\textbf{2) Then we will idenity the Aumented matrix which is the concatenation between the input and the identity matrix,this will give the following matrix : }"))
         LatexText += Container("A_{aug} = "+bmatrix(augmented))
         # Gaussian elimination
         for k in range(n):
@@ -220,7 +220,7 @@ class Inverse_matrix(Resource):
             LatexText += Container(emph(" After eliminating the next rows we will remain with the matrix : ")+bmatrix(augmented))
         # Extract the inverted matrix
         inverted = augmented[:, n:]
-        LatexText += Container(emph("At the end we will extract the inverse matrix that will be :"))
+        LatexText += Container(emph("\\textbf{3) At the end we will extract the inverse matrix that will be :}"))
         LatexText += Container("A^{-1} = "+bmatrix(inverted))
         LatexText += Container(emph("Where ")+"A.A^{-1} = "+bmatrix(arr)+"."+bmatrix(inverted)+" = "+bmatrix(b)+" = I")
 
@@ -253,7 +253,7 @@ class Trace(Resource):
                 else:
                     LatexText += str(diag[i])+'+'
 
-            LatexText += "="+str(trace)
+            LatexText += "="+"\\textbf{"+str(trace)+"}"
             return {'output':LatexText,"result":trace.tolist()}   
 
 class Determinant(Resource):
@@ -306,7 +306,7 @@ class Determinant(Resource):
 
                     sum = sum + ((-1)**a)*Matrix[i,j]*self.calc_det(mat)
 
-        LatexText += emph('= '+str(sum))
+        LatexText += '= '+"\\textbf{"+str(sum)+"}"
         return {'output':LatexText,"result":np.array([[sum]]).tolist()}  
 
 
@@ -337,7 +337,7 @@ class Trace(Resource):
                 else:
                     LatexText += str(diag[i])+'+'
 
-            LatexText += "="+str(trace)
+            LatexText += "="+"\\textbf{"+str(trace)+"}"
             return {'output':LatexText,"result":trace.tolist()}   
 
 
@@ -391,12 +391,12 @@ class Angle(Resource):
         product_type = np.array(request.json["choice"])
 
         if((x==0).all() or(y==0).all()):
-            LatexText += Container(emph("You Cant calculate Angles using a zero vector"))
+            LatexText += Container(emph("\\textbf{You Cant calculate Angles using a zero vector}"))
             return {'output':LatexText,"result":[[-1]]}   
         
         if(product_type==0):
             # the inner product = dot product
-            LatexText += emph('computing the angle between:')+'\\\\'
+            LatexText += emph('\\textbf{computing the angle between:}')+'\\\\'
             LatexText += Container(emph('x=')+bmatrix(x)+emph(' , y= ')+bmatrix(y))
             LatexText += emph('using <x,y> :=')+f"x^{'T'}y"+'\\\\'
             pr = Products()
@@ -408,20 +408,20 @@ class Angle(Resource):
 
             a,b = f"\sqrt{norm_x}",f"\sqrt{norm_y}"
             f = "\dfrac{"+str(product_x_y)+"}{"+a+b+"} = "+str(cos_angle)+"rad = "+f"{str(angle)}^{'o'}"+'\\\\'
-            LatexText += emph('cos ω =')+ f
+            LatexText += emph('cos ω =')+f
             return {'output':LatexText,"result":angle.tolist()}   
         if(product_type==1):
             if((A==0).all()):
-                LatexText += Container(emph("You Cant calculate Angles using a zero Matrix "))
+                LatexText += Container(emph("\\textbf{You Cant calculate Angles using a zero Matrix }"))
                 return {'output':LatexText,"result":[[-1]]}   
             # the inner product defined as <x,y> = x.T@A@y
-            LatexText += emph('computing the angle between:')+'\\\\'
+            LatexText += emph('\\textbf{computing the angle between:}')+'\\\\'
             LatexText += Container(emph('x=')+bmatrix(x)+emph(' , y= ')+bmatrix(y) +emph(' ,B = ')+bmatrix(A))
             LatexText += emph('using <x,y> :=')+f"x^{'T'}By"+'\\\\'
 
             pr = Products(A)
             if(pr.check_matrix_positive_symetric()==-1):
-                LatexText += emph('The B matrix must be symmetric and positive define')
+                LatexText += emph('\\textbf{The B matrix must be symmetric and positive define}')
                 return {'output':LatexText,"result":[[-1]]}   
             product_x_y = pr.inner_product(x,y)
             norm_x = pr.inner_product(x,x)
@@ -431,7 +431,7 @@ class Angle(Resource):
 
             a,b = f"\sqrt{norm_x}",f"\sqrt{norm_y}"
             f = "\dfrac{"+str(product_x_y)+"}{"+a+b+"} = "+str(cos_angle)+"rad = "+f"{str(angle)}^{'o'}"+'\\\\'
-            LatexText += emph('cos ω =')+ f
+            LatexText += emph('cos ω =')+f
 
             return {'output':LatexText,"result":angle.tolist()}   
 
@@ -522,7 +522,7 @@ class Projection:
       LatexText += Container("u_{"+str(i+1)+"} = b_{"+str(i+1)+"} - \\sum_{j=1}^{"+str(i)+"} proj_{u_j}(b_{"+str(i+1)+"}) = "+bvector(C[i]))
     return np.array(C).T,LatexText
   def Basis(self,U_Span):
-    LatexText = Container(emph("The first step is to find the Basis of the input space where we will apply the Gaussian elimination on the space"))
+    LatexText = Container(emph("\\textbf{1) The first step is to find the Basis of the input space where we will apply the Gaussian elimination on the space}"))
     U_reduced,ls = self.Apply_Gaussian_Elm(U_Span)
     ls = ls.replace(" Your Input is " ,"we will start by the Space matrix ")
     LatexText += ls
@@ -530,7 +530,7 @@ class Projection:
     for i in range(0,U_reduced.shape[1]):
       if(U_reduced[i,i] == 1): # this is a basis
         Basis.append(U_Span[:,i])
-    LatexText += Container(emph("After extracting the pivot columns which are the basis we find that the basis of the space are : "))
+    LatexText += Container(emph("\\textbf{2) After extracting the pivot columns which are the basis we find that the basis of the space are : }"))
     LatexText += Container("Basis = Span \\left ("+bmatrix(np.array(Basis).T)+"\\right )")
     return np.array(Basis).T,LatexText
   def Dot_Projection(self,Basis,x):
@@ -541,7 +541,7 @@ class Projection:
     LatexText += Container("B.\\lambda = " +bmatrix(Basis @ lambda_B))
     return Basis @ lambda_B,LatexText
   def is_Orthogonal_Space(self,SubSpace):
-    LatexText = Container(emph("The next step is to test if the Basis of the space are orthogonal or not"))
+    LatexText = Container(emph("\\textbf{3) The next step is to test if the Basis of the space are orthogonal or not}"))
     tester = True
     for i in range(SubSpace.shape[1]):
       for j in range(i+1,SubSpace.shape[1]):
@@ -557,7 +557,7 @@ class Projection:
       LatexText += Container(emph("After evaluation we find that all the basis are orthogonal ,Then the space is an Orthogonal space"))
     return tester,LatexText
   def Projection_custom(self,Basis,x):
-    LatexText = Container(emph("After applying the projection we will get the following projected vector : "))
+    LatexText = Container(emph("\\textbf{4) After applying the projection we will get the following projected vector : }"))
     p = np.zeros_like(x)
     LatexText += "\\\\ \ \\\\ \pi_{U} x = "
     for i in range(Basis.shape[1]):
@@ -586,8 +586,8 @@ class Projection:
       LatexText += Container(emph("The space is not orthogonal and the inner product is not set as the dot product so we should apply the Gram shmidt method to turn the basis into an orthonormal basis "))
       Basis,ls = self.Gram_Shmidt(Basis)
       LatexText += ls
-      LatexText += Container(emph("After applying the gramshmidt method we will be remain with the basis ")+bmatrix(Basis)+emph("which are now orthogonal "))
-      LatexText += Container(emph("now we will apply the basic projection which applyied on different inner products"))
+      LatexText += Container(emph("\\textbf{4) After applying the gramshmidt method we will be remain with the basis} ")+bmatrix(Basis)+emph("\\textbf{which are now orthogonal} "))
+      LatexText += Container(emph("\\textbf{5) now we will apply the basic projection which applied on different inner products}"))
       P,ls = self.Projection_custom(Basis,x)
       LatexText += ls
       return P,LatexText
@@ -650,14 +650,14 @@ class Projection_C(Resource):
         U_Span = np.array(request.json["matrix3"])
         product_type = np.array(request.json["choice"])
         if((U_Span == 0).all()):
-            LatexText += Container(emph("You cant do projection using full zeros span"))
+            LatexText += Container(emph("\\textbf{You cant do projection using full zeros span}"))
             return {'output':LatexText,"result":[[-1]]}   
         if(product_type == 0):
             prj = Projection()
         else:
             pr = Products(A)
             if(pr.check_matrix_positive_symetric()==-1):
-                LatexText += emph('The A matrix must be symmetric and positive define')
+                LatexText += emph('\\textbf{The A matrix must be symmetric and positive define}')
                 return {'output':LatexText,"result":[[-1]]}   
             prj = Projection(pr.inner_product)
         

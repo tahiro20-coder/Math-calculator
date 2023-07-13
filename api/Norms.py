@@ -162,7 +162,7 @@ class Euclidean_Norm(Resource):
         # Apply the formula of norm
         norm = np.sqrt(sqinside)
         LatexText += " = "+str(norm)
-        LatexText += Container(emph("The norm of the matrix is : ")+str(norm.astype(float)))
+        LatexText += Container(emph("The norm of the matrix is : ")+"\\textbf{"+str(norm.astype(float)))+"}"
         
         
         return {'output':LatexText,"result":norm.tolist()}
@@ -202,7 +202,7 @@ class Inifinity_norm(Resource):
                 LatexText += " = " + str(temp)+emph(" and ")
             sols.append(temp)
         maxi = max(sols)
-        LatexText += Container(emph("The larger of these is ")+str(maxi)+emph(" and therefore ")+"\Vert A \Vert_\infty = "+str(maxi))
+        LatexText += Container(emph("The larger of these is ")+str(maxi)+emph(" and therefore ")+"\Vert A \Vert_\infty = "+"\\textbf{"+str(maxi)+"}")
 
         return {'output':LatexText,"result":maxi.tolist()}
 
@@ -240,7 +240,7 @@ class one_norm(Resource):
                 LatexText += " = " + str(temp)+emph(" and ")
             sols.append(temp)
         maxi = max(sols)
-        LatexText += Container(emph("The larger of these is ")+str(maxi)+emph(" and therefore ")+"\Vert A \Vert_1 = "+str(maxi))
+        LatexText += Container(emph("The larger of these is ")+str(maxi)+emph(" and therefore ")+"\Vert A \Vert_1 = "+"\\textbf{"+str(maxi)+"}")
 
         return {'output':LatexText,"result":maxi.tolist()}
 
@@ -273,7 +273,7 @@ class Manhattan_Norm(Resource):
                     LatexText += str(vect[i]) + " + "
             result += abs(vect[i])
         LatexText += " = "+ str(result) + "."
-        LatexText += Container(emph("Therfore the Manhattan Norm of the Vector A is ")+ str(result) )
+        LatexText += Container(emph("Therfore the Manhattan Norm of the Vector A is ")+"\\textbf{"+str(result)+"}"  )
 
         return {'output':LatexText,"result":result.tolist()}
 
@@ -305,7 +305,7 @@ class Euclidean_VNorm(Resource):
                     LatexText += str(vect[i]) + "^2 + "
             result += abs(vect[i])**2
         LatexText += "} = \sqrt{"+ str(result) + "}."
-        LatexText += Container(emph("Therfore the Euclidean Norm of the Vector A is ")+ "\sqrt{"+str(result)+"} = "+str(np.sqrt(result)) )
+        LatexText += Container(emph("Therfore the Euclidean Norm of the Vector A is ")+ "\sqrt{"+str(result)+"} = "+"\\textbf{"+str(np.sqrt(result))+"}" )
         result = np.sqrt(result)
 
         return {'output':LatexText,"result":result.tolist()}
@@ -326,7 +326,7 @@ class Inifinity_VNorm(Resource):
         vect = abs(vect)
         result = max(vect)
         LatexText += str(result)
-        LatexText += Container(emph("Therfore the inifinity max norm of the Vector A is ")+ str(result) )
+        LatexText += Container(emph("Therfore the inifinity max norm of the Vector A is ")+"\\textbf{"+str(result)+"}"  )
 
 
         return {'output':LatexText,"result":result.tolist()}
@@ -345,9 +345,9 @@ class Lp_Norm(Resource):
         
         LatexText = emph(" Your Input is ") +", A = "+ bvector(vect) +" , P = "+str(p) +" \\\\ \ \\\\"
         if(p<0):
-            LatexText += Container( "  P = "+str(p) + emph(" the P value should always be larger than 0 , Therefor you Cant Precede on The Calculation") )
+            LatexText += Container( "  P = "+str(p) + emph(" \\textbf{the P value should always be larger than 0 , Therefor you Cant Precede on The Calculation}") )
             return {'output':LatexText,"result":[0]}
-        LatexText += emph(" The P Variable is Larger than 0 than you can continue the calculation ") + " \\\\ \ \\\\"
+        LatexText += emph(" \\textbf{The P Variable is Larger than 0 than you can continue the calculation} ") + " \\\\ \ \\\\"
         LatexText += "\\\\ \ \\\\ \Vert A \Vert_p = ( "
         result = 0
         for i in range(vect.shape[0]):
@@ -363,7 +363,7 @@ class Lp_Norm(Resource):
                     LatexText += str(vect[i]) + "^{"+str(p)+"} + "
             result += abs(vect[i])**p
         LatexText += ")^{"+str(p)+"} = ("+ str(result) + ")^{"+str(p)+"}."
-        LatexText += Container(emph("Therfore the Lp Norm of the Vector A where P = ")+str(p)+emph(" is ")+ "("+ str(result) + ")^{"+str(p)+"} = "+str(result**p))
+        LatexText += Container(emph("Therfore the Lp Norm of the Vector A where P = ")+str(p)+emph(" is ")+ "("+ str(result) + ")^{"+str(p)+"} = "+"\\textbf{"+str(result**p)+"}")
         result = result**p
 
         return {'output':LatexText,"result":result.tolist()}

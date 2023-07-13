@@ -151,7 +151,7 @@ def Gaussian_Elm(A,col=0,isReduit=False,tol = 1e-5):
     if(col!=0):
       LatexText+=Container(emph("Then we Evaluate the next column which is the column number ")+str(col+1))
     else:
-      LatexText += Container(emph("we will be applying the transformations column by column so we will start by the first column"))
+      LatexText += Container(emph("we will be applying the transformations column by column so we will start by the first column "))
     # swaping pointer(index)
     LatexText += Container(emph("The current matrix is ")+bmatrix(A))
     swap_idx = col
@@ -234,7 +234,7 @@ class Basis(Resource):
         U_Span = np.array(request.json["matrix1"])
 
         LatexText =  emph(" Your Input Subspace is ") +", U = span \\left ("+ bmatrix(U_Span) +" \\right )\\\\ \ \\\\"
-        LatexText += Container(emph("we will apply the Gaussian elimination on the space to eliminate the kernel vectors"))
+        LatexText += Container(emph("\\textbf{1) we will apply the Gaussian elimination on the space to eliminate the kernel vectors}"))
         U_reduced,ls = Apply_Gaussian_Elm(U_Span)
         ls = ls.replace(" Your Input is " ,"we will start by the Space matrix ")
         LatexText += ls
@@ -242,7 +242,7 @@ class Basis(Resource):
         for i in range(0,U_reduced.shape[1]):
             if(U_reduced[i,i] == 1): # this is a basis
                 Basis.append(U_Span[:,i])
-        LatexText += Container(emph("After extracting the pivot columns which are the basis we find that the basis of the space are : "))
+        LatexText += Container(emph("\\textbf{2) After extracting the pivot columns which are the basis we find that the basis of the space are: }"))
         LatexText += Container("Basis = Span \\left ("+bmatrix(np.array(Basis).T)+"\\right )")
 
         return {'output':LatexText,"result":(np.array(Basis).T).tolist()}   
@@ -261,9 +261,9 @@ class Gram_Shmidt(Resource):
 
         LatexText =  emph(" Your Input Subspace is ") +", U = span \\left ("+ bmatrix(B) +" \\right )\\\\ \ \\\\"
         if((B==0).all()):
-            LatexText += Container(emph("Your input is a zero matrix there is nothing to do about it"))
+            LatexText += Container(emph("\\textbf{Your input is a zero matrix there is nothing to do about it}"))
             return {'output':LatexText,"result":[["Error"]]}   
-        LatexText += Container(emph("The new Basis Space after applying the gram shmidt method will be : "))
+        LatexText += Container(emph("\\textbf{The new Basis Space after applying the gram shmidt method will be : }"))
         C = [B[:,0].copy()]
         LatexText += Container("u_1 = b_1 = "+bvector(B[:,0].copy()))
         for i in range(1,B.shape[1]):
@@ -291,7 +291,7 @@ class Kernel(Resource):
         U_Span = np.array(request.json["matrix1"])
 
         LatexText =  emph(" Your Input Subspace is ") +", U = span \\left ("+ bmatrix(U_Span) +" \\right )\\\\ \ \\\\"
-        LatexText += Container(emph("we will apply the Gaussian elimination on the space to eliminate the basis vectors"))
+        LatexText += Container(emph("\\textbf{1) we will apply the Gaussian elimination on the space to eliminate the basis vectors}"))
         U_pik,ls = Apply_Gaussian_Elm(U_Span,isReduit=True)
         ls = ls.replace(" Your Input is " ,"we will start by the Space matrix ")
         LatexText += ls
@@ -302,7 +302,7 @@ class Kernel(Resource):
             if(U_reduced[i,i] == 0): # this is a Kernel
                 U_reduced[i,i] = -1
                 Kernel.append(U_reduced[:,i])
-        LatexText += Container(emph("After extracting the non pivot columns which forms the kernel space we find that the kernel of the space is : "))
+        LatexText += Container(emph("\\textbf{2) After extracting the non pivot columns which forms the kernel space we find that the kernel of the space is : }"))
         LatexText += Container("Ker(U) = Span \\left ("+bmatrix(np.array(Kernel).T)+"\\right )")
 
         return {'output':LatexText,"result":(np.array(Kernel).T).tolist()}   
@@ -321,7 +321,7 @@ class Rank(Resource):
         U_Span = np.array(request.json["matrix1"])
 
         LatexText =  emph(" Your Input Subspace is ") +", U = span \\left ("+ bmatrix(U_Span) +" \\right )\\\\ \ \\\\"
-        LatexText += Container(emph("we will apply the Gaussian elimination on the space to eliminate the kernel vectors"))
+        LatexText += Container(emph("\\textbf{1) we will apply the Gaussian elimination on the space to eliminate the kernel vectors}"))
         U_reduced,ls = Apply_Gaussian_Elm(U_Span)
         Basis = []
         LatexText += Container(emph("where the echelon form of will be"))
@@ -329,15 +329,15 @@ class Rank(Resource):
         for i in range(0,U_reduced.shape[1]):
             if(U_reduced[i,i] == 1): # this is a basis
                 Basis.append(U_Span[:,i])
-        LatexText += Container(emph("After extracting the pivot columns which are the basis we find that the basis of the space are : "))
+        LatexText += Container(emph("\\textbf{2) After extracting the pivot columns which are the basis we find that the basis of the space are : }"))
         LatexText += Container("Basis = Span \\left ("+bmatrix(np.array(Basis).T)+"\\right )")
 
-        LatexText += Container(emph("From there the rank is the size of the basis so it will be : "))
+        LatexText += Container(emph("\\textbf{3) From there the rank is the size of the basis so it will be : }"))
         if(len(Basis) == 0):
-            LatexText += Container("Rank(U) = "+str(0))
+            LatexText += Container("Rank(U) = "+"\\textbf{"+str(0)+"}")
             return {'output':LatexText,"result":[[0]]}   
         else:
-            LatexText += Container("Rank(U) = "+str(np.array(Basis).T.shape[1]))
+            LatexText += Container("Rank(U) = "+"\\textbf{"+str(np.array(Basis).T.shape[1])+"}")
             return {'output':LatexText,"result":[[np.array(Basis).T.shape[1]]]}   
         
 
@@ -357,9 +357,9 @@ class Particular_Solution_C(Resource):
 
         LatexText = emph(" Your Input is ") +", A = "+ bmatrix(A) +" , b = "+bmatrix(b)+"\\\\ \ \\\\"
         A_Augm = np.column_stack([A,b])
-        LatexText += Container(emph("The first thing to do is to concatenate the A and b Matrices, this will give as the following matrix : "))
+        LatexText += Container(emph("\\textbf{1) The first thing to do is to concatenate the A and b Matrices, this will give as the following matrix : }"))
         LatexText += Container("A_{aug} = "+bmatrix(A_Augm))
-        LatexText += Container(emph("Then we should apply the reduced Echelon form on the augmented matrix "))
+        LatexText += Container(emph("\\textbf{2) Then we should apply the reduced Echelon form on the augmented matrix }"))
         U_Augm,ls = Apply_Gaussian_Elm(A_Augm,isReduit=True)
         ls = ls.replace(" Your Input is " ,"we will start by the augmented matrix ")
         LatexText += ls
@@ -367,12 +367,12 @@ class Particular_Solution_C(Resource):
         Solution = U_Augm[:,U.shape[1]:]
         for i in range(U.shape[0]):
             if(((U[i]==0).all())and((Solution[i]!=0).any())):
-                LatexText += Container(emph("There exist a Zero row after the transformation of A faced by a valued transformed b so it is impossible to find a solution in this case"))
+                LatexText += Container(emph("\\textbf{There exist a Zero row after the transformation of A faced by a valued transformed b so it is impossible to find a solution in this case}"))
                 return {'output':LatexText,"result":[]}   
         sol = np.zeros((U.shape[1],b.shape[1]))
 
         sol[:Solution.shape[0],:Solution.shape[1]] = Solution
-        LatexText += Container(emph("Then we will extract the particular solution where the solution will be : "))
+        LatexText += Container(emph("\\textbf{3) Then we will extract the particular solution where the solution will be : }"))
         LatexText += "\\begin{bmatrix}"
         if(sol.shape[1] == 1):
             LatexText += "x_1"
@@ -406,9 +406,9 @@ class General_solution(Resource):
 
         LatexText = emph(" Your Input is ") +", A = "+ bmatrix(A) +" , b = "+bmatrix(b)+"\\\\ \ \\\\"
         A_Augm = np.column_stack([A,b])
-        LatexText += Container(emph("The first thing to do is to concatenate the A and b Matrices, this will give as the following matrix : "))
+        LatexText += Container(emph("\\textbf{1) The first thing to do is to concatenate the A and b Matrices, this will give as the following matrix :} "))
         LatexText += Container("A_{aug} = "+bmatrix(A_Augm))
-        LatexText += Container(emph("Then we should apply the reduced Echelon form on the augmented matrix "))
+        LatexText += Container(emph("\\textbf{2) Then we should apply the reduced Echelon form on the augmented matrix }"))
         U_Augm,ls = Apply_Gaussian_Elm(A_Augm,isReduit=True)
         ls = ls.replace(" Your Input is " ,"we will start by the augmented matrix ")
         LatexText += ls
@@ -416,7 +416,7 @@ class General_solution(Resource):
         Solution = U_Augm[:,U.shape[1]:]
         for i in range(U.shape[0]):
             if(((U[i]==0).all())and((Solution[i]!=0).any())):
-                LatexText += Container(emph("There exist a Zero row after the transformation of A faced by a valued transformed b so it is impossible to find a solution in this case"))
+                LatexText += Container(emph("\\textbf{There exist a Zero row after the transformation of A faced by a valued transformed b so it is impossible to find a solution in this case}"))
                 return {'output':LatexText,"result":[]}  
         sol = np.zeros((U.shape[1],b.shape[1]))
         sol[:Solution.shape[0],:Solution.shape[1]] = Solution
@@ -427,8 +427,8 @@ class General_solution(Resource):
         U,ls = Apply_Gaussian_Elm(U_Aug,isReduit=True)
         nullSpaces = []
         variables = ""
-        LatexText += Container(emph("Then we will extract the particular solution where the solution will be : ")+bmatrix(sol))
-        LatexText += Container(emph("After finding the null space the general solution will be : "))
+        LatexText += Container(emph("\\textbf{3) Then we will extract the particular solution where the solution will be : }")+bmatrix(sol))
+        LatexText += Container(emph("\\textbf{4) After finding the null space the general solution will be :} "))
         LatexText += "\\\\ \ \\\\ \\left \{ x \in \mathbb{R}^{"+str(U.shape[1])+"} : x = "+bmatrix(sol)
 
         for i in range(U.shape[0]):
@@ -622,7 +622,7 @@ class Eigenvalues_and_Eigenvectors:
   def eignvalues2by2(self):
     #the formila is lamda1 , lamda2 = m +- sqrt(m**2 - p)
     #calculate the mean and the determinant p
-    LatexText = Container(emph("The input matrix is a 2x2 matrix so its eigen values could be calculated as follwing : "))
+    LatexText = Container(emph("\\textbf{The input matrix is a 2x2 matrix so its eigen values could be calculated as follwing : }"))
     LatexText += Container("\\lambda_1 = m + \\sqrt{m^2 - p} , \\lambda_2 = m - \\sqrt{m^2 - p}")
     LatexText += Container(emph("where ")+" m = \\frac{a_{11}+a_{22}}{2} "+emph(" and ")+" p = (a_{11}*a_{22}) - (a_{12}*a_{21})"+emph(" , From there :"))
 
@@ -641,7 +641,7 @@ class Eigenvalues_and_Eigenvectors:
     LatexText = ""
     # Check if the matrix is empty or not square
     if self.isEmpty() or self.isNotSquare():
-        LatexText += Container(emph("The matrix is not squared so you cant calculate its eigen values or eigen vectors"))
+        LatexText += Container(emph("\\textbf{The matrix is not squared so you cant calculate its eigen values or eigen vectors}"))
         return [[], []],LatexText
 
     #case the matrix is 2*2 for quique calculation we will use easy method
@@ -650,7 +650,7 @@ class Eigenvalues_and_Eigenvectors:
       self.eigenSet = list(set(EV))[::-1]
       return EV,LatexText
 
-    LatexText += Container(emph("To calculate the eigen values we will use the HeisenBerge algorithm with 500 iteration where the eigen values will be "))
+    LatexText += Container(emph("\\textbf{1) To calculate the eigen values we will use the HeisenBerge algorithm with 500 iteration where the eigen values will be }"))
 
     matrix = self.mat
     Q,R = np.linalg.qr(matrix)
@@ -670,7 +670,7 @@ class Eigenvalues_and_Eigenvectors:
 
 #-------------------------------------------------------------------------------
   def eignvectos_solve_homogen(self, eignvalues):
-    LatexText = Container(emph("For each eigenvalue λ,we will solve the homogeneous system")+ " ( A - \lambda I)x = 0")
+    LatexText = Container(emph("\\textbf{3) For each eigenvalue λ,we will solve the homogeneous system}")+ "\\textbf{ ( A - λ I)x = 0}")
     # Create an empty list to store the eigenvectors
     eign = []
     
@@ -683,7 +683,7 @@ class Eigenvalues_and_Eigenvectors:
         # Solve the homogeneous system of equations for the given matrix
         g,latex = Apply_Gaussian_Elm(mat,isReduit=True)
         m = mat.shape[0]
-        LatexText += Container(emph("After applying the Gaussian Elimination we get the following matrix : ")+bmatrix(g))
+        LatexText += Container(emph("\\textbf{After applying the Gaussian Elimination we get the following matrix : }")+bmatrix(g))
 
         sol = []
         # set the pivot that equal 0 to -1
@@ -692,7 +692,7 @@ class Eigenvalues_and_Eigenvectors:
                 g[k,k]=-1
                 sol.append( g[:,k])
 
-        LatexText += Container(emph("after extracting the null space we will get the following eigen values  : "))
+        LatexText += Container(emph("\\textbf{after extracting the null space we will get the following eigen values  : }"))
 
         LatexText += Format_EigenSpect([eignvalue],[sol])
         eign.append(sol)
@@ -704,10 +704,10 @@ class Eigenvalues_and_Eigenvectors:
     LatexText = emph(" Your Input is ") +", A = "+ bmatrix(matrix) +"\\\\ \ \\\\"
     ev,ls = self.eignvalues()
     LatexText += ls
-    LatexText += Container(emph(" Then we will use the eigen values to find the eigen vectors "))
+    LatexText += Container(emph("\\textbf{2) Then we will use the eigen values to find the eigen vectors }"))
     evect,ls = self.eignvectos_solve_homogen(ev)
     LatexText += ls
-    LatexText += Container(emph("At the end we find that the eigen values and eigen vectors of the matrix ")+bmatrix(matrix)+emph(" are equal to : "))
+    LatexText += Container(emph("\\textbf{6) At the end we find that the eigen values and eigen vectors of the matrix }")+bmatrix(matrix)+emph("\\textbf{are equal to : }"))
     LatexText += Format_EigenSpect(self.eigenSet,evect)
     return ev,evect,LatexText
 
