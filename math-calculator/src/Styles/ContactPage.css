@@ -1,0 +1,47 @@
+.CPT {
+    background-color: #83c5be !important;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.CPTTitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200 !important;
+    -webkit-font-smoothing: antialiased;
+    /* font-family: "roboto_semi" !important; */
+    font-size: 3.5rem;
+    /* font-weight: 300; */
+    color: #116A7B;
+    color: #262626;
+    color: #116A7B;
+    line-height: 125%;
+    text-align: center;
+}
+
+.CPTdesc {
+    font-weight: 200;
+    font-size: 1.25rem;
+    width: 60%;
+    line-height: 150%;
+    -webkit-font-smoothing: antialiased;
+    color: whitesmoke;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.main-ctp {
+    width: 60%;
+}
+
+@media (max-width: 450px) {
+    .CPTdesc {
+        width: 90%;
+    }
+    .main-ctp {
+        width: 95%;
+    }
+}

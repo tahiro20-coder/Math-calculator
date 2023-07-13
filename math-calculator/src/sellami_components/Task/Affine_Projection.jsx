@@ -6,22 +6,21 @@ import Title from '../Title';
 import MatrixFund from '../api/MatrixFund';
 import 'katex/dist/katex.min.css';
 import Choice from '../Inputs/Choice';
-
+import Reference from '../Inputs/Reference';
 
 const Description = `
 
-\\textit{The orthogonal projection of a vector} **x** \\textit{onto 
-the space of a matrix }**A** \\textit{is the vector (e.g a time-series) that is 
-closest in the space} C(A), \\textit{where distance is measured as the sum of squared errors.}\\\\
+\\textit{The orthogonal projection of a vector \\textbf{x} onto 
+the space of a matrix \\textbf{A} is the vector (e.g a time-series) that is 
+closest in the space} \\,\\textbf{C(A)}, \\textit{where distance is measured as the sum of squared errors.}\\\\
 
-\\textit{and in addition the affine projection is a projection that project a vector x onto 
-    an affine subspace L where it is defined as 
-}L = A + x0\\\\
+\\textit{and in addition the affine projection is a projection that project a vector \\textbf{x} onto 
+    an affine subspace \\textbf{L} where it is defined as 
+}\\textbf{L = A + x0}\\\\
 
-\\textit{From: \\\\ [Statistical Parametric Mapping, 2007](https://www.sciencedirect.com/science/article/abs/pii/B9780123725608500097)}
 
 `
-
+const link = "https://www.sciencedirect.com/science/article/abs/pii/B9780123725608500097"
 const Affine_Projection = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -166,7 +165,9 @@ const Affine_Projection = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

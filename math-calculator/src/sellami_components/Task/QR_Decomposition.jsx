@@ -12,8 +12,8 @@ const Description = `
 
 \\textit{QR Decomposition :} \\\\
 
-   A = QR 
-   \\textit{**where** :}\\\\
+   A = QR \\\\
+   \\textit{\\textbf{where} :}\\\\
     A \\textit{: m × n matrix } .\\\\
     Q \\textit{: m × m orthogonal matrix.}\\\\
     R \\textit{: m × n upper triangular matrix.}\\\\
@@ -21,14 +21,14 @@ const Description = `
 A = \\begin{bmatrix} \\mathbf{q_1} & \\mathbf{q_2} & \\dots & \\mathbf{q_m} \\end{bmatrix}
 \\begin{bmatrix} r_{11} & r_{12} & \\dots & r_{1n} \\\\ 0 & r_{22} & \\dots & r_{2n} 
 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\dots & r_{mn} \\end{bmatrix}
-
-\\textit{**Calculat**} Q  :\\\\
+\\\\
+\\textit{\\textbf{Calculat}} \\; Q  :\\\\
 \\textit{for calculate this matrix we use Gram-Schmidt methode :}
 \\\\
-\\textit{**Gram :**\\\\}
-**\\mathbf{v}_1 = \\mathbf{u}_1**
+\\textit{\\textbf{Gram :}\\\\}\\\\
+\\mathbf{v}_1 = \\mathbf{u}_1
 \\\\
-**\\mathbf{v}_i = \\mathbf{u}_i - \\sum_{j=1}^{i-1} \\text{proj}_{\\mathbf{v}_j}(\\mathbf{u}_i)**
+\\mathbf{v}_i = \\mathbf{u}_i - \\sum_{j=1}^{i-1} \\text{proj}_{\\mathbf{v}_j}(\\mathbf{u}_i)
 \\\\
 \\textit{to Calculate R}\\\\
 \\textit{We have :}

@@ -5,7 +5,7 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Echelon from '../api/Echelon';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
@@ -14,17 +14,16 @@ const Description = `
   ‘characteristic’. Therefore, the term eigenvalue can be termed as characteristic value,
    characteristic root, proper values or latent roots as well. In simple words, the eigenvalue
     is a scalar that is used to transform the eigenvector. The basic equation is:}\\\\
-Ax = λx\\\\
+    \\textbf{Ax = λx}\\\\
 
-\\textit{The number or scalar value} {“λ”}\\textit{ is an eigenvalue of **A**.}\\\\
+\\textit{The number or scalar value} \\; {“λ”}\\textit{ is an eigenvalue of \\textbf{A}.}\\\\
 
-\\textit{An **Eigenspace** of vector} {“x”}\\textit{ consists of a set of all eigenvectors with the 
+\\textit{An \\textbf{Eigenspace} of vector} \\; {“x”}\\textit{ consists of a set of all eigenvectors with the 
 equivalent eigenvalue }{“λ”} \\textit{collectively with the zero vector. Though, the zero 
 vector is not an eigenvector.}\\\\
 
-\\textit{\\\\for more : \\\\ https://byjus.com/maths/eigen-values/}\\#\\textit{definition}
 `
-
+const link = "https://byjus.com/maths/eigen-values/}#definition"
 const Eigenvalues_and_Eigenvectors = () => {
   const [sizeX,setSizeX] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
@@ -77,7 +76,9 @@ const Eigenvalues_and_Eigenvectors = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

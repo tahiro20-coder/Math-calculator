@@ -6,7 +6,7 @@ import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Echelon from '../api/Echelon';
 import Checker from '../Inputs/Checker';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
@@ -23,16 +23,15 @@ of the following:} \\\\
 \\textit{ 3.   The inverse of an invertible matrix}\\\\
 
 \\textit{ To perform row reduction on a matrix, we have to complete a sequence of 
-elementary row operations **(adding-swaping-mulitplaying)** to transform 
+elementary row operations \\textbf{(adding-swaping-mulitplaying)} to transform 
 the matrix till we get 0s (i.e., zeros) on the lower left-hand corner of the 
-matrix as much as possible, the output of **Gussian Elimination** called a matrix 
-in **Echlon Form**.}
+matrix as much as possible, the output of \\textbf{Gussian Elimination} called a matrix 
+in \\textbf{Echlon Form}.}
 
 
 
-\\textit{ \\\\ for more : \\\\ https://athsbyjus.com/m/gauss-elimination-method/}
 `
-
+const link = "https://athsbyjus.com/m/gauss-elimination-method/"
 const Gaussian_Elm = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -89,7 +88,9 @@ const Gaussian_Elm = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

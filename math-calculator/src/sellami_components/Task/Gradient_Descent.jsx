@@ -6,7 +6,7 @@ import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Gradients from '../api/Gradients';
 import InputParameter from '../Inputs/InputParameter';
-
+import Reference from '../Inputs/Reference';
 
 const Description = `
 \\textit{Gradient descent is Gradient Method for unconstrained 
@@ -18,16 +18,11 @@ time, and the cost function within gradient descent specifically acts as a
  \\textit{The gradient descent is then described by :}\\\\
 {x^{(k+1)}=x^{(k)}-ρ_k∇J(x^{(k)})^T}\\\\
 
-\\textit{where} ρ_k ∈ R\\textit{ are selected.}\\\\
+\\textit{where} \\; ρ_k ∈ R\\textit{ are selected.}\\\\
 
-
-
-
-\\textit{For More : \\\\ https://www.ibm.com/topics/gradient-descent}\\#\\textit{:~:text=Gradient\\%20descent\\%20is\\%20an\\%20optimization,
-each\\%20iteration\\%20of\\%20parameter\\%20updates.}
 
 `
-
+const link = "https://www.ibm.com/topics/gradient-descent#:~:text=Gradient%20descent%20is%20an%20optimization,each%20iteration%20of%20parameter%20updates."
 const Gradient_Descent = () => {
   const [sizeX,setSizeX] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
@@ -131,7 +126,9 @@ const Gradient_Descent = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

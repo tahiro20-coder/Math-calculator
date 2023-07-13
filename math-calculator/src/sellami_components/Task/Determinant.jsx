@@ -5,7 +5,7 @@ import Container from '../Container';
 import Title from '../Title';
 import MatrixFund from '../api/MatrixFund';
 import 'katex/dist/katex.min.css';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
@@ -13,7 +13,7 @@ const Description = `
         \\textit{1)- Expansion along column j :} \\\\
       det(A)= \\sum_{k=1}^n (-1)^{k+j} a_{kj} det(A_{kj})\\\\ \\  \\\\
       \\textit{2)- Expansion along row j :} \\\\
-      det(A)= \\sum_{k=1}^n (-1)^{k+j} a_{jk} det(A_{jk})
+      det(A)= \\sum_{k=1}^n (-1)^{k+j} a_{jk} det(A_{jk}) \\\\ \\  \\\\
       
       
       \\textit{In mathematics, the determinant is a scalar value that is a 
@@ -22,9 +22,8 @@ const Description = `
       by the matrix. In particular, the determinant is nonzero if 
       and only if the matrix is invertible and the linear map represented 
       by the matrix is an isomorphism.}
-      \\textit{\\\\for more : \\\\https://en.wikipedia.org/wiki/Determinant}
 `
-
+const link = "https://en.wikipedia.org/wiki/Determinant"
 const Determinant = () => {
     const [sizeX,setSizeX] = useState(2)
     const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
@@ -77,7 +76,9 @@ const Determinant = () => {
     return (
       <div>
           <Title title={"Description"}/>
-          <Container title={"Function Description"} mathcontent={ Description}/>
+          <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
           
           <Title title={"Inputs"}/>
   

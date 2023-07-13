@@ -6,17 +6,20 @@ import Title from '../Title';
 import MatrixFund from '../api/MatrixFund';
 import 'katex/dist/katex.min.css';
 import Choice from '../Inputs/Choice';
-
+import Reference from '../Inputs/Reference';
+import 'katex/dist/katex.min.css';
 
 const Description = `
 
-\\textit{Calculate Angle between two vectors with assuming that} x\\neq0,y\\neq0 , then:\\\\
-{-1\\leq\\frac{<x,y>}{||x||\\:||y||}\\leq1}\\\\
+\\textit{Calculate Angle between two vectors with assuming that} \\\\  x \\neq 0,y \\neq 0 , then:\\\\
+\\ \\\\
+
+{-1\\leq\\frac{<x,y>}{||x||\\:||y||}\\leq1}\\\\ \\  \\\\
 {cos\\:\\:ω = \\frac{<x,y>}{||x||\\:||y||}}\\\\
 
-\\textit{resource: mml-book}
 
 `
+const link = "https://mml-book.github.io/book/mml-book.pdf"
 
 const Angle = () => {
   const [sizeX,setSizeX] = useState(2)
@@ -135,7 +138,9 @@ const Angle = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

@@ -5,14 +5,14 @@ import Container from '../Container';
 import Title from '../Title';
 import Distance from '../api/Distance';
 import 'katex/dist/katex.min.css';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
 d_1(A,B) = \\sum_{i=1}^n\\sum_{j=1}^m \\vert a_{ij} - b_{ij} \\vert \\\\
-\\textit{For More : \\\\ https://math.stackexchange.com/questions/507742/distance-similarity-between-two-matrices}
-`
 
+`
+const link = "https://math.stackexchange.com/questions/507742/distance-similarity-between-two-matrices"
 const Manhattan_Distance = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -86,7 +86,9 @@ const Manhattan_Distance = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

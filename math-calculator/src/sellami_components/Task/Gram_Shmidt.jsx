@@ -5,7 +5,7 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Echelon from '../api/Echelon';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
@@ -15,8 +15,8 @@ const Description = `
 \\textit{the Gram–Schmidt process is a method for orthonormalizing a 
 set of vectors in an inner product space, most commonly the Euclidean 
 space Rn equipped with the standard inner product. The Gram–Schmidt process
- takes a finite, linearly independent set of vectors} S = \\{{v_1, ..., v_k}\\}
- \\textit{for k ≤ n and generates an orthogonal set }S′ = \\{{u_1, ..., u_k}\\} \\textit{that spans 
+ takes a finite, linearly independent set of vectors} \\\\ S = \\{{v_1, ..., v_k}\\} \\;
+ \\textit{for k ≤ n and generates an orthogonal set } \\\\ S′ = \\{{u_1, ..., u_k}\\} \\; \\textit{that spans 
  the same k-dimensional subspace of Rn as S.}\\\\
 
 
@@ -32,8 +32,8 @@ space Rn equipped with the standard inner product. The Gram–Schmidt process
 product of the vectors v and u. This operator projects the vector 
 v orthogonally onto the line spanned by vector u. If u = 0, we define } \\\\
 {\\displaystyle \\operatorname {proj} _{\\mathbf {0} }(\\mathbf {v} ):=\\mathbf {0} },
-\\textit{i.e., the projection map} 
-{\\displaystyle \\operatorname {proj} _{\\mathbf {0} }} 
+\\textit{i.e., the projection map} \\;
+{\\displaystyle \\operatorname {proj} _{\\mathbf {0} }}  \\;
 \\textit{is the zero map, sending every vector to the zero vector.}\\\\
 
 \\textit{The Gram–Schmidt process then works as follows:}\\\\
@@ -56,12 +56,9 @@ _{1}}(\\mathbf {v} _{3})-\\operatorname {proj} _{\\mathbf {u} _{2}}(\\mathbf {v}
 
 
 
-     \\textit{\\\\ for more : \\\\ https://en.wikipedia.org/wiki/Gram\\%E2\\%80\\%93Schmidt\\_process }
-
-
 
 `
-
+const link = "https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process"
 const Gram_Shmidt = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -116,7 +113,9 @@ const Gram_Shmidt = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

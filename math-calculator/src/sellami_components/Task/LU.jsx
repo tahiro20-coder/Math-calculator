@@ -5,7 +5,7 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Matrix_Decomposition from '../api/Matrix_Decomposition';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
@@ -19,10 +19,9 @@ const Description = `
         \\textit{ all elements above the diagonal are zero, 
         in the upper triangular matrix }{U} \\textit{,all the elements below the diagonal are zero.}
 
-        \\textit{\\\\for more : \\\\ https://en.wikipedia.org/wiki/LU\\_decomposition}
         
 `
-
+const link = " https://en.wikipedia.org/wiki/LU_decomposition"
 const LU = () => {
     const [sizeX,setSizeX] = useState(2)
     const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
@@ -75,7 +74,9 @@ const LU = () => {
     return (
       <div>
           <Title title={"Description"}/>
-          <Container title={"Function Description"} mathcontent={ Description}/>
+          <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
           
           <Title title={"Inputs"}/>
   

@@ -6,18 +6,16 @@ import Title from '../Title';
 import MatrixFund from '../api/MatrixFund';
 import 'katex/dist/katex.min.css';
 import Choice from '../Inputs/Choice';
-
+import Reference from '../Inputs/Reference';
 
 const Description = `
 
-\\textit{The orthogonal projection of a vector} **x** \\textit{onto 
-the space of a matrix }**A** \\textit{is the vector (e.g a time-series) that is 
-closest in the space} C(A), \\textit{where distance is measured as the sum of squared errors.}\\\\
-
-\\textit{From: \\\\ [Statistical Parametric Mapping, 2007](https://www.sciencedirect.com/science/article/abs/pii/B9780123725608500097)}
+\\textit{The orthogonal projection of a vector} \\; \\textbf{x} \\; \\textit{onto 
+the space of a matrix } \\; \\textbf{A} \\; \\textit{is the vector (e.g a time-series) that is 
+closest in the space} \\; C(A), \\textit{where distance is measured as the sum of squared errors.}\\\\
 
 `
-
+const link = "https://www.sciencedirect.com/science/article/abs/pii/B9780123725608500097"
 const Projection = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -147,7 +145,9 @@ const Projection = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

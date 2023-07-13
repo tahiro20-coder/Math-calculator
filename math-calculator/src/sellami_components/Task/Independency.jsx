@@ -6,7 +6,7 @@ import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Testing_Methods from '../api/Testing_Methods';
 
-
+import Reference from '../Inputs/Reference';
 
 const Description = `
 
@@ -24,12 +24,11 @@ vectors are said to be linearly dependent.}\\\\
 
 \\textit{and to check the independency of the vectors subspace we will apply the Gaussian 
 elimination on the space to check if there exist a kernel span.}
+q
 
-
-\\textit{\\\\for more : \\\\ https://en.wikipedia.org/wiki/Linear\\_independence}
 
 `
-
+const link = "https://en.wikipedia.org/wiki/Linear_independence"
 const Independency = () => {
   const [sizeX,setSizeX] = useState(2)
   const [sizeY,setSizeY] = useState(2)
@@ -84,7 +83,9 @@ const Independency = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

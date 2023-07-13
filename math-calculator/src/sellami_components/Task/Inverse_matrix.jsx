@@ -9,9 +9,9 @@ import 'katex/dist/katex.min.css';
 
 
 const Description = `
-\\textit{If A is a non-singular square matrix, there is an existence of n x n matrix} A^{-1}, 
+\\textit{If A is a non-singular square matrix, there is an existence of n x n matrix} \\; A^{-1}, 
 \\textit{which is called the inverse matrix of A such that it satisfies the property:}
-
+\\\\
 AA^{-1} = A^{-1}A = I, \\textit{where I is  the Identity matrix}
 `
 

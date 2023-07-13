@@ -5,16 +5,15 @@ import Container from '../Container';
 import Title from '../Title';
 import MatrixFund from '../api/MatrixFund';
 import 'katex/dist/katex.min.css';
-
+import Reference from '../Inputs/Reference';
 
 
 const Description = `
 \\textit{the transpose of a matrix is an operator which flips a matrix over its diagonal;
      that is, it switches the row and column indices of the matrix A by producing another matrix,
       often denoted by } A^T
-      \\textit{\\\\for more : \\\\https://en.wikipedia.org/wiki/Transpose}
 `
-
+const link ="https://en.wikipedia.org/wiki/Transpose"
 const Transpose = () => {
     const [sizeX,setSizeX] = useState(2)
     const [sizeY,setSizeY] = useState(2)
@@ -69,7 +68,9 @@ const Transpose = () => {
     return (
       <div>
           <Title title={"Description"}/>
-          <Container title={"Function Description"} mathcontent={ Description}/>
+          <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        } />
           
           <Title title={"Inputs"}/>
   

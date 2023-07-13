@@ -7,19 +7,18 @@ import 'katex/dist/katex.min.css';
 import Matrix_Decomposition from '../api/Matrix_Decomposition';
 
 
+// \\textit{ Let A be a square matrix. An LU factorization refers to the factorization of A,
+//   with proper row and/or column orderings or permutations, into two factors a lower
+//    triangular matrix L and an upper triangular matrix U:}\\\\
+
+//  A=LU. 
+//  \\textit{In the lower triangular matrix} {L}
+//  \\textit{ all elements above the diagonal are zero, 
+//  in the upper triangular matrix }{U} \\textit{,all the elements below the diagonal are zero.}
+
+//  \\textit{\\\\for more : \\\\ https://en.wikipedia.org/wiki/LU\\_decomposition}
 
 const Description = `
-
-        \\textit{ Let A be a square matrix. An LU factorization refers to the factorization of A,
-         with proper row and/or column orderings or permutations, into two factors a lower
-          triangular matrix L and an upper triangular matrix U:}\\\\
-
-        A=LU. 
-        \\textit{In the lower triangular matrix} {L}
-        \\textit{ all elements above the diagonal are zero, 
-        in the upper triangular matrix }{U} \\textit{,all the elements below the diagonal are zero.}
-
-        \\textit{\\\\for more : \\\\ https://en.wikipedia.org/wiki/LU\\_decomposition}
         
         \\textit{A symmetric, positive definite matrix A can be factorized into a
         product} A = LL^T, \\textit{where L is a lower triangular matrix with
@@ -43,7 +42,7 @@ const Description = `
         0 & \\dots & l_{nn}
         \\end{pmatrix}
         
-        \\\\
+        \\\\ \\ \\\\
         \\textit{The matrix L is uniquely defined and is called the Cholesky
         factor of A.}
 `
@@ -100,7 +99,7 @@ const Cholosky_Decomposition = () => {
     return (
       <div>
           <Title title={"Description"}/>
-          <Container title={"Function Description"} mathcontent={ Description}/>
+          <Container title={"Function Description"} mathcontent={ Description} />
           
           <Title title={"Inputs"}/>
   

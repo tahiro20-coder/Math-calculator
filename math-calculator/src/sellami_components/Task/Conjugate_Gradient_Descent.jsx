@@ -6,7 +6,7 @@ import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Gradients from '../api/Gradients';
 import InputParameter from '../Inputs/InputParameter';
-
+import Reference from '../Inputs/Reference';
 
 const Description = `
 
@@ -15,25 +15,24 @@ the numerical solution of particular systems of linear equations,
 namely those whose matrix is positive-definite.The conjugate gradient
  method is often implemented as an iterative algorithm.}\\\\
 
- \\textit{with assuming that } J : R^n→ R \\textit{is such that:}\\\\
+ \\textit{with assuming that } J : R^n→ R \\; \\textit{is such that:}\\\\
 J(x) = \\frac{1}{2}⟨A x, x⟩ − ⟨b, x⟩ + c\\\\
 
 
-\\textit{with} A ∈ R^{n×n} \\textit{symetric definite positive matrix ,} b ∈ R^n \\textit{and} c ∈ R.\\\\
+\\textit{with} A ∈ R^{n×n} \\textit{symetric definite positive matrix ,} b ∈ R^n \\textit{and} \\; c ∈ R.\\\\
 
-\\textit{For} k ∈ N\\textit{, we note:}\\\\
+\\textit{For} \\; k ∈ N\\textit{, we note:}\\\\
 G_k = L(∇J(x^{(0)})^⊤, ∇J(x^{(1)})^⊤, . . . , ∇J(x^{(k)})^⊤) ⊂ R^n\\\\
 
 
 
-\\textit{Conjugate gradients aims to find} x^{(k+1)} = x^{(k)} +G_k \\textit{ such that:}\\\\
+\\textit{Conjugate gradients aims to find} \\; x^{(k+1)} = x^{(k)} +G_k \\textit{ such that:}\\\\
 
 
 J(x^{k+1})=\\underset{v ∈ x^{(k)}+G_k}{min}J(v)\\\\
 
-\\textit{For More : \\\\ K.Boanan cours + https://en.wikipedia.org/wiki/Conjugate\\_gradient\\_method}
 `
-
+const link = "https://en.wikipedia.org/wiki/Conjugate_gradient_method"
 const Conjugate_Gradient_Descent = () => {
   const [sizeX,setSizeX] = useState(2)
   const [matrix1,setMatrix1] = useState(Array(sizeX).fill(0).map(row => new Array(sizeX).fill(0)))
@@ -133,7 +132,9 @@ const Conjugate_Gradient_Descent = () => {
   return (
     <div>
         <Title title={"Description"}/>
-        <Container title={"Function Description"} mathcontent={ Description}/>
+        <Container title={"Function Description"} mathcontent={ Description} content2={
+         <Reference link={link}/>
+        }/>
         
         <Title title={"Inputs"}/>
 

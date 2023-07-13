@@ -1,16 +1,46 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 
 
 function MatrixEntry ({sizeX , sizeY, HandleMatrixChange}){
     let matrix = Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0))
+    const [screenSize, setScreenSize] = useState(getCurrentDimension());
+    const [ins,setIns] = useState(15)
+  	function getCurrentDimension(){
+    	return {
+      		width: window.innerWidth,
+      		height: window.innerHeight
+    	}
+  	}
+
+    useEffect(() => {
+      const updateDimension = () => {
+          setScreenSize(getCurrentDimension())
+      }
+      window.addEventListener('resize', updateDimension);
+      if(screenSize.width <960){
+        setIns(30)
+      }else{
+        setIns(15)
+      }
+  
+      return(() => {
+          window.removeEventListener('resize', updateDimension);
+      })
+  }, [screenSize])
     
     // const input_size = 50
-    const ins = 15
+    
+    console.log(sizeY)
   return (
-    <div className='d-flex justify-content-center MinputCont' style={{"width":((32*ins) - sizeY*ins) +"vw"}}>
+    // <div className='d-flex justify-content-center MinputCont' style={{"width":((32*ins) - sizeY*ins) +"vw"}}>
+    <div className='d-flex justify-content-center MinputCont' style={{"width":"100%"}}>
         {matrix.map((row, indexRow = 1) => {
           return (
-            <div className='d-flex flex-wrap justify-content-center'  key={indexRow} style={{ "width": ins + "%" ,"minWidth":"25px"}} >
+            // <div className='d-flex flex-wrap justify-content-center'  key={indexRow} style={{ "width": ins + "%" ,"minWidth":"25px"}} >
+            <div className='d-flex flex-wrap justify-content-center'  key={indexRow} style={{ "width":
+            screenSize.width<500?(100/sizeY)+"%":ins + "%" 
+             
+             }} >
               {row.map((item, indexColumn = 1) => {
                 return (
                     <input
