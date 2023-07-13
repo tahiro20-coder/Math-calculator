@@ -86,10 +86,12 @@ function HomePage() {
                     </div>
                 </div>
             </Container>
-            <Container fluid="xl" className='container desc1 d-flex justify-content-within align-items-center'>
-                <div className='imgcont w-50'>
-                <div className="layer"></div>
-                    <img className='img1' src={img1} alt="" />
+            <Container fluid="xl" className='container desc1 d-flex justify-content-within align-items-center' >
+                <div className='imgcont w-50' >
+                <div className="layer ">
+                    <img className='img1' src={img1} alt="" /> 
+                </div>
+                
                     
                 </div>
                 <div className='desco1 w-50'>

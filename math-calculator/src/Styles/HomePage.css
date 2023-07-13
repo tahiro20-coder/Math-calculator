@@ -270,29 +270,38 @@
  
  .imgcont {
      height: 350px;
-     width: 45vw;
+     
      overflow: hidden;
+     
  }
  
  .img1 {
-     margin-top: -100px;
-     margin-left: 50px;
+     
+     position: relative;
+     top: -100px;
+     left: 50px;
      transform: rotateZ(-35deg);
+     z-index: -555;
+     
  }
  
  .img2 {
-     margin-top: 0px;
-     margin-left: 125px;
+     position: relative;
+     top: -350px;
+     left: 125px;
      transform: rotateZ(-35deg) scale(1.25);
+     z-index: -555;
  }
  
  .layer,
  .layer2 {
-     z-index: 555;
+     
      background-color: #22b3d01c;
-     position: absolute;
-     width: 40vw;
+     
+     z-index: 555;
+     width: 45vw;
      height: inherit;
+     overflow: hidden;
  }
  
  .layer2 {
