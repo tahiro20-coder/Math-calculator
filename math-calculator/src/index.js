@@ -16,9 +16,10 @@ if (rootElement !== null) {
     const root = ReactDOM.createRoot(rootElement);
 
     root.render( <React.StrictMode >
-        <HashRouter >
+        <BrowserRouter >
         <App / >
-        </HashRouter>  </React.StrictMode>
+        </BrowserRouter>  
+        </React.StrictMode>
     );
 
 }

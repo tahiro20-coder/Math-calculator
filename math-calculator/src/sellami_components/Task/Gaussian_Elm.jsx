@@ -5,9 +5,9 @@ import Container from '../Container';
 import Title from '../Title';
 import 'katex/dist/katex.min.css';
 import Echelon from '../api/Echelon';
-import Checker from '../Inputs/Checker';
+// import Checker from '../Inputs/Checker';
 import Reference from '../Inputs/Reference';
-
+import Checker from '../Inputs/Checker';
 
 const Description = `
 
@@ -107,7 +107,10 @@ const Gaussian_Elm = () => {
         }/>
 
         <Container title={"Additions"} content={
-        < Checker label = {"to Reduced Form ?"}  check = {check1} HandleCheckchange = {setcheck1} />
+        
+        <div>
+        <Checker label={"to Reduced Form ?"} check={check1} HandleCheckchange={setcheck1}/>
+    </div>
         }/>
         
         <div className='d-flex justify-content-center'>
