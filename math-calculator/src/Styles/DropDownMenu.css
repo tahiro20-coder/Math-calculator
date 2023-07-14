@@ -67,6 +67,10 @@
 
 .dropdown-item {
     white-space: unset;
+    padding: 0;
+}
+
+.dropdown-item a {
     padding: 10px 10px;
 }
 
@@ -96,9 +100,12 @@
 
 @media (max-width: 960px) {
     .dropdown_btn {
-        width: 75%;
+        width: 90%;
     }
     .dropdown_menu {
-        width: 75%;
+        width: 90%;
+    }
+    .content {
+        padding-top: 5rem !important;
     }
 }

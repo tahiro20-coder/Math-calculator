@@ -38,7 +38,7 @@ import Particular_Solution from '../sellami_components/Task/Particular_Solution'
 import General_solution from '../sellami_components/Task/General_solution';
 import LU_Solv from '../sellami_components/Task/LU_Solv';
 import Eigenvalues_and_Eigenvectors from '../sellami_components/Task/Eigenvalues_and_Eigenvectors';
-import Diagonizable from '../sellami_components/Task/Diagonizable';
+import Diagonizable from '../sellami_components/Task/diagonizable';
 import Convexity from '../sellami_components/Task/Convexity';
 import Invertibility from '../sellami_components/Task/Invertibility';
 import Orthogonality from '../sellami_components/Task/Orthogonality';
@@ -109,8 +109,24 @@ function CalcPage(){
         "SubMatrcies" : SubMatrcies,
     }
     const handle_page = (func)=>{
-        const  Comp  = Pages[func];
-        return <Comp  />
+        if(func in Pages){
+            const  Comp  = Pages[func];
+            return <Comp  />
+        }else{
+            return Pages[""]
+        }
+        
+    }
+    const select_func = (func)=>{
+        if(func == null){
+            return func
+        }
+        if(func in Pages){
+            return func
+        }else{
+            return null
+        }
+        
     }
     return(
         <div className= "container content text-center" >
@@ -120,7 +136,7 @@ function CalcPage(){
             <span className = 'normal' >
                 You can choose the linear algebra problem that you want to solve from the bottom menu
             </span>
-            <DropDownMenu selected={func} />
+            <DropDownMenu selected={select_func(func)} />
             
 
             {

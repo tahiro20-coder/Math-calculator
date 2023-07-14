@@ -201,8 +201,8 @@
         .conti {
             margin: 5px !important;
         }
-        .textit {
-            font-size: 15px;
+        .base {
+            font-size: 12.5px;
         }
         .choice {
             width: 80vw;
