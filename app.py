@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory,current_app,jsonify,request
+from flask import Flask, send_from_directory,current_app,jsonify,request,render_template
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS #comment this on deployment
 from api.HelloApiHandler import HelloApiHandler
@@ -19,6 +19,19 @@ CORS(app, origins=['https://easy-algebra.onrender.com'], methods=['GET', 'POST']
 api = Api(app)
 
 @app.route("/", defaults={'path':''})
+
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template('index.html')
+
+@app.route('/static/<path:path>')
+def serve_static(path):
+    return app.send_static_file(path)
+
+@app.route('/')
+def serve_index():
+    return render_template('index.html')
+    
 def serve(path):
     return send_from_directory(app.static_folder,'index.html')
 
