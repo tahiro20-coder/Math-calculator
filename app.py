@@ -32,8 +32,8 @@ def serve_static(path):
 def serve_index():
     return render_template('index.html')
     
-def serve(path):
-    return send_from_directory(app.static_folder,'index.html')
+#def serve(path):
+    #return send_from_directory(app.static_folder,'index.html')
 
 # @app.route("/add", methods=['GET', 'POST'], strict_slashes=False)
 # def add_articles():
