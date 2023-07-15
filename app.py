@@ -20,20 +20,11 @@ api = Api(app)
 
 @app.route("/", defaults={'path':''})
 
-@app.route('/<path:path>')
-def catch_all(path):
-    return render_template('index.html')
-
-@app.route('/static/<path:path>')
-def serve_static(path):
-    return app.send_static_file(path)
-
-@app.route('/')
-def serve_index():
-    return render_template('index.html')
-    
-#def serve(path):
-    #return send_from_directory(app.static_folder,'index.html')
+@app.errorhandler(404)
+def catch_all(e):
+    send_from_directory(app.static_folder,'index.html')
+def serve(path):
+    return send_from_directory(app.static_folder,'index.html')
 
 # @app.route("/add", methods=['GET', 'POST'], strict_slashes=False)
 # def add_articles():
