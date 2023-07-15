@@ -22,7 +22,7 @@ api = Api(app)
 
 @app.errorhandler(404)
 def catch_all(e):
-    send_from_directory(app.static_folder,'index.html')
+    return send_from_directory(app.static_folder,'index.html')
 def serve(path):
     return send_from_directory(app.static_folder,'index.html')
 
