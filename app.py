@@ -20,17 +20,8 @@ api = Api(app)
 
 @app.route("/", defaults={'path':''})
 
-@app.route('/<path:path>')
-def catch_all(path):
-    return render_template('index.html')
-
-@app.route('/static/<path:filename>')
-def serve_static(filename):
-    root_dir = app.root_path
-    return app.send_from_directory(root_dir + '/math-calculator/build/static/', filename)
-
-@app.route('/')
-def serve_index():
+@app.errorhandler(404)
+def page_not_found(e):
     return render_template('index.html')
 
 def serve(path):
