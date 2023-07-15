@@ -20,9 +20,18 @@ api = Api(app)
 
 @app.route("/", defaults={'path':''})
 
-@app.errorhandler(404)
-def catch_all(e):
+@app.route('/<path:path>')
+def catch_all(path):
     return render_template('index.html')
+
+@app.route('/public/<path:path>')
+def serve_static(path):
+    return app.send_static_file(path)
+
+@app.route('/')
+def serve_index():
+    return render_template('index.html')
+
 def serve(path):
     return send_from_directory(app.static_folder,'index.html')
 
