@@ -24,9 +24,10 @@ api = Api(app)
 def catch_all(path):
     return render_template('index.html')
 
-@app.route('/public/<path:path>')
-def serve_static(path):
-    return app.send_static_file(path)
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    root_dir = app.root_path
+    return app.send_from_directory(root_dir + '/math-calculator/build/static/', filename)
 
 @app.route('/')
 def serve_index():

@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0075a4c4.css",
+    "main.js": "/static/js/main.dba57be6.js",
+    "static/js/787.8d08abd6.chunk.js": "/static/js/787.8d08abd6.chunk.js",
+    "static/media/intro_img.png": "/static/media/intro_img.6987691997f16fdde503.png",
+    "static/media/univ_logo.png": "/static/media/univ_logo.e2eb5cdeb14b94c1df3c.png",
+    "index.html": "/index.html",
+    "main.0075a4c4.css.map": "/static/css/main.0075a4c4.css.map",
+    "main.dba57be6.js.map": "/static/js/main.dba57be6.js.map",
+    "787.8d08abd6.chunk.js.map": "/static/js/787.8d08abd6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0075a4c4.css",
+    "static/js/main.dba57be6.js"
+  ]
+}
