@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom"
-import { HashRouter } from 'react-router-dom'
+
 import 'katex/dist/katex.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import "./Styles/Fonts.css"
@@ -16,9 +16,9 @@ if (rootElement !== null) {
     const root = ReactDOM.createRoot(rootElement);
 
     root.render( <React.StrictMode >
-        <HashRouter >
+        <BrowserRouter >
         <App / >
-        </HashRouter>  </React.StrictMode>
+        </BrowserRouter>  </React.StrictMode>
     );
 
 }
