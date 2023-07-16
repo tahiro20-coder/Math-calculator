@@ -29,7 +29,7 @@ function Header(){
     <>
       <Navbar bg="light" expand="md" bsPrefix='navbar'>
         <Container   fluid='sm'>
-          <Navbar.Brand href="/#/Home">
+          <Navbar.Brand href="/Home">
             <img className="logo" src={univ_logo} alt="logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
