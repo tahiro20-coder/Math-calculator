@@ -29,7 +29,7 @@ function Header(){
     <>
       <Navbar bg="light" expand="md" bsPrefix='navbar'>
         <Container   fluid='sm'>
-          <Navbar.Brand href="/#/Home">
+          <Navbar.Brand href="/Home">
             <img className="logo" src={univ_logo} alt="logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
@@ -37,6 +37,7 @@ function Header(){
             <Nav className="me-auto">
               <CustomLink className = "link_page" to='/Home'>Home</CustomLink>
               <CustomLink className = "link_page" to='/Calculator' >Math Calculator</CustomLink>
+              <CustomLink className = "link_page" to='/Learning' >Courses</CustomLink>
               <CustomLink className = "link_page" to='/About'>About</CustomLink>
               <CustomLink className = "link_page " to='/Contact'>Contact us</CustomLink>
             </Nav>

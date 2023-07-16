@@ -35,7 +35,9 @@ function ContactPage(){
       <Container fluid="xxl" className='CPT'>
           <div className="CPTTitle">
             Contact Us
+            <hr className='lineSt'/>
           </div>
+          
           <div className='CPTdesc'>
             Here you can send us your feedback, problems, sujessions and anything you want to tell us about
             feel free and write what ever you want to say we will read it later.
