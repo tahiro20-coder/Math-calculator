@@ -21,27 +21,19 @@ api = Api(app)
 @app.route("/", defaults={'path':''})
 
 
-@app.route('/<path:path>')
-def catch_all(path):
-    print(path)
-    return render_template('index.html')
-
-@app.route('/static/<path:filename>')
-def serve_static(filename):
-    root_dir = app.root_path
-    print(root_dir)
-    return send_from_directory(root_dir + '/math-calculator/build/static/', filename)
-
-
 @app.route('/')
-def serve_index():
-    return render_template('index.html')
-    
+def index():
+    return send_from_directory(app.static_folder,'index.html')
 
-
+@app.route('/redirect')
+def redirect_to_index():
+    return redirect(url_for('index'))
 
 def serve(path):
+    print(app.static_folder)
     return send_from_directory(app.static_folder,'index.html')
+
+
 
 # @app.route("/add", methods=['GET', 'POST'], strict_slashes=False)
 # def add_articles():
