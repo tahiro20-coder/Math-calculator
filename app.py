@@ -19,16 +19,6 @@ CORS(app, origins=['https://easy-algebra.onrender.com'], methods=['GET', 'POST']
 api = Api(app)
 
 @app.route("/", defaults={'path':''})
-
-
-@app.route('/Home')
-def index():
-    return send_from_directory(app.static_folder,'index.html')
-
-@app.route('/redirect')
-def redirect_to_index():
-    return redirect(url_for('index'))
-
 def serve(path):
     print(app.static_folder)
     return send_from_directory(app.static_folder,'index.html')
