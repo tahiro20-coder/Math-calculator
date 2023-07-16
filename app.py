@@ -21,7 +21,7 @@ api = Api(app)
 @app.route("/", defaults={'path':''})
 
 
-@app.route('/')
+@app.route('/Home')
 def index():
     return send_from_directory(app.static_folder,'index.html')
 
