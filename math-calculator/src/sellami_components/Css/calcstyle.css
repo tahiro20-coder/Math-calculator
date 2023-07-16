@@ -52,7 +52,7 @@
 
 .content {
     /* padding: 25vh; */
-    padding-top: 35vh;
+    padding-top: 12.5vmax;
     padding-bottom: 10vh;
     height: fit-content;
 }

@@ -4,6 +4,7 @@ import AboutPage from '../Pages/AboutPage.jsx';
 import CalcPage from '../Pages/CalcPage.jsx';
 import ContactPage from '../Pages/ContactPage.js';
 import RedirectPage from '../Pages/Redirect.jsx';
+import LearningPage from "../Pages/LearningPage.jsx";
 import React,{useEffect} from 'react'
 
 function PageContent(){
@@ -14,6 +15,7 @@ function PageContent(){
             <Route path='/Home' element={<HomePage/>}/>
             <Route path='/Calculator' element={<CalcPage/>}/>
             <Route path='/Calculator/:func' element={<CalcPage/>}/>
+            <Route path='/Learning' element={<LearningPage/>}/>
             <Route path='/About' element={<AboutPage/>}/>
             <Route path='/Contact' element={<ContactPage/>}/>
             <Route path='/*' element={<RedirectPage/>}/>

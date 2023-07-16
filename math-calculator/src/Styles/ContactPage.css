@@ -17,8 +17,13 @@
     color: #116A7B;
     color: #262626;
     color: #116A7B;
+    color: white;
     line-height: 125%;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .CPTdesc {
@@ -35,6 +40,12 @@
 
 .main-ctp {
     width: 60%;
+}
+
+.lineSt {
+    width: 50%;
+    border-color: white;
+    border-width: 2px;
 }
 
 @media (max-width: 450px) {
