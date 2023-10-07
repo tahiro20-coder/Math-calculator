@@ -5,7 +5,7 @@ import Container from '../Container';
 import Title from '../Title';
 import Distance from '../api/Distance';
 import 'katex/dist/katex.min.css';
-
+import { CircularProgress } from "@mui/material";
 
 
 const Description = `
@@ -18,7 +18,7 @@ const Manhattan_VDistance = () => {
   const [matrix2,setMatrix2] = useState(Array(sizeY).fill(0).map(row => new Array(1).fill(0)))
   // const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(1).fill(0)))
   const [output,setoutput] = useState("")
-
+  const [waiting, setWaiting] = useState(false);
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
     let temp = Array(1).fill(0).map(row => new Array(sizeY).fill(0))
     for (let i = 0; i < Math.min(matrix1.length,1) ; i++) {
@@ -42,8 +42,9 @@ const Manhattan_VDistance = () => {
     setMatrix2(temp)
   }
   const handleSubmit = () =>{
+    setWaiting(true);
     Distance.Manhattan_VDistance({matrix1,matrix2})
-      .then((response) => {console.log("jakobian",response["result"]); setoutput(response["output"])})
+      .then((response) => {console.log("jakobian",response["result"]); setoutput(response["output"]);setWaiting(false);})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -102,15 +103,31 @@ const Manhattan_VDistance = () => {
           </div>
         </div>
 
-        {output==="" ? <></> : 
-        <>
-        <Title title={"Output"}/>
         
-        <Container title={"Results"} mathcontent={
-            output
-        }/>
+{output === "" && !waiting ? (
+        <></>
+      ) : (
+        <>
+          <Title title={"Output"} />
+          {waiting ? (
+            <Container
+              title={"Results"}
+              content={
+                <div
+                  className="d-flex flex-column justify-content-center align-items-center p-4"
+                  style={{ gap: "15px" }}
+                >
+                  <CircularProgress />
+                  <span>This may take some time, please be patient</span>
+                </div>
+              }
+            />
+          ) : (
+            <Container title={"Results"} mathcontent={output} />
+          )}
         </>
-        }
+      )}
+
     </div>
   )
 }

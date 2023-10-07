@@ -5,7 +5,7 @@ import Container from '../Container';
 import Title from '../Title';
 import Norms from '../api/Norms';
 import 'katex/dist/katex.min.css';
-
+import { CircularProgress } from "@mui/material";
 
 
 const Description = `
@@ -22,7 +22,7 @@ const Inifinity_VNorm = () => {
   const [matrix1,setMatrix1] = useState(Array(sizeY).fill(0).map(row => new Array(1).fill(0)))
   // const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(1).fill(0)))
   const [output,setoutput] = useState("")
-
+  const [waiting, setWaiting] = useState(false);
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
     let temp = Array(1).fill(0).map(row => new Array(sizeY).fill(0))
     for (let i = 0; i < Math.min(matrix1.length,1) ; i++) {
@@ -36,8 +36,9 @@ const Inifinity_VNorm = () => {
   }
 
   const handleSubmit = () =>{
+    setWaiting(true);
     Norms.Inifinity_VNorm({matrix1})
-      .then((response) => { setoutput(response["output"])})
+      .then((response) => { setoutput(response["output"]);setWaiting(false);})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -88,15 +89,31 @@ const Inifinity_VNorm = () => {
           </div>
         </div>
 
-        {output==="" ? <></> : 
+        
+{output === "" && !waiting ? (
+        <></>
+      ) : (
         <>
-        <Title title={"Output"}/>
-
-        <Container title={"Results"} mathcontent={
-            output
-        }/>
+          <Title title={"Output"} />
+          {waiting ? (
+            <Container
+              title={"Results"}
+              content={
+                <div
+                  className="d-flex flex-column justify-content-center align-items-center p-4"
+                  style={{ gap: "15px" }}
+                >
+                  <CircularProgress />
+                  <span>This may take some time, please be patient</span>
+                </div>
+              }
+            />
+          ) : (
+            <Container title={"Results"} mathcontent={output} />
+          )}
         </>
-        }
+      )}
+
     </div>
   )
 }

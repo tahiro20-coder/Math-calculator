@@ -16,6 +16,7 @@ import sys
 
 app = Flask(__name__, static_url_path='', static_folder='fronted/build')
 CORS(app, origins=['https://easy-algebra.onrender.com'], methods=['GET', 'POST'], allow_headers=['Content-Type']) #comment this on deployment
+
 api = Api(app)
 
 @app.route("/", defaults={'path':''})

@@ -6,7 +6,7 @@ import Title from '../Title';
 import Distance from '../api/Distance';
 import 'katex/dist/katex.min.css';
 import Reference from '../Inputs/Reference';
-
+import { CircularProgress } from "@mui/material";
 
 const Description = `
 d_1(A,B) = \\sum_{i=1}^n\\sum_{j=1}^m \\vert a_{ij} - b_{ij} \\vert \\\\
@@ -20,7 +20,7 @@ const Manhattan_Distance = () => {
   const [matrix2,setMatrix2] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   //const [resultMatrix,setresultMatrix] = useState(Array(sizeY).fill(0).map(row => new Array(sizeX).fill(0)))
   const [output,setoutput] = useState("")
-
+  const [waiting, setWaiting] = useState(false);
   const HandleMatrix1Change = (indexX,indexY,Value) =>{
     let temp = Array(sizeX).fill(0).map(row => new Array(sizeY).fill(0))
     for (let i = 0; i < Math.min(matrix1.length,sizeX) ; i++) {
@@ -44,8 +44,9 @@ const Manhattan_Distance = () => {
     setMatrix2(temp)
   }
   const handleSubmit = () =>{
+    setWaiting(true);
     Distance.Manhattan_Distance({matrix1,matrix2})
-      .then((response) => {console.log("jakobian",response["result"]); setoutput(response["output"])})
+      .then((response) => {console.log("jakobian",response["result"]); setoutput(response["output"]);setWaiting(false);})
       .catch(error => console.log('error',error))
     }
   const handleReset = () =>{
@@ -116,15 +117,31 @@ const Manhattan_Distance = () => {
           </div>
         </div>
 
-        {output==="" ? <></> : 
-        <>
-        <Title title={"Output"}/>
         
-        <Container title={"Results"} mathcontent={
-            output
-        }/>
+{output === "" && !waiting ? (
+        <></>
+      ) : (
+        <>
+          <Title title={"Output"} />
+          {waiting ? (
+            <Container
+              title={"Results"}
+              content={
+                <div
+                  className="d-flex flex-column justify-content-center align-items-center p-4"
+                  style={{ gap: "15px" }}
+                >
+                  <CircularProgress />
+                  <span>This may take some time, please be patient</span>
+                </div>
+              }
+            />
+          ) : (
+            <Container title={"Results"} mathcontent={output} />
+          )}
         </>
-        }
+      )}
+
     </div>
   )
 }

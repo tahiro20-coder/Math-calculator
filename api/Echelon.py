@@ -326,7 +326,7 @@ class Rank(Resource):
         Basis = []
         LatexText += Container(emph("where the echelon form of will be"))
         LatexText += Container("U_{echelon} = "+bmatrix(U_reduced))
-        for i in range(0,U_reduced.shape[1]):
+        for i in range(0,min(U_reduced.shape[0],U_reduced.shape[1])):
             if(U_reduced[i,i] == 1): # this is a basis
                 Basis.append(U_Span[:,i])
         LatexText += Container(emph("\\textbf{2) After extracting the pivot columns which are the basis we find that the basis of the space are : }"))
