@@ -1,0 +1,32 @@
+CORS(app, origins=['https://easy-algebra.onrender.com'], methods=['GET', 'POST'], allow_headers=['Content-Type']) #comment this on deployment
+
+CORS(app)
+
+
+import { CircularProgress } from "@mui/material";
+const [waiting, setWaiting] = useState(false);
+setWaiting(true);
+
+{output === "" && !waiting ? (
+        <></>
+      ) : (
+        <>
+          <Title title={"Output"} />
+          {waiting ? (
+            <Container
+              title={"Results"}
+              content={
+                <div
+                  className="d-flex flex-column justify-content-center align-items-center p-4"
+                  style={{ gap: "15px" }}
+                >
+                  <CircularProgress />
+                  <span>This may take some time, please be patient</span>
+                </div>
+              }
+            />
+          ) : (
+            <Container title={"Results"} mathcontent={output} />
+          )}
+        </>
+      )}
