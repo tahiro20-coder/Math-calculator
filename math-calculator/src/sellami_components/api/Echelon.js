@@ -45,7 +45,7 @@ export default class Echelon {
   }
 
   static Rank(content) {
-    return fetch(`http://easy-algebra-backend.onrender.com/Rank`, {
+    return fetch(`https://easy-algebra-backend.onrender.com/Rank`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
