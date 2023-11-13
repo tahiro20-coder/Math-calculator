@@ -1,12 +1,18 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { BlockMath } from 'react-katex'; 
+import 'katex/dist/katex.min.css';
 
-const Container = ({title,content,mathcontent}) => {
+const Container = ({title,content,mathcontent,content2}) => {
 
-  var tds = document.querySelectorAll("span");
+  
+
+  useEffect (() => {
+    var tds = document.querySelectorAll(".base span");
   for (let i = 0; i < tds.length; ++i) {
     tds[i].innerHTML = tds[i].innerHTML.replace(/&nbsp;/g, " ");
+    tds[i].innerHTML = tds[i].innerHTML.replace(//g, "≠");
   }
+  }, []);
   return (
       <div className='container cont '>
           <div className='titleCont'>
@@ -24,6 +30,13 @@ const Container = ({title,content,mathcontent}) => {
              <div className='m-3 conti'>
             <BlockMath math={mathcontent} />
             </div> :
+            null
+          }
+          {
+            content2 != null?
+            <div className='content2'>
+              {content2}
+            </div>:
             null
           }
            

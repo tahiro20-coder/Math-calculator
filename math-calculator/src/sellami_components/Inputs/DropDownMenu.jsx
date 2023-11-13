@@ -27,20 +27,20 @@ function DropDownMenu ({selected}){
     "Inverse_matrix" : "Matrix Inverse",
     "Trace" : "Trace",
     "Determinant" : "Determinant",
-    "Gaussian_Elm" : "Gaussian_Elimination",
+    "Gaussian_Elm" : "Gaussian Elimination",
     "Basis" : "Basis Extraction",
-    "Kernel" : "Null Space",
+    "Kernel" : "Kernel Extraction",
     "Rank" : "Rank",
     "Gram_Shmidt" : "Gram Shmidt",
     "Particular_Solution" : "Particular Solution of Ax=b",
     "General_solution": "General solution of Ax=b",
     "LU_Solv" : "LU Decomposition for Solving a Linear equation",
     "Eigenvalues_and_Eigenvectors" : "Eigenvalues and Eigenvectors",
-    "Diagonizable" : "Diagonizable Check",
-    "Convexity" : "Convexity Check",
-    "Invertibility" : "Invertibility Check",
-    "Orthogonality" : "Orthogonality Check of a Subspace",
-    "Independency" : "Independency check of a Subspace",
+    "Diagonizable" : "Diagonizability Cecking",
+    "Convexity" : "Convexity Checking",
+    "Invertibility" : "Invertibility Checking",
+    "Orthogonality" : "Checking Orthogonality for a Subspace",
+    "Independency" : "Checking Independency for a Subspace",
     "Angle" : "Angle between vectors",
     "Projection" : "Orthogonal Projection",
     "Affine_Projection" : "Orthogonal Projection onto an Affine subspace",
@@ -53,7 +53,7 @@ function DropDownMenu ({selected}){
     "Cholosky_Decomposition" : "Cholosky Decomposition",
     "QR_Decomposition" : "QR Decomposition",
     "Gradient_Linear_Regression" : "Univariante Linear Regression using Gradient Descent ",
-    "MulMatrcies" : "Side by Side Matricies Multiplication ",
+    "MulMatrcies" : "Hadamard Product",
     "MulScalarMatrix" : "Scalar Multiplication",
     "SubMatrcies" : "Subtract two matrcies",
 
@@ -63,7 +63,7 @@ function DropDownMenu ({selected}){
         <Dropdown className='w-100 '>
         <Dropdown.Toggle className=' dropdown_btn' variant="success" id="dropdown-basic">
             {
-              selected == null ? "What to do ? " : TitleList[selected]
+              selected == null ? "Choose a Function " : TitleList[selected]
             }
             
         </Dropdown.Toggle>
@@ -71,7 +71,12 @@ function DropDownMenu ({selected}){
         <Dropdown.Menu className='dropdown_menu'>
         {Object.entries(TitleList).map(([keyV, value])=>{
           return <Dropdown.Item key={keyV}  className={selected===keyV? "active" : ""} >
-          <Link to={'/Calculator/'+keyV} className='d-flex w-100'>{value}</Link>
+          <Link to={'/Calculator/'+keyV} className='d-flex w-100'>
+            <span>
+            {value}
+            </span>
+
+          </Link>
           </Dropdown.Item>
         })}
 {/*         

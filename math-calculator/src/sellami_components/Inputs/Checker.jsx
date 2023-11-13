@@ -5,10 +5,10 @@ const Checker = ({label,check,HandleCheckchange}) => {
     <div>
         <FormGroup>
         <FormControlLabel control={<Checkbox  checked={check} onChange={()=>{
-          if(check === 0){
-            HandleCheckchange(1)
+          if(check === false){
+            HandleCheckchange(true)
           }else{
-            HandleCheckchange(0)
+            HandleCheckchange(false)
           }
         }}/>} label={label} />
         </FormGroup>

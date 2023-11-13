@@ -1,5 +1,7 @@
 import React from 'react'
 import "../Css/Components.css"
+
+
 const Choice = ({choice = 0,setChoice}) => {
   const HandleChange = () =>{
     if(choice === 0){
@@ -9,7 +11,8 @@ const Choice = ({choice = 0,setChoice}) => {
     }
   }
   return (
-    <div className='choiceCont'>
+    <div className=' w-100 d-flex justify-content-center'>
+      <div className='choiceCont'>
         <div className='d-flex justify-content-between choice' onClick={HandleChange}>
         <div className='sh'>
         <div className={'slider ' + (choice===0 ?"select1": "select2")}></div>
@@ -23,6 +26,8 @@ const Choice = ({choice = 0,setChoice}) => {
         
     </div>
     </div>
+    </div>
+    
     
   )
 }

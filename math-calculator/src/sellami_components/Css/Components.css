@@ -138,7 +138,7 @@
     }
     
     .choice {
-        width: 35vw;
+        width: 40vw;
         height: 50px;
         background-color: #C2DEDC;
         align-items: center;
@@ -152,7 +152,7 @@
     
     .slider {
         position: relative;
-        width: 20vw;
+        width: 22.5vw;
         height: 50px;
         background-color: #0B3841;
         display: block;
@@ -169,7 +169,7 @@
     
     .select2 {
         /* right: -11vw; */
-        transform: translateX(14.5vw);
+        transform: translateX(16.5vw);
         transition: all 0.5s ease;
         clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
     }
@@ -183,4 +183,52 @@
     .choice2 {
         transition: all 0.5s ease;
         z-index: 999;
+        width: 50%;
+    }
+    
+    .resourcebtn {
+        margin-top: 0px;
+        margin-bottom: 15px;
+        width: fit-content;
+        font-size: 15px;
+    }
+    
+    @media (max-width: 960px) {
+        .cont {
+            width: 100%;
+            padding: 2px;
+        }
+        .conti {
+            margin: 5px !important;
+        }
+        .base {
+            font-size: 12.5px;
+        }
+        .choice {
+            width: 80vw;
+            padding: 0 1vw;
+        }
+        .slider {
+            width: 45vw;
+        }
+        .select1 {
+            /* left: -1vw; */
+            transform: translateX(-1vw);
+            transition: all 0.5s ease;
+            clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
+        }
+        .select2 {
+            /* right: -11vw; */
+            transform: translateX(34vw);
+            transition: all 0.5s ease;
+            clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
+        }
+    }
+    
+    @media (max-width: 305px) {
+        .conti {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
     }
