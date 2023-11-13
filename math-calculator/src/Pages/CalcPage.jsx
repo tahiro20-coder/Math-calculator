@@ -254,8 +254,8 @@ function CalcPage() {
       setFunctionSelectedMAIN(state.Findex);
       setSubFunctionSelectedMAIN(state.Sindex);
 
-      setFunctionSelected(state.Findex == -1 ? state.Findex : 0);
-      setSubFunctionSelected(state.Sindex == -1 ? state.Sindex : 0);
+      setFunctionSelected(state.Findex != -1 ? state.Findex : 0);
+      setSubFunctionSelected(state.Sindex != -1 ? state.Sindex : 0);
 
       navigate(loc.pathname, { replace: true });
     }
@@ -267,6 +267,8 @@ function CalcPage() {
               setFF(i);
               setSSF(j);
               setSubSubFunctionSelected(k);
+              setFunctionSelected(i);
+              setSubFunctionSelected(j);
               return;
             }
           }
@@ -751,12 +753,15 @@ function CalcPage() {
       ],
     ],
   ];
-  const [Opened, setOpened] = useState(true);
+  const [Opened, setOpened] = useState(false);
   return (
     <div>
       <IconButton
-        className={"TopDownButton " + (offset <= 50 ? "Frezed" : "")+
-        (Opened ? " Opened" : "")}
+        className={
+          "TopDownButton " +
+          (offset <= 50 ? "Frezed" : "") +
+          (Opened ? " Opened" : "")
+        }
         onClick={() => {
           setOpened(!Opened);
         }}
@@ -996,8 +1001,8 @@ function CalcPage() {
             <IconButton
               onClick={() => {
                 setFunctionSelectedMAIN(-1);
-                setFunctionSelected(-1);
-                SubFunctionSelected(0);
+                setFunctionSelected(0);
+                setSubFunctionSelected(0);
               }}
             >
               <ArrowLeftCircle />
@@ -1007,8 +1012,8 @@ function CalcPage() {
               style={{ fontSize: 20, cursor: "pointer" }}
               onClick={() => {
                 setFunctionSelectedMAIN(-1);
-                setFunctionSelected(-1);
-                SubFunctionSelected(0);
+                setFunctionSelected(0);
+                setSubFunctionSelected(0);
               }}
             >
               Main Problems
@@ -1055,7 +1060,7 @@ function CalcPage() {
             <IconButton
               onClick={() => {
                 setSubFunctionSelectedMAIN(-1);
-                setSubFunctionSelected(-1);
+                setSubFunctionSelected(0);
               }}
             >
               <ArrowLeftCircle />
@@ -1065,8 +1070,8 @@ function CalcPage() {
               style={{ fontSize: 20, cursor: "pointer" }}
               onClick={() => {
                 setFunctionSelectedMAIN(-1);
-                setFunctionSelected(-1);
-                SubFunctionSelected(0);
+                setFunctionSelected(0);
+                setSubFunctionSelected(0);
               }}
             >
               Main Problems
@@ -1077,7 +1082,7 @@ function CalcPage() {
               style={{ fontSize: 20, cursor: "pointer" }}
               onClick={() => {
                 setSubFunctionSelectedMAIN(-1);
-                setSubFunctionSelected(-1);
+                setSubFunctionSelected(0);
               }}
             >
               {MainFunctions[FunctionSelectedMAIN]["title"]} Problems
