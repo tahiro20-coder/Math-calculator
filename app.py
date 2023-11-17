@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory,current_app,jsonify,request
+from flask import Flask, send_from_directory,current_app,jsonify,request,render_template
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS #comment this on deployment
 from api.HelloApiHandler import HelloApiHandler
@@ -21,7 +21,10 @@ api = Api(app)
 
 @app.route("/", defaults={'path':''})
 def serve(path):
+    print(app.static_folder)
     return send_from_directory(app.static_folder,'index.html')
+
+
 
 # @app.route("/add", methods=['GET', 'POST'], strict_slashes=False)
 # def add_articles():
