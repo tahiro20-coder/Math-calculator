@@ -6,7 +6,13 @@ const Container = ({title,content,mathcontent,content2}) => {
 
   
   useEffect (() => {
-    var tds = document.querySelectorAll(".base span");
+    var tds = document.querySelectorAll(".mord");
+  for (let i = 0; i < tds.length; i++) {
+
+    tds[i].innerHTML = tds[i].innerHTML.replace(/&nbsp;/g, " ");
+    tds[i].innerHTML = tds[i].innerHTML.replace(//g, "≠");
+  }
+  tds = document.querySelectorAll(".base span");
   for (let i = 0; i < tds.length; i++) {
 
     tds[i].innerHTML = tds[i].innerHTML.replace(/&nbsp;/g, " ");

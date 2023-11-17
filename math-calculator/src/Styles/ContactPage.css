@@ -80,6 +80,9 @@
   }
  
 }
+div.path_container{
+  text-align: start!important;
+}
 .dropCont{
   position: absolute;
   top: 25px;

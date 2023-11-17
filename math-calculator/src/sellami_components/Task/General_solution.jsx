@@ -202,7 +202,7 @@ const General_solution = () => {
           <button onClick={handleReset}>Reset Input</button>
         </div>
       </div>
-
+      
       {output === "" && !waiting ? (
         <></>
       ) : (
