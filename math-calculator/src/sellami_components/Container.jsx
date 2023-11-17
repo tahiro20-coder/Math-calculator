@@ -5,10 +5,10 @@ import 'katex/dist/katex.min.css';
 const Container = ({title,content,mathcontent,content2}) => {
 
   
-
   useEffect (() => {
     var tds = document.querySelectorAll(".base span");
-  for (let i = 0; i < tds.length; ++i) {
+  for (let i = 0; i < tds.length; i++) {
+
     tds[i].innerHTML = tds[i].innerHTML.replace(/&nbsp;/g, " ");
     tds[i].innerHTML = tds[i].innerHTML.replace(//g, "≠");
   }
