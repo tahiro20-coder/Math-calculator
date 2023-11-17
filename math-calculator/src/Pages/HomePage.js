@@ -40,11 +40,11 @@ function HomePage() {
                 <div className='intro-container'>
                     <div className='intro-text-container'>
                         <div className='intro-title'>
-                            <span>Calculate your Linear Algebra</span>
+                            <span>Calculate your Mathematics</span>
                         </div>
                         <div className='intro-content'>
 
-                            <span>Descover and calculate up to 50+ linear algebra problems, where the solutions are shown step by step.</span>
+                            <span>Descover and calculate up to 45+ mathematical problems, where the solutions are shown step by step.</span>
                         </div>
 
                         <div className='intro-btn-container'>
@@ -65,10 +65,10 @@ function HomePage() {
                 <div className="sec-main">
                     <div className="sec-cont">
                         <span className='sec-nb'>
-                            50+
+                            45+
                         </span>
                         <span className='sec-dc'>
-                            Linear algebra problems
+                            Mathematical problems
                         </span>
                     </div>
                     <div className="sec-cont">
@@ -99,7 +99,7 @@ function HomePage() {
                     Step by Step <span style={{color: "#178a9f"}}>Claculations</span> 
                     </div>
                     <div className='descocontent'>
-                        Our interactive Linear Algebra Calculator website simplifies complex linear algebra computations
+                        Our interactive Mathematical Calculator website simplifies complex Mathematical computations
                      and is designed for students, educators, and mathematics enthusiasts. It provides 
                      a user-friendly interface for performing operations like matrix multiplication, 
                      addition, subtraction, determinants, inverses, and solving systems of linear equations.
@@ -107,7 +107,7 @@ function HomePage() {
                     The website offers step-by-step guidance and explanations to help users understand 
                     the underlying principles behind each computation. It also features interactive visualizations 
                     that allow users to visualize matrices and their transformations, 
-                    aiding in the comprehension of geometric interpretations of linear algebra concepts.
+                    aiding in the comprehension of geometric interpretations of Mathematical concepts.
                     </div>
                 </div>
             </Container>

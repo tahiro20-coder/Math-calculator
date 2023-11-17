@@ -30,7 +30,7 @@ function MatrixEntry ({sizeX , sizeY, HandleMatrixChange}){
     
     // const input_size = 50
     
-    console.log(sizeY)
+    // console.log(sizeY)
   return (
     // <div className='d-flex justify-content-center MinputCont' style={{"width":((32*ins) - sizeY*ins) +"vw"}}>
     <div className='d-flex justify-content-center MinputCont' style={{"width":"100%"}}>

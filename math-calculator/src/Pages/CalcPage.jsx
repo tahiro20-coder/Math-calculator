@@ -38,7 +38,7 @@ import Particular_Solution from "../sellami_components/Task/Particular_Solution"
 import General_solution from "../sellami_components/Task/General_solution";
 import LU_Solv from "../sellami_components/Task/LU_Solv";
 import Eigenvalues_and_Eigenvectors from "../sellami_components/Task/Eigenvalues_and_Eigenvectors";
-import Diagonizable from "../sellami_components/Task/diagonizable";
+import Diagonizable from "../sellami_components/Task/Diagonizable";
 import Convexity from "../sellami_components/Task/Convexity";
 import Invertibility from "../sellami_components/Task/Invertibility";
 import Orthogonality from "../sellami_components/Task/Orthogonality";
@@ -756,6 +756,9 @@ function CalcPage() {
   const [Opened, setOpened] = useState(false);
   return (
     <div>
+      <div className="dropCont">
+      <DropDownMenu selected={select_func(func)} />
+      </div>
       <IconButton
         className={
           "TopDownButton " +
@@ -880,14 +883,14 @@ function CalcPage() {
 
       {func != null ? (
         <div
-          className="container content text-center"
+          className="container content "
           style={{ paddingTop: "2.5vh" }}
         >
           {FF == -1 ? (
             <></>
           ) : (
             <div
-              className="d-flex flex-row align-items-center flex-wrap "
+              className="d-flex flex-row align-items-center flex-wrap path_container"
               style={{ gap: 15 }}
             >
               <Link
@@ -903,7 +906,7 @@ function CalcPage() {
                 state={{ Findex: -1, Sindex: -1, SSindex: -1 }}
               >
                 <span
-                  className="Header text-center"
+                  className="Header  path_container"
                   style={{ fontSize: 18, cursor: "pointer" }}
                 >
                   Main Problems
@@ -915,7 +918,7 @@ function CalcPage() {
                 state={{ Findex: FF, Sindex: -1, SSindex: -1 }}
               >
                 <span
-                  className="Header text-center"
+                  className="Header  path_container"
                   style={{ fontSize: 18, cursor: "pointer" }}
                 >
                   {MainFunctions[FF]["title"]} Problems
@@ -931,7 +934,7 @@ function CalcPage() {
                 }}
               >
                 <span
-                  className="Header text-center"
+                  className="Header  path_container"
                   style={{ fontSize: 18, cursor: "pointer" }}
                 >
                   {SubFunctions[FF][SSF]["title"]} Problems
@@ -939,7 +942,7 @@ function CalcPage() {
               </Link>{" "}
               /
               <span
-                className="Header text-center"
+                className="Header  path_container"
                 style={{ fontSize: 18 }}
                 onClick={() => {}}
               >
@@ -959,10 +962,10 @@ function CalcPage() {
         Step by Step Solving
       </span> */}
           <div
-            className="d-flex flex-row align-items-center"
+            className="d-flex flex-row align-items-center flex-wrap"
             style={{ gap: 15 }}
           >
-            <span className="Header text-center" style={{ fontSize: 25 }}>
+            <span className="Header path_container" style={{ fontSize: 25 }}>
               Main Problems
             </span>
           </div>
@@ -995,7 +998,7 @@ function CalcPage() {
       ) : SubFunctionSelectedMAIN == -1 ? ( // THIS IS THE SubFunctions FIELD
         <div className="container content " style={{ paddingTop: "2vh" }}>
           <div
-            className="d-flex flex-row align-items-center"
+            className="d-flex flex-row align-items-center flex-wrap"
             style={{ gap: 15 }}
           >
             <IconButton
@@ -1008,7 +1011,7 @@ function CalcPage() {
               <ArrowLeftCircle />
             </IconButton>
             <span
-              className="Header text-center"
+              className="Header path_container"
               style={{ fontSize: 20, cursor: "pointer" }}
               onClick={() => {
                 setFunctionSelectedMAIN(-1);
@@ -1019,7 +1022,7 @@ function CalcPage() {
               Main Problems
             </span>
             /
-            <span className="Header text-center" style={{ fontSize: 20 }}>
+            <span className="Header  path_container" style={{ fontSize: 20 }}>
               {MainFunctions[FunctionSelectedMAIN]["title"]} Problems
             </span>
           </div>
@@ -1054,7 +1057,7 @@ function CalcPage() {
         // THIS IS THE SubSubFunctions FIELD
         <div className="container content " style={{ paddingTop: "2vh" }}>
           <div
-            className="d-flex flex-row align-items-center"
+            className="d-flex flex-row align-items-center flex-wrap"
             style={{ gap: 15 }}
           >
             <IconButton
@@ -1066,7 +1069,7 @@ function CalcPage() {
               <ArrowLeftCircle />
             </IconButton>
             <span
-              className="Header text-center"
+              className="Header  path_container"
               style={{ fontSize: 20, cursor: "pointer" }}
               onClick={() => {
                 setFunctionSelectedMAIN(-1);
@@ -1078,7 +1081,7 @@ function CalcPage() {
             </span>
             /
             <span
-              className="Header text-center"
+              className="Header  path_container"
               style={{ fontSize: 20, cursor: "pointer" }}
               onClick={() => {
                 setSubFunctionSelectedMAIN(-1);
@@ -1088,7 +1091,7 @@ function CalcPage() {
               {MainFunctions[FunctionSelectedMAIN]["title"]} Problems
             </span>
             /
-            <span className="Header text-center" style={{ fontSize: 20 }}>
+            <span className="Header  path_container" style={{ fontSize: 20 }}>
               {
                 SubFunctions[FunctionSelectedMAIN][SubFunctionSelectedMAIN][
                   "title"

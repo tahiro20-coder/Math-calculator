@@ -20,41 +20,41 @@ import C6PDF from "../PDF/Optimization-Methods1.pdf";
 import C7PDF from "../PDF/Optimization-Constrained.pdf";
 
 const sources = [
-  {
-    title: "Linear Algebra",
-    img: C1,
-    link: C1PDF,
-  },
-  {
-    title: "Analytic Geometry",
-    img: C2,
-    link: C2PDF,
-  },
-  {
-    title: "Matrix Decomposition",
-    img: C3,
-    link: C3PDF,
-  },
-  {
-    title: "Vector calculus",
-    img: C4,
-    link: C4PDF,
-  },
-  {
-    title: "Optimization Preliminaries",
-    img: C5,
-    link: C5PDF,
-  },
-  {
-    title: "Gradient Methods for unconstrained Optimization",
-    img: C6,
-    link: C6PDF,
-  },
-  {
-    title: "Constrained Optimization",
-    img: C7,
-    link: C7PDF,
-  },
+  // {
+  //   title: "Linear Algebra",
+  //   img: C1,
+  //   link: C1PDF,
+  // },
+  // {
+  //   title: "Analytic Geometry",
+  //   img: C2,
+  //   link: C2PDF,
+  // },
+  // {
+  //   title: "Matrix Decomposition",
+  //   img: C3,
+  //   link: C3PDF,
+  // },
+  // {
+  //   title: "Vector calculus",
+  //   img: C4,
+  //   link: C4PDF,
+  // },
+  // {
+  //   title: "Optimization Preliminaries",
+  //   img: C5,
+  //   link: C5PDF,
+  // },
+  // {
+  //   title: "Gradient Methods for unconstrained Optimization",
+  //   img: C6,
+  //   link: C6PDF,
+  // },
+  // {
+  //   title: "Constrained Optimization",
+  //   img: C7,
+  //   link: C7PDF,
+  // },
   {
     title: "Mathematics for Machine Learning",
     img: mml,
@@ -89,7 +89,7 @@ const LearningPage = () => {
         <div className="CPTdesc">
           Education Resources to make your work easier, the resources created by
           Dr Bouanane which mainly written from the book of Mathemathics for
-          Machine Learning
+          Machine Learning ( Still Modification )
         </div>
       </Container>
 
