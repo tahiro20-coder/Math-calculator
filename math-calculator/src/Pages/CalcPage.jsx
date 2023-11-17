@@ -138,7 +138,7 @@ import QR_Decomposition_IMG from "../Images/QR_Decomposition.png";
 import Gradient_Linear_Regression_IMG from "../Images/Gradient_Linear_Regression.png";
 import MulMatrcies_IMG from "../Images/MulMatrcies.png";
 import MulScalarMatrix_IMG from "../Images/MulScalarMatrix.png";
-
+import { IMAGES } from "./Images"
 const TitleList = {
   AddMatrices: "Matrix Addition",
   DivScalarMatrix: "Divide by Scalar",
@@ -192,7 +192,30 @@ const TitleList = {
   SubMatrcies: "Subtract two matrcies",
 };
 
+
 function CalcPage() {
+  const [imgsLoaded, setImgsLoaded] = useState(false)
+
+  useEffect(() => {
+    const loadImage = image => {
+      return new Promise((resolve, reject) => {
+        const loadImg = new Image()
+        loadImg.src = image.url
+        // wait 2 seconds to simulate loading time
+        loadImg.onload = () =>
+          setTimeout(() => {
+            resolve(image.url)
+          }, 2000)
+
+        loadImg.onerror = err => reject(err)
+      })
+    }
+
+    Promise.all(IMAGES.map(image => loadImage(image)))
+      .then(() => setImgsLoaded(true))
+      .catch(err => console.log("Failed to load images", err))
+  }, [])
+
   const navigate = useNavigate();
   const loc = useLocation();
   const { state } = useLocation();
@@ -907,9 +930,9 @@ function CalcPage() {
               >
                 <span
                   className="Header  path_container"
-                  style={{ fontSize: 18, cursor: "pointer" }}
+                  style={{ fontSize: 14, cursor: "pointer" }}
                 >
-                  Main Problems
+                  Main 
                 </span>
               </Link>
               /
@@ -919,9 +942,9 @@ function CalcPage() {
               >
                 <span
                   className="Header  path_container"
-                  style={{ fontSize: 18, cursor: "pointer" }}
+                  style={{ fontSize: 14, cursor: "pointer" }}
                 >
-                  {MainFunctions[FF]["title"]} Problems
+                  {MainFunctions[FF]["title"]} 
                 </span>
               </Link>
               /
@@ -935,15 +958,15 @@ function CalcPage() {
               >
                 <span
                   className="Header  path_container"
-                  style={{ fontSize: 18, cursor: "pointer" }}
+                  style={{ fontSize: 14, cursor: "pointer" }}
                 >
-                  {SubFunctions[FF][SSF]["title"]} Problems
+                  {SubFunctions[FF][SSF]["title"]} 
                 </span>
               </Link>{" "}
               /
               <span
                 className="Header  path_container"
-                style={{ fontSize: 18 }}
+                style={{ fontSize: 14 }}
                 onClick={() => {}}
               >
                 {TitleList[func]}
@@ -965,7 +988,7 @@ function CalcPage() {
             className="d-flex flex-row align-items-center flex-wrap"
             style={{ gap: 15 }}
           >
-            <span className="Header path_container" style={{ fontSize: 25 }}>
+            <span className="Header path_container" style={{ fontSize: 20 }}>
               Main Problems
             </span>
           </div>
@@ -1012,18 +1035,19 @@ function CalcPage() {
             </IconButton>
             <span
               className="Header path_container"
-              style={{ fontSize: 20, cursor: "pointer" }}
+              style={{ fontSize: 14, cursor: "pointer" }}
               onClick={() => {
                 setFunctionSelectedMAIN(-1);
+                setSubFunctionSelectedMAIN(-1);
                 setFunctionSelected(0);
                 setSubFunctionSelected(0);
               }}
             >
-              Main Problems
+              Main 
             </span>
             /
-            <span className="Header  path_container" style={{ fontSize: 20 }}>
-              {MainFunctions[FunctionSelectedMAIN]["title"]} Problems
+            <span className="Header  path_container" style={{ fontSize: 14 }}>
+              {MainFunctions[FunctionSelectedMAIN]["title"]} 
             </span>
           </div>
 
@@ -1070,9 +1094,10 @@ function CalcPage() {
             </IconButton>
             <span
               className="Header  path_container"
-              style={{ fontSize: 20, cursor: "pointer" }}
+              style={{ fontSize: 14, cursor: "pointer" }}
               onClick={() => {
                 setFunctionSelectedMAIN(-1);
+                setSubFunctionSelectedMAIN(-1);
                 setFunctionSelected(0);
                 setSubFunctionSelected(0);
               }}
@@ -1082,22 +1107,22 @@ function CalcPage() {
             /
             <span
               className="Header  path_container"
-              style={{ fontSize: 20, cursor: "pointer" }}
+              style={{ fontSize: 14, cursor: "pointer" }}
               onClick={() => {
                 setSubFunctionSelectedMAIN(-1);
                 setSubFunctionSelected(0);
               }}
             >
-              {MainFunctions[FunctionSelectedMAIN]["title"]} Problems
+              {MainFunctions[FunctionSelectedMAIN]["title"]} 
             </span>
             /
-            <span className="Header  path_container" style={{ fontSize: 20 }}>
+            <span className="Header  path_container" style={{ fontSize: 14 }}>
               {
                 SubFunctions[FunctionSelectedMAIN][SubFunctionSelectedMAIN][
                   "title"
                 ]
               }{" "}
-              Problems
+              
             </span>
           </div>
 
