@@ -755,7 +755,7 @@ function CalcPage() {
   ];
   const [Opened, setOpened] = useState(false);
   return (
-    <div>
+    <div className="text-center">
       <div className="dropCont">
       <DropDownMenu selected={select_func(func)} />
       </div>
@@ -890,7 +890,7 @@ function CalcPage() {
             <></>
           ) : (
             <div
-              className="d-flex flex-row align-items-center flex-wrap path_container"
+              className="d-flex flex-row align-items-center flex-wrap path_container "
               style={{ gap: 15 }}
             >
               <Link
