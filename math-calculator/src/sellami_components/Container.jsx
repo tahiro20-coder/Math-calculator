@@ -18,7 +18,7 @@ const Container = ({title,content,mathcontent,content2}) => {
     tds[i].innerHTML = tds[i].innerHTML.replace(/&nbsp;/g, " ");
     tds[i].innerHTML = tds[i].innerHTML.replace(//g, "≠");
   }
-  }, []);
+  }, [mathcontent]);
   return (
       <div className='container cont '>
           <div className='titleCont'>
