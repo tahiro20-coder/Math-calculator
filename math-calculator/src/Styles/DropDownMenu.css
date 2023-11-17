@@ -100,10 +100,10 @@
 
 @media (max-width: 960px) {
     .dropdown_btn {
-        width: 90%;
+        width: 100%;
     }
     .dropdown_menu {
-        width: 90%;
+        width: 100%;
     }
     .content {
         padding-top: 5rem !important;

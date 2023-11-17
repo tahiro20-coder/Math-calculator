@@ -71,7 +71,8 @@ const Particular_Solution = () => {
     setWaiting(true);
     Echelon.Particular_Solution({ matrix1, matrix2 })
       .then((response) => {
-        console.log("jakobian", response["result"]);
+        // console.log(response)
+        // console.log("jakobian", response["result"]);
         setoutput(response["output"]);
         setWaiting(false);
       })
