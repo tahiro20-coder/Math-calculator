@@ -57,7 +57,7 @@ function HomePage() {
                         </div>
                     </div>
                     <div className='intro-img'>
-                        <img src={intro_img} alt="logo" />
+                        <img src={intro_img} alt="logo"  />
                     </div>
                 </div>
             </Container>
