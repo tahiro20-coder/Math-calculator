@@ -60,9 +60,7 @@
   }
 }
 @media (max-width: 1100px) {
-  .TopDownButton {
-    visibility: hidden !important;
-  }
+
   .dropCont{
     position: relative !important;
     display: flex !important;

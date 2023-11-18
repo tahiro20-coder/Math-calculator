@@ -138,7 +138,7 @@ import QR_Decomposition_IMG from "../Images/QR_Decomposition.png";
 import Gradient_Linear_Regression_IMG from "../Images/Gradient_Linear_Regression.png";
 import MulMatrcies_IMG from "../Images/MulMatrcies.png";
 import MulScalarMatrix_IMG from "../Images/MulScalarMatrix.png";
-
+import { IMAGES } from "./Images"
 const TitleList = {
   AddMatrices: "Matrix Addition",
   DivScalarMatrix: "Divide by Scalar",
@@ -192,7 +192,30 @@ const TitleList = {
   SubMatrcies: "Subtract two matrcies",
 };
 
+
 function CalcPage() {
+  const [imgsLoaded, setImgsLoaded] = useState(false)
+
+  useEffect(() => {
+    const loadImage = image => {
+      return new Promise((resolve, reject) => {
+        const loadImg = new Image()
+        loadImg.src = image.url
+        // wait 2 seconds to simulate loading time
+        loadImg.onload = () =>
+          setTimeout(() => {
+            resolve(image.url)
+          }, 2000)
+
+        loadImg.onerror = err => reject(err)
+      })
+    }
+
+    Promise.all(IMAGES.map(image => loadImage(image)))
+      .then(() => setImgsLoaded(true))
+      .catch(err => console.log("Failed to load images", err))
+  }, [])
+
   const navigate = useNavigate();
   const loc = useLocation();
   const { state } = useLocation();
@@ -347,7 +370,7 @@ function CalcPage() {
     {
       title: "Linear Algebra Applications",
       description:
-        "This group explores various applications of linear algebra in solving linear systems, finding eigenvalues and eigenvectors, optimization problems, and other areas. These applications demonstrate the power and versatility of linear algebra in various fields.",
+        "This group explores various applications of linear algebra in solving linear systems, finding eigenvalues and eigenvectors, optimization , and other areas. These applications demonstrate the power and versatility of linear algebra in various fields.",
       img: LGA,
     },
   ];
@@ -382,7 +405,7 @@ function CalcPage() {
       {
         title: "Matrix Decompositions",
         description:
-          "are factorization techniques that break down a matrix into simpler or more structured matrices. These decompositions provide insights into the matrix's structure, properties, and relationships, enabling efficient computations and solving various problems.",
+          "are factorization techniques that break down a matrix into simpler or more structured matrices. These decompositions provide insights into the matrix's structure, properties, and relationships, enabling efficient computations and solving various .",
         img: Matrix_Decompositions,
       },
     ],
@@ -575,7 +598,7 @@ function CalcPage() {
         {
           title: "QR_Decomposition",
           description:
-            "QR decomposition factors a rectangular matrix into an orthogonal matrix (Q) and an upper triangular matrix (R). This decomposition is useful for solving least squares problems and analyzing data matrices.",
+            "QR decomposition factors a rectangular matrix into an orthogonal matrix (Q) and an upper triangular matrix (R). This decomposition is useful for solving least squares  and analyzing data matrices.",
           img: QR_Decomposition_IMG,
         },
         {
@@ -735,19 +758,19 @@ function CalcPage() {
         {
           title: "Conjugate_Gradient_Descent",
           description:
-            "Conjugate gradient descent is an iterative optimization algorithm for solving a system of linear equations or minimizing a quadratic function. It is a more efficient variant of the gradient descent algorithm, which can converge to the optimal solution in a finite number of steps for certain types of problems.",
+            "Conjugate gradient descent is an iterative optimization algorithm for solving a system of linear equations or minimizing a quadratic function. It is a more efficient variant of the gradient descent algorithm, which can converge to the optimal solution in a finite number of steps for certain types of .",
           img: Conjugate_Gradient_Descent_IMG,
         },
         {
           title: "Steepest_Gradient_Descent",
           description:
-            "Steepest gradient descent is a specific implementation of the gradient descent algorithm that moves in the direction of the negative gradient of the function at each iteration. It is a simple and efficient algorithm but may not converge to the optimal solution for certain types of problems.",
+            "Steepest gradient descent is a specific implementation of the gradient descent algorithm that moves in the direction of the negative gradient of the function at each iteration. It is a simple and efficient algorithm but may not converge to the optimal solution for certain types of .",
           img: Steepest_Gradient_Descent_IMG,
         },
         {
           title: "Gradient_Linear_Regression",
           description:
-            "Gradient linear regression is a statistical method for fitting a linear model to data by minimizing the sum of the squared residuals. It is a common technique for solving linear regression problems and is widely used in various fields, including machine learning, economics, and finance.",
+            "Gradient linear regression is a statistical method for fitting a linear model to data by minimizing the sum of the squared residuals. It is a common technique for solving linear regression  and is widely used in various fields, including machine learning, economics, and finance.",
           img: Gradient_Linear_Regression_IMG,
         },
       ],
@@ -755,6 +778,7 @@ function CalcPage() {
   ];
   const [Opened, setOpened] = useState(false);
   return (
+    
     <div className="text-center">
       <div className="dropCont">
       <DropDownMenu selected={select_func(func)} />
@@ -778,11 +802,12 @@ function CalcPage() {
           (offset <= 50 ? "Frezed " : "") +
           (Opened ? " Opened" : "")
         }
+        style={{textAlign:"start"}}
       >
         <Box sx={{ backgroundColor: "white" }}>
           <div className="d-flex flex-row " style={{ gap: 0 }}>
             <div className=" w-25 p-4" style={{ backgroundColor: "#116a7b" }}>
-              <span style={{ color: "#83c5be" }}>Main Problems</span>
+              <span style={{ color: "#83c5be" }}>Main </span>
 
               <div
                 className=" d-flex flex-column justify-content-center "
@@ -809,7 +834,7 @@ function CalcPage() {
               </div>
             </div>
             <div className="flex-fill p-4">
-              Sub Groupment Problems
+              Sub Groupment 
               <div
                 className="d-flex flex-column flex-wrap "
                 style={{
@@ -907,9 +932,9 @@ function CalcPage() {
               >
                 <span
                   className="Header  path_container"
-                  style={{ fontSize: 18, cursor: "pointer" }}
+                  style={{ fontSize: 14, cursor: "pointer" }}
                 >
-                  Main Problems
+                  Main 
                 </span>
               </Link>
               /
@@ -919,9 +944,9 @@ function CalcPage() {
               >
                 <span
                   className="Header  path_container"
-                  style={{ fontSize: 18, cursor: "pointer" }}
+                  style={{ fontSize: 14, cursor: "pointer" }}
                 >
-                  {MainFunctions[FF]["title"]} Problems
+                  {MainFunctions[FF]["title"]} 
                 </span>
               </Link>
               /
@@ -935,15 +960,15 @@ function CalcPage() {
               >
                 <span
                   className="Header  path_container"
-                  style={{ fontSize: 18, cursor: "pointer" }}
+                  style={{ fontSize: 14, cursor: "pointer" }}
                 >
-                  {SubFunctions[FF][SSF]["title"]} Problems
+                  {SubFunctions[FF][SSF]["title"]} 
                 </span>
               </Link>{" "}
               /
               <span
                 className="Header  path_container"
-                style={{ fontSize: 18 }}
+                style={{ fontSize: 14 }}
                 onClick={() => {}}
               >
                 {TitleList[func]}
@@ -965,7 +990,7 @@ function CalcPage() {
             className="d-flex flex-row align-items-center flex-wrap"
             style={{ gap: 15 }}
           >
-            <span className="Header path_container" style={{ fontSize: 25 }}>
+            <span className="Header path_container" style={{ fontSize: 20 }}>
               Main Problems
             </span>
           </div>
@@ -1012,18 +1037,19 @@ function CalcPage() {
             </IconButton>
             <span
               className="Header path_container"
-              style={{ fontSize: 20, cursor: "pointer" }}
+              style={{ fontSize: 14, cursor: "pointer" }}
               onClick={() => {
                 setFunctionSelectedMAIN(-1);
+                setSubFunctionSelectedMAIN(-1);
                 setFunctionSelected(0);
                 setSubFunctionSelected(0);
               }}
             >
-              Main Problems
+              Main 
             </span>
             /
-            <span className="Header  path_container" style={{ fontSize: 20 }}>
-              {MainFunctions[FunctionSelectedMAIN]["title"]} Problems
+            <span className="Header  path_container" style={{ fontSize: 14 }}>
+              {MainFunctions[FunctionSelectedMAIN]["title"]} 
             </span>
           </div>
 
@@ -1070,34 +1096,35 @@ function CalcPage() {
             </IconButton>
             <span
               className="Header  path_container"
-              style={{ fontSize: 20, cursor: "pointer" }}
+              style={{ fontSize: 14, cursor: "pointer" }}
               onClick={() => {
                 setFunctionSelectedMAIN(-1);
+                setSubFunctionSelectedMAIN(-1);
                 setFunctionSelected(0);
                 setSubFunctionSelected(0);
               }}
             >
-              Main Problems
+              Main 
             </span>
             /
             <span
               className="Header  path_container"
-              style={{ fontSize: 20, cursor: "pointer" }}
+              style={{ fontSize: 14, cursor: "pointer" }}
               onClick={() => {
                 setSubFunctionSelectedMAIN(-1);
                 setSubFunctionSelected(0);
               }}
             >
-              {MainFunctions[FunctionSelectedMAIN]["title"]} Problems
+              {MainFunctions[FunctionSelectedMAIN]["title"]} 
             </span>
             /
-            <span className="Header  path_container" style={{ fontSize: 20 }}>
+            <span className="Header  path_container" style={{ fontSize: 14 }}>
               {
                 SubFunctions[FunctionSelectedMAIN][SubFunctionSelectedMAIN][
                   "title"
                 ]
               }{" "}
-              Problems
+              
             </span>
           </div>
 
