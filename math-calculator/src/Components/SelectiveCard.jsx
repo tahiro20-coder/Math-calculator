@@ -13,7 +13,6 @@ const SelectiveCard = ({
   onClick,
 }) => {
   
-  
   return (
     <Card
       className="CCPut"
