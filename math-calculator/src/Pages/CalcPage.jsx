@@ -878,7 +878,7 @@ function CalcPage() {
               >
                 {MainFunctions.map((e, i) => {
                   return (
-                    <div className="d-flex flex-row " style={{ gap: 10 }}>
+                    <div key={"title-"+i} className="d-flex flex-row " style={{ gap: 10 }}>
                       <h6
                         className={
                           FunctionSelected == i ? "funcActive func " : "func"
@@ -910,7 +910,7 @@ function CalcPage() {
               >
                 {SubFunctions[FunctionSelected].map((e, i) => {
                   return (
-                    <h6
+                    <h6 key={"subtitle-"+i}
                       className={
                         SubFunctionSelected == i
                           ? "subfuncActive subfunc "
@@ -940,7 +940,7 @@ function CalcPage() {
                 {SubSubFunctions[FunctionSelected][SubFunctionSelected].map(
                   (e, i) => {
                     return (
-                      <Link
+                      <Link key={"problemtitle-"+i}
                         to={"/Calculator/" + e["title"]}
                         state={{
                           Findex: FunctionSelected,
@@ -1067,6 +1067,7 @@ function CalcPage() {
             {MainFunctions.map((e, i) => {
               return (
                 <SelectiveCard
+                key={"elementV-"+i}
                   title={e["title"]}
                   description={e["description"]}
                   img={e["img"]}
@@ -1125,6 +1126,7 @@ function CalcPage() {
             {SubFunctions[FunctionSelectedMAIN].map((e, i) => {
               return (
                 <SelectiveCard
+                key={"elementVV-"+i}
                   title={e["title"]}
                   description={e["description"]}
                   img={e["img"]}
@@ -1201,6 +1203,7 @@ function CalcPage() {
               (e, i) => {
                 return (
                   <SelectiveCard
+                  key={"elementVVV-"+i}
                     title={TitleList[e["title"]]}
                     description={e["description"]}
                     img={e["img"]}
