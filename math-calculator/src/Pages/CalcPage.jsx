@@ -337,6 +337,7 @@ function CalcPage() {
   };
   useEffect(() => {
     if (state != null) {
+      
       setFunctionSelectedMAIN(state.Findex);
       setSubFunctionSelectedMAIN(state.Sindex);
 
@@ -345,11 +346,13 @@ function CalcPage() {
 
       navigate(loc.pathname, { replace: true });
     }
-    if (func != null) {
+    if ((func != null)&(first_load==true)) {
+      setFirst_Load(false)
       for (let i = 0; i < SubSubFunctions.length; i++) {
         for (let j = 0; j < SubSubFunctions[i].length; j++) {
           for (let k = 0; k < SubSubFunctions[i][j].length; k++) {
             if (SubSubFunctions[i][j][k]["title"] == func) {
+ 
               setFF(i);
               setSSF(j);
               setSubSubFunctionSelected(k);
@@ -362,6 +365,7 @@ function CalcPage() {
       }
     }
   });
+  const [first_load,setFirst_Load] = useState(true)
   const [offset, setOffset] = useState(0);
   useEffect(() => {
     const onScroll = () => setOffset(window.pageYOffset);
@@ -370,6 +374,7 @@ function CalcPage() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+ 
 
   const handle_page = (func) => {
     if (func in Pages) {
@@ -407,6 +412,7 @@ function CalcPage() {
   const [SubFunctionSelectedMAIN, setSubFunctionSelectedMAIN] = useState(
     state ? state.Sindex : -1
   );
+
 
   const [FF, setFF] = useState(-1);
   const [SSF, setSSF] = useState(-1);
@@ -950,7 +956,7 @@ function CalcPage() {
                       >
                         <h6
                           className={
-                            SubSubFunctionSelected == i
+                            (SubSubFunctionSelected == i)
                               ? "subsubfuncActive subsubfunc "
                               : "subsubfunc"
                           }
