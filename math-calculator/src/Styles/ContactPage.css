@@ -59,9 +59,9 @@
     font-size: 12px !important;
   }
 }
-@media (max-width:650px) {
+@media (max-width: 650px) {
   .TopDownButton{
-    visibility: hidden;
+    visibility: hidden !important;
   }
 }
 @media (max-width: 1100px) {
