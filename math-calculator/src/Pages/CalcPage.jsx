@@ -870,7 +870,7 @@ function CalcPage() {
         <Box sx={{ backgroundColor: "white" }}>
           <div className="d-flex flex-row " style={{ gap: 0 }}>
             <div className=" w-25 p-4" style={{ backgroundColor: "#116a7b" }}>
-              <span style={{ color: "#83c5be" }}>Main </span>
+              <span style={{ color: "#83c5be" ,fontWeight:"bolder",letterSpacing:1 }}>Main </span>
 
               <div
                 className=" d-flex flex-column justify-content-center "
@@ -897,7 +897,8 @@ function CalcPage() {
               </div>
             </div>
             <div className="flex-fill p-4">
-              Sub Groupment 
+              
+              <span style={{ fontWeight:"bolder",letterSpacing:1 }}>Sub Groupment  </span>
               <div
                 className="d-flex flex-column flex-wrap "
                 style={{
@@ -930,7 +931,8 @@ function CalcPage() {
               className="p-4 "
               style={{ backgroundColor: "#edf2f4", width: "40%" }}
             >
-              Problems
+              <span style={{ fontWeight:"bolder",letterSpacing:1 }}>Problems  </span>
+              
               <div
                 className="d-flex flex-column flex-wrap"
                 style={{ gap: 15, marginTop: 20, height: "30vh" }}

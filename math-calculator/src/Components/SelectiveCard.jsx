@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -12,26 +12,7 @@ const SelectiveCard = ({
   link,
   onClick,
 }) => {
-  const [imgsLoaded, setImgsLoaded] = useState(false)
-  useEffect(() => {
-
-    const loadImage = image => {
-      return new Promise((resolve, reject) => {
-        const loadImg = new Image()
-        
-        loadImg.src = image
-        // wait 2 seconds to simulate loading time
-        loadImg.onload = () =>
-        resolve(image)
-
-        loadImg.onerror = err => reject(err)
-      })
-    }
-
-    Promise.all([img].map(image => loadImage(image)))
-      .then(() => {setImgsLoaded(true);})
-      .catch(err => console.log("Failed to load images", err))
-  }, [img])
+  
   
   return (
     <Card
@@ -40,14 +21,13 @@ const SelectiveCard = ({
       onClick={onClick}
     >
       <CardActionArea className=" h-100" href={link != null ? link : ""}>
-        {
-          imgsLoaded == true?<CardMedia
+        <CardMedia
           component="img"
           height="250"
           image={img}
           alt="green iguana"
-        />:<></>
-        }
+          loading="lazy"
+        />
         
         <CardContent>
           <Typography
