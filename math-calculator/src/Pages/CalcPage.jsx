@@ -335,7 +335,7 @@ function CalcPage() {
     MulScalarMatrix: MulScalarMatrix,
     SubMatrcies: SubMatrcies,
   };
-  useEffect(() => {
+  useEffect(()=>{
     if (state != null) {
       
       setFunctionSelectedMAIN(state.Findex);
@@ -346,8 +346,11 @@ function CalcPage() {
 
       navigate(loc.pathname, { replace: true });
     }
-    if ((func != null)&(first_load==true)) {
-      setFirst_Load(false)
+  })
+  useEffect(() => {
+    
+    if ((func != null)) {
+      // setFirst_Load(false)
       for (let i = 0; i < SubSubFunctions.length; i++) {
         for (let j = 0; j < SubSubFunctions[i].length; j++) {
           for (let k = 0; k < SubSubFunctions[i][j].length; k++) {
@@ -358,14 +361,17 @@ function CalcPage() {
               setSubSubFunctionSelected(k);
               setFunctionSelected(i);
               setSubFunctionSelected(j);
+
+
+
               return;
             }
           }
         }
       }
     }
-  });
-  const [first_load,setFirst_Load] = useState(true)
+  },[func]);
+  // const [first_load,setFirst_Load] = useState(true)
   const [offset, setOffset] = useState(0);
   useEffect(() => {
     const onScroll = () => setOffset(window.pageYOffset);
