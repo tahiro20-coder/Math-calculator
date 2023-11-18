@@ -138,7 +138,70 @@ import QR_Decomposition_IMG from "../Images/QR_Decomposition.png";
 import Gradient_Linear_Regression_IMG from "../Images/Gradient_Linear_Regression.png";
 import MulMatrcies_IMG from "../Images/MulMatrcies.png";
 import MulScalarMatrix_IMG from "../Images/MulScalarMatrix.png";
-import { IMAGES } from "./Images"
+var IMAGES = [
+  FMO,
+    LGA,
+    MTO,
+    VTO,
+    Basic_Arithmetic,
+    EAG_IMG,
+    Linear_Systems,
+    Matrix_Decompositions,
+    Matrix_Distance,
+    Matrix_Norms,
+    Matrix_Properties,
+    Optimization,
+    Vector_Distances,
+    Vector_Norms,
+    Vector_Operations_and_Relationships,
+    AddMatrices_IMG,
+    Dot_Product_IMG,
+    one_norm_IMG,
+    Euclidean_Norm_IMG,
+    Inifinity_norm_IMG,
+    Manhattan_Norm_IMG,
+    Euclidean_VNorm_IMG,
+    Inifinity_VNorm_IMG,
+    Lp_Norm_IMG,
+    Manhattan_Distance_IMG,
+    Euclidean_Distance_IMG,
+    Infinity_Distance_IMG,
+    Manhattan_VDistance_IMG,
+    Euclidean_VDistance_IMG,
+    Infinity_VDistance_IMG,
+    Transpose_IMG,
+    Inverse_matrix_IMG,
+    Trace_IMG,
+    Determinant_IMG,
+    Gaussian_Elm_IMG,
+    Basis_IMG,
+    Kernel_IMG,
+    Rank_IMG,
+    Gram_Shmidt_IMG,
+    Particular_Solution_IMG,
+    General_solution_IMG,
+    LU_Solv_IMG,
+    Eigenvalues_and_Eigenvectors_IMG,
+    Diagonizable_IMG,
+    Convexity_IMG,
+    Invertibility_IMG,
+    Orthogonality_IMG,
+    Independency_IMG,
+    Angle_IMG,
+    Projection_IMG,
+    Affine_Projection_IMG,
+    Gradient_Descent_IMG,
+    Steepest_Gradient_Descent_IMG,
+    Conjugate_Gradient_Descent_IMG,
+    Eigen_Decomposition_IMG,
+    LU_IMG,
+    SVD_IMG,
+    Cholosky_Decomposition_IMG,
+    QR_Decomposition_IMG,
+    Gradient_Linear_Regression_IMG,
+    MulMatrcies_IMG,
+    MulScalarMatrix_IMG
+]
 const TitleList = {
   AddMatrices: "Matrix Addition",
   DivScalarMatrix: "Divide by Scalar",
@@ -194,27 +257,27 @@ const TitleList = {
 
 
 function CalcPage() {
-  const [imgsLoaded, setImgsLoaded] = useState(false)
+  // const [imgsLoaded, setImgsLoaded] = useState(false)
 
-  useEffect(() => {
-    const loadImage = image => {
-      return new Promise((resolve, reject) => {
-        const loadImg = new Image()
-        loadImg.src = image.url
-        // wait 2 seconds to simulate loading time
-        loadImg.onload = () =>
-          setTimeout(() => {
-            resolve(image.url)
-          }, 2000)
+  // useEffect(() => {
+  //   const loadImage = image => {
+  //     return new Promise((resolve, reject) => {
+  //       const loadImg = new Image()
+  //       loadImg.src = image.url
+  //       // wait 2 seconds to simulate loading time
+  //       loadImg.onload = () =>
+  //         setTimeout(() => {
+  //           resolve(image.url)
+  //         }, 2000)
 
-        loadImg.onerror = err => reject(err)
-      })
-    }
+  //       loadImg.onerror = err => reject(err)
+  //     })
+  //   }
 
-    Promise.all(IMAGES.map(image => loadImage(image)))
-      .then(() => setImgsLoaded(true))
-      .catch(err => console.log("Failed to load images", err))
-  }, [])
+  //   Promise.all(IMAGES.map(image => loadImage(image)))
+  //     .then(() => setImgsLoaded(true))
+  //     .catch(err => console.log("Failed to load images", err))
+  // }, [])
 
   const navigate = useNavigate();
   const loc = useLocation();
@@ -807,7 +870,7 @@ function CalcPage() {
         <Box sx={{ backgroundColor: "white" }}>
           <div className="d-flex flex-row " style={{ gap: 0 }}>
             <div className=" w-25 p-4" style={{ backgroundColor: "#116a7b" }}>
-              <span style={{ color: "#83c5be" }}>Main </span>
+              <span style={{ color: "#83c5be" ,fontWeight:"bolder",letterSpacing:1 }}>Main </span>
 
               <div
                 className=" d-flex flex-column justify-content-center "
@@ -815,7 +878,7 @@ function CalcPage() {
               >
                 {MainFunctions.map((e, i) => {
                   return (
-                    <div className="d-flex flex-row " style={{ gap: 10 }}>
+                    <div key={"title-"+i} className="d-flex flex-row " style={{ gap: 10 }}>
                       <h6
                         className={
                           FunctionSelected == i ? "funcActive func " : "func"
@@ -834,7 +897,8 @@ function CalcPage() {
               </div>
             </div>
             <div className="flex-fill p-4">
-              Sub Groupment 
+              
+              <span style={{ fontWeight:"bolder",letterSpacing:1 }}>Sub Groupment  </span>
               <div
                 className="d-flex flex-column flex-wrap "
                 style={{
@@ -846,7 +910,7 @@ function CalcPage() {
               >
                 {SubFunctions[FunctionSelected].map((e, i) => {
                   return (
-                    <h6
+                    <h6 key={"subtitle-"+i}
                       className={
                         SubFunctionSelected == i
                           ? "subfuncActive subfunc "
@@ -867,7 +931,8 @@ function CalcPage() {
               className="p-4 "
               style={{ backgroundColor: "#edf2f4", width: "40%" }}
             >
-              Problems
+              <span style={{ fontWeight:"bolder",letterSpacing:1 }}>Problems  </span>
+              
               <div
                 className="d-flex flex-column flex-wrap"
                 style={{ gap: 15, marginTop: 20, height: "30vh" }}
@@ -875,7 +940,7 @@ function CalcPage() {
                 {SubSubFunctions[FunctionSelected][SubFunctionSelected].map(
                   (e, i) => {
                     return (
-                      <Link
+                      <Link key={"problemtitle-"+i}
                         to={"/Calculator/" + e["title"]}
                         state={{
                           Findex: FunctionSelected,
@@ -1002,6 +1067,7 @@ function CalcPage() {
             {MainFunctions.map((e, i) => {
               return (
                 <SelectiveCard
+                key={"elementV-"+i}
                   title={e["title"]}
                   description={e["description"]}
                   img={e["img"]}
@@ -1060,6 +1126,7 @@ function CalcPage() {
             {SubFunctions[FunctionSelectedMAIN].map((e, i) => {
               return (
                 <SelectiveCard
+                key={"elementVV-"+i}
                   title={e["title"]}
                   description={e["description"]}
                   img={e["img"]}
@@ -1136,6 +1203,7 @@ function CalcPage() {
               (e, i) => {
                 return (
                   <SelectiveCard
+                  key={"elementVVV-"+i}
                     title={TitleList[e["title"]]}
                     description={e["description"]}
                     img={e["img"]}

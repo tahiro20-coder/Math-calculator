@@ -12,6 +12,7 @@ const SelectiveCard = ({
   link,
   onClick,
 }) => {
+  
   return (
     <Card
       className="CCPut"
@@ -24,7 +25,9 @@ const SelectiveCard = ({
           height="250"
           image={img}
           alt="green iguana"
+          loading="lazy"
         />
+        
         <CardContent>
           <Typography
             gutterBottom
